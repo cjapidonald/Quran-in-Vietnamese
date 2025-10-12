@@ -15,6 +15,7 @@ final class AppState: ObservableObject {
     @Published var useSystemTheme = true
     @Published var enableNotifications = false
     @Published var selectedFontSize: FontSizeOption = .medium
+    @Published var selectedThemeGradient: ThemeManager.ThemeGradient = .dawn
 }
 
 enum ReaderLanguage: String, CaseIterable, Identifiable {
