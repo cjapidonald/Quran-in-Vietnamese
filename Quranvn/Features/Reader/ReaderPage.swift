@@ -34,7 +34,13 @@ struct ReaderPage: View {
                 }
             }
             .navigationDestination(isPresented: $appState.showSurahDashboard) {
-                ReaderDashboardView()
+                ReaderDashboardView(
+                    initialSurah: appState.pendingReaderDestination?.surah,
+                    initialAyah: appState.pendingReaderDestination?.ayah
+                )
+                .onAppear {
+                    appState.pendingReaderDestination = nil
+                }
             }
             .navigationDestination(isPresented: $isShowingFullPlayer) {
                 FullPlayerView()

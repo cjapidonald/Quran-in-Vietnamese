@@ -10,6 +10,7 @@ struct ReaderDashboardView: View {
 
     @State private var selectedSurah: SurahPlaceholder
     @State private var ayahs: [AyahPlaceholder]
+    @State private var scrollTarget: UUID?
     @State private var favoriteAyahs: Set<UUID> = []
     @State private var ayahNotes: [UUID: [String]] = [:]
     @State private var toastMessage: String?
@@ -23,10 +24,19 @@ struct ReaderDashboardView: View {
 
     private let surahOptions = SurahPlaceholder.examples
 
-    init() {
-        let initialSurah = SurahPlaceholder.examples.first ?? SurahPlaceholder(name: "Placeholder", index: 1)
-        _selectedSurah = State(initialValue: initialSurah)
-        _ayahs = State(initialValue: ReaderDashboardView.generateAyahs(for: initialSurah))
+    init(initialSurah: SurahPlaceholder? = nil, initialAyah: Int? = nil) {
+        let defaultSurah = SurahPlaceholder.examples.first ?? SurahPlaceholder(name: "Placeholder", index: 1)
+        let resolvedSurah = initialSurah ?? defaultSurah
+        let generatedAyahs = ReaderDashboardView.generateAyahs(for: resolvedSurah)
+
+        _selectedSurah = State(initialValue: resolvedSurah)
+        _ayahs = State(initialValue: generatedAyahs)
+        if let ayahNumber = initialAyah {
+            let targetID = ReaderDashboardView.scrollIdentifier(for: ayahNumber, in: generatedAyahs)
+            _scrollTarget = State(initialValue: targetID)
+        } else {
+            _scrollTarget = State(initialValue: nil)
+        }
     }
 
     var body: some View {
@@ -36,16 +46,27 @@ struct ReaderDashboardView: View {
             VStack(spacing: DesignTokens.Spacing.lg) {
                 ReaderToolbar()
 
-                ScrollView {
-                    LazyVStack(spacing: readerStore.isFlowMode ? DesignTokens.Spacing.md : DesignTokens.Spacing.lg) {
-                        surahHeader
-                        ForEach(ayahs) { ayah in
-                            ayahCard(for: ayah)
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack(spacing: readerStore.isFlowMode ? DesignTokens.Spacing.md : DesignTokens.Spacing.lg) {
+                            surahHeader
+                            ForEach(ayahs) { ayah in
+                                ayahCard(for: ayah)
+                                    .id(ayah.id)
+                            }
                         }
+                        .padding(.bottom, DesignTokens.Spacing.xl)
                     }
-                    .padding(.bottom, DesignTokens.Spacing.xl)
+                    .scrollIndicators(.hidden)
+                    .onAppear {
+                        guard let target = scrollTarget else { return }
+                        scrollTo(target, using: proxy)
+                    }
+                    .onChange(of: scrollTarget) { target in
+                        guard let target else { return }
+                        scrollTo(target, using: proxy)
+                    }
                 }
-                .scrollIndicators(.hidden)
             }
             .padding(.horizontal, DesignTokens.Spacing.xl)
             .padding(.top, DesignTokens.Spacing.xl)
@@ -196,6 +217,7 @@ struct ReaderDashboardView: View {
         ayahs = ReaderDashboardView.generateAyahs(for: surah)
         favoriteAyahs.removeAll()
         ayahNotes.removeAll()
+        scrollTarget = nil
     }
 
     private func showToast(message: String) {
@@ -303,6 +325,21 @@ struct ReaderDashboardView: View {
         let baseCount = 6 + (surah.index % 5) * 2
         return (1...baseCount).map { AyahPlaceholder(number: $0) }
     }
+
+    private static func scrollIdentifier(for ayahNumber: Int, in ayahs: [AyahPlaceholder]) -> UUID? {
+        if let match = ayahs.first(where: { $0.number == ayahNumber }) {
+            return match.id
+        }
+        return ayahs.last?.id
+    }
+
+    private func scrollTo(_ id: UUID, using proxy: ScrollViewProxy) {
+        DispatchQueue.main.async {
+            withAnimation(.easeInOut) {
+                proxy.scrollTo(id, anchor: .top)
+            }
+        }
+    }
 }
 
 #if canImport(SafariServices)
@@ -345,4 +382,9 @@ struct SurahPlaceholder: Identifiable, Hashable {
         SurahPlaceholder(name: "Al-A'rāf", index: 7),
         SurahPlaceholder(name: "Al-Anfāl", index: 8)
     ]
+}
+
+struct ReaderDestination {
+    let surah: SurahPlaceholder
+    let ayah: Int
 }
