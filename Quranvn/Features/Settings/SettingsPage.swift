@@ -6,6 +6,9 @@ struct SettingsPage: View {
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var reminderTime = Self.defaultReminderTime
+#if DEBUG
+    @State private var isShowingDebugMenu = false
+#endif
 
     var body: some View {
         NavigationStack {
@@ -29,6 +32,13 @@ struct SettingsPage: View {
             .tint(accentColor)
             .navigationBarTitleDisplayMode(.inline)
         }
+#if DEBUG
+        .sheet(isPresented: $isShowingDebugMenu) {
+            DebugMenu()
+                .environmentObject(appState)
+                .environmentObject(readerStore)
+        }
+#endif
     }
 
     private var header: some View {
@@ -36,6 +46,11 @@ struct SettingsPage: View {
             Text("Settings")
                 .font(.largeTitle.bold())
                 .foregroundStyle(primaryText)
+#if DEBUG
+                .onLongPressGesture {
+                    isShowingDebugMenu = true
+                }
+#endif
             Text("Customize your reading experience")
                 .font(.subheadline)
                 .foregroundStyle(secondaryText)

@@ -97,7 +97,7 @@ struct ReaderDashboardView: View {
             Group {
                 if !readerStore.isFullScreen {
                     VStack(spacing: DesignTokens.Spacing.md) {
-                        if appState.showMiniPlayer {
+                        if appState.isMiniPlayerVisible {
                             MiniPlayerBar {
                                 isShowingFullPlayer = true
                             }
@@ -137,6 +137,14 @@ struct ReaderDashboardView: View {
             lastHandledLanguageEnforcementID = newValue
             showToast(message: "Always keep one language on")
         }
+        .onAppear {
+            applyDebugAyahOverrideIfNeeded()
+        }
+#if DEBUG
+        .onChange(of: appState.debugAyahCountOverride) { _ in
+            applyDebugAyahOverrideIfNeeded()
+        }
+#endif
     }
 
     private var background: some View {
@@ -256,7 +264,7 @@ struct ReaderDashboardView: View {
 
     private func updateAyahs(for surah: SurahPlaceholder) {
         selectedSurah = surah
-        ayahs = ReaderDashboardView.generateAyahs(for: surah)
+        ayahs = resolvedAyahs(for: surah)
         favoriteAyahs.removeAll()
         ayahNotes.removeAll()
         scrollTarget = nil
@@ -372,6 +380,33 @@ struct ReaderDashboardView: View {
 
     private var highlightColor: Color {
         ThemeManager.accentColor(for: readerStore.selectedGradient, colorScheme: colorScheme)
+    }
+
+    private func resolvedAyahs(for surah: SurahPlaceholder) -> [AyahPlaceholder] {
+#if DEBUG
+        if let override = appState.debugAyahCountOverride, override > 0 {
+            return (1...override).map { AyahPlaceholder(number: $0) }
+        }
+#endif
+        return ReaderDashboardView.generateAyahs(for: surah)
+    }
+
+    private func applyDebugAyahOverrideIfNeeded() {
+#if DEBUG
+        let updated = resolvedAyahs(for: selectedSurah)
+        let currentNumbers = ayahs.map(\.number)
+        let updatedNumbers = updated.map(\.number)
+
+        guard currentNumbers != updatedNumbers else { return }
+
+        ayahs = updated
+        favoriteAyahs.removeAll()
+        ayahNotes.removeAll()
+        scrollTarget = nil
+        highlightedAyahID = nil
+        highlightIsActive = false
+        hasActivatedHighlight = false
+#endif
     }
 
     private static func generateAyahs(for surah: SurahPlaceholder) -> [AyahPlaceholder] {
@@ -518,7 +553,8 @@ struct SurahPlaceholder: Identifiable, Hashable {
         SurahPlaceholder(name: "Al-Mā'idah", index: 5),
         SurahPlaceholder(name: "Al-An'ām", index: 6),
         SurahPlaceholder(name: "Al-A'rāf", index: 7),
-        SurahPlaceholder(name: "Al-Anfāl", index: 8)
+        SurahPlaceholder(name: "Al-Anfāl", index: 8),
+        SurahPlaceholder(name: "Al-Kahf", index: 18)
     ]
 }
 

@@ -4,19 +4,12 @@ struct NotesPage: View {
     let theme: ThemeManager.ThemeGradient
     let onSelect: (NoteItem) -> Void
 
+    @EnvironmentObject private var appState: AppState
     @Environment(\.colorScheme) private var colorScheme
-
-    private let notes: [NoteItem] = [
-        NoteItem(title: "Remember His mercy", surah: SurahPlaceholder.examples[0], ayah: 3),
-        NoteItem(title: "Patience brings relief", surah: SurahPlaceholder.examples[1], ayah: 4),
-        NoteItem(title: "Trust in the plan", surah: SurahPlaceholder.examples[2], ayah: 9),
-        NoteItem(title: "Stand for justice", surah: SurahPlaceholder.examples[3], ayah: 8),
-        NoteItem(title: "Gratitude multiplies", surah: SurahPlaceholder.examples[4], ayah: 2)
-    ]
 
     var body: some View {
         VStack(spacing: DesignTokens.Spacing.md) {
-            ForEach(notes) { note in
+            ForEach(currentNotes) { note in
                 Button {
                     onSelect(note)
                 } label: {
@@ -61,6 +54,15 @@ struct NotesPage: View {
     private var accentColor: Color {
         ThemeManager.accentColor(for: theme, colorScheme: colorScheme)
     }
+
+    private var currentNotes: [NoteItem] {
+#if DEBUG
+        if let override = appState.debugLibraryNotesOverride {
+            return override
+        }
+#endif
+        return NoteItem.samples
+    }
 }
 
 struct NoteItem: Identifiable {
@@ -68,6 +70,14 @@ struct NoteItem: Identifiable {
     let title: String
     let surah: SurahPlaceholder
     let ayah: Int
+
+    static let samples: [NoteItem] = [
+        NoteItem(title: "Remember His mercy", surah: SurahPlaceholder.examples[0], ayah: 3),
+        NoteItem(title: "Patience brings relief", surah: SurahPlaceholder.examples[1], ayah: 4),
+        NoteItem(title: "Trust in the plan", surah: SurahPlaceholder.examples[2], ayah: 9),
+        NoteItem(title: "Stand for justice", surah: SurahPlaceholder.examples[3], ayah: 8),
+        NoteItem(title: "Gratitude multiplies", surah: SurahPlaceholder.examples[4], ayah: 2)
+    ]
 
     var subtitle: String {
         "Surah \(surah.name), Ayah \(ayah)"
@@ -80,4 +90,5 @@ struct NoteItem: Identifiable {
 
 #Preview {
     NotesPage(theme: .dawn) { _ in }
+        .environmentObject(AppState())
 }
