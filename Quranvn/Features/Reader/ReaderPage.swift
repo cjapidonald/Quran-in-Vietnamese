@@ -29,7 +29,7 @@ struct ReaderPage: View {
                 }
             }
             .navigationDestination(isPresented: $appState.showSurahDashboard) {
-                SurahDashboardPlaceholder()
+                ReaderDashboardView()
             }
         }
         .tint(accentColor)
@@ -137,21 +137,6 @@ struct ReaderPage: View {
 
     private var accentColor: Color {
         ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
-    }
-}
-
-private struct SurahDashboardPlaceholder: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
-            Text("Surah Dashboard")
-                .font(.largeTitle.bold())
-            Text("This is where detailed Surah content will appear.")
-                .foregroundStyle(.secondary)
-            Spacer()
-        }
-        .padding(DesignTokens.Spacing.xl)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.systemBackground))
     }
 }
 
