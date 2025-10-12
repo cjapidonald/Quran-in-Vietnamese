@@ -21,21 +21,33 @@ struct ReaderDashboardView: View {
     @State private var noteDraft = ""
     @State private var noteAyahID: UUID?
     @State private var isShowingFullPlayer = false
+    @State private var highlightedAyahID: UUID?
+    @State private var highlightIsActive = false
+    @State private var hasActivatedHighlight = false
 
     private let surahOptions = SurahPlaceholder.examples
 
-    init(initialSurah: SurahPlaceholder? = nil, initialAyah: Int? = nil) {
+    init(initialSurah: SurahPlaceholder? = nil, initialAyah: Int? = nil, highlightAyah: Int? = nil) {
         let defaultSurah = SurahPlaceholder.examples.first ?? SurahPlaceholder(name: "Placeholder", index: 1)
         let resolvedSurah = initialSurah ?? defaultSurah
-        let generatedAyahs = ReaderDashboardView.generateAyahs(for: resolvedSurah)
+        let highlightTarget = highlightAyah ?? initialAyah
+        var generatedAyahs = ReaderDashboardView.generateAyahs(for: resolvedSurah)
+
+        if let highlightTarget,
+           !generatedAyahs.contains(where: { $0.number == highlightTarget }) {
+            generatedAyahs.append(AyahPlaceholder(number: highlightTarget))
+            generatedAyahs.sort { $0.number < $1.number }
+        }
 
         _selectedSurah = State(initialValue: resolvedSurah)
         _ayahs = State(initialValue: generatedAyahs)
-        if let ayahNumber = initialAyah {
-            let targetID = ReaderDashboardView.scrollIdentifier(for: ayahNumber, in: generatedAyahs)
+        if let ayahNumber = highlightTarget ?? initialAyah,
+           let targetID = ReaderDashboardView.scrollIdentifier(for: ayahNumber, in: generatedAyahs) {
             _scrollTarget = State(initialValue: targetID)
+            _highlightedAyahID = State(initialValue: targetID)
         } else {
             _scrollTarget = State(initialValue: nil)
+            _highlightedAyahID = State(initialValue: nil)
         }
     }
 
@@ -65,6 +77,9 @@ struct ReaderDashboardView: View {
                     .onChange(of: scrollTarget) { target in
                         guard let target else { return }
                         scrollTo(target, using: proxy)
+                    }
+                    .onAppear {
+                        activateHighlightIfNeeded()
                     }
                 }
             }
@@ -120,6 +135,8 @@ struct ReaderDashboardView: View {
     }
 
     private func ayahCard(for ayah: AyahPlaceholder) -> some View {
+        let isHighlighted = highlightIsActive && highlightedAyahID == ayah.id
+
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
@@ -170,6 +187,16 @@ struct ReaderDashboardView: View {
         .padding(.horizontal, DesignTokens.Spacing.lg)
         .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
         .contentShape(Rectangle())
+        .overlay {
+            if isHighlighted {
+                RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.large, style: .continuous)
+                    .stroke(highlightColor.opacity(0.9), lineWidth: 3)
+                    .shadow(color: highlightColor.opacity(0.25), radius: 18)
+                    .transition(.scale.combined(with: .opacity))
+            }
+        }
+        .scaleEffect(isHighlighted ? 1.02 : 1)
+        .animation(.spring(response: 0.55, dampingFraction: 0.75), value: isHighlighted)
         .onTapGesture(count: 2) {
             toggleFavorite(for: ayah.id)
         }
@@ -218,6 +245,9 @@ struct ReaderDashboardView: View {
         favoriteAyahs.removeAll()
         ayahNotes.removeAll()
         scrollTarget = nil
+        highlightedAyahID = nil
+        highlightIsActive = false
+        hasActivatedHighlight = false
     }
 
     private func showToast(message: String) {
@@ -321,6 +351,10 @@ struct ReaderDashboardView: View {
         .system(size: readerStore.fontSize, weight: .regular, design: .default)
     }
 
+    private var highlightColor: Color {
+        ThemeManager.accentColor(for: readerStore.selectedGradient, colorScheme: colorScheme)
+    }
+
     private static func generateAyahs(for surah: SurahPlaceholder) -> [AyahPlaceholder] {
         let baseCount = 6 + (surah.index % 5) * 2
         return (1...baseCount).map { AyahPlaceholder(number: $0) }
@@ -337,6 +371,30 @@ struct ReaderDashboardView: View {
         DispatchQueue.main.async {
             withAnimation(.easeInOut) {
                 proxy.scrollTo(id, anchor: .top)
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            activateHighlightIfNeeded()
+        }
+    }
+
+    private func activateHighlightIfNeeded() {
+        guard !hasActivatedHighlight, highlightedAyahID != nil else { return }
+        hasActivatedHighlight = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.75)) {
+                highlightIsActive = true
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                withAnimation(.easeInOut(duration: 0.6)) {
+                    highlightIsActive = false
+                }
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    highlightedAyahID = nil
+                }
             }
         }
     }

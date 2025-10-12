@@ -3,22 +3,35 @@ import SwiftUI
 struct SearchPage: View {
     @EnvironmentObject private var appState: AppState
     @Environment(\.colorScheme) private var colorScheme
-    @State private var mockQuery: String = ""
+    @State private var searchQuery: String = ""
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
-                header
-                searchControls
-                resultsPreview
+        NavigationStack {
+            ZStack {
+                ThemeManager
+                    .backgroundGradient(style: appState.selectedThemeGradient, for: colorScheme)
+                    .ignoresSafeArea()
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
+                        header
+                        resultsSection
+                    }
+                    .padding(.horizontal, DesignTokens.Spacing.xl)
+                    .padding(.top, DesignTokens.Spacing.xl)
+                    .padding(.bottom, DesignTokens.Spacing.xl)
+                }
+                .scrollIndicators(.hidden)
             }
-            .padding(DesignTokens.Spacing.xl)
+            .navigationTitle("Search")
+            .toolbarBackground(.hidden, for: .navigationBar)
         }
-        .background(
-            ThemeManager
-                .backgroundGradient(style: appState.selectedThemeGradient, for: colorScheme)
-                .ignoresSafeArea()
-        )
+        .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search the Quran")
+        .onChange(of: searchQuery) { _, newValue in
+            withAnimation(.easeInOut) {
+                appState.isSearchFocused = !newValue.trimmingCharacters(in: .whitespaces).isEmpty
+            }
+        }
         .tint(accentColor)
     }
 
@@ -27,99 +40,73 @@ struct SearchPage: View {
             Text("Search")
                 .font(.largeTitle.bold())
                 .foregroundStyle(primaryText)
-            Text("Explore Surahs, reciters, and more")
+            Text("Visualise upcoming search with playful mock data")
                 .font(.subheadline)
                 .foregroundStyle(secondaryText)
         }
         .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
-    private var searchControls: some View {
+    @ViewBuilder
+    private var resultsSection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-            PrimaryButton(
-                title: appState.isSearchFocused ? "Dismiss Keyboard" : "Focus Search",
-                subtitle: "Simulate focusing the search bar",
-                icon: "magnifyingglass",
-                theme: appState.selectedThemeGradient
-            ) {
-                withAnimation(.easeInOut) { appState.isSearchFocused.toggle() }
-            }
-
-            VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Search Scope")
-                    .font(.headline)
-                    .foregroundStyle(primaryText)
-                HStack(spacing: DesignTokens.Spacing.sm) {
-                    ForEach(SearchScope.allCases) { scope in
-                        SegmentPill(
-                            title: scope.rawValue,
-                            isSelected: scope == appState.selectedSearchScope,
-                            theme: appState.selectedThemeGradient
-                        ) {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                                appState.selectedSearchScope = scope
-                            }
-                        }
-                    }
-                }
-            }
-            .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
-
-            VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Mock Query")
-                    .font(.headline)
-                    .foregroundStyle(primaryText)
-                TextField("Type something...", text: $mockQuery)
-                    .textFieldStyle(.plain)
-                    .padding(.horizontal, DesignTokens.Spacing.md)
-                    .padding(.vertical, DesignTokens.Spacing.sm)
-                    .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge, padding: DesignTokens.Spacing.sm, shadowStyle: DesignTokens.Shadow.subtle)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.extraLarge, style: .continuous)
-                            .strokeBorder(appState.isSearchFocused ? accentColor.opacity(0.7) : Color.white.opacity(colorScheme == .dark ? 0.15 : 0.3), lineWidth: 1)
-                    )
-                    .onTapGesture {
-                        withAnimation(.easeInOut) { appState.isSearchFocused = true }
-                    }
-                    .onChange(of: appState.isSearchFocused) { _, newValue in
-                        if newValue {
-                            mockQuery = ""
-                        }
-                    }
-            }
-            .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
-        }
-    }
-
-    private var resultsPreview: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-            Text("Preview")
+            Text("Results")
                 .font(.headline)
                 .foregroundStyle(primaryText)
 
-            VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                if mockQuery.isEmpty {
-                    Text("Suggestions will appear here.")
+            if searchQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
+                    Text("Start typing to preview how visual search could feel.")
                         .foregroundStyle(secondaryText)
-                } else {
-                    ForEach(sampleResults, id: \.self) { result in
-                        Label(result, systemImage: "text.book.closed")
-                            .padding(.vertical, DesignTokens.Spacing.xs)
-                            .foregroundStyle(primaryText)
+                    Text("No real search yet — everything here is a placeholder experience.")
+                        .font(.footnote)
+                        .foregroundStyle(secondaryText.opacity(0.8))
+                }
+                .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
+            } else {
+                VStack(spacing: DesignTokens.Spacing.sm) {
+                    ForEach(mockResults) { result in
+                        Button {
+                            open(result)
+                        } label: {
+                            VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
+                                Text(result.title)
+                                    .font(.headline)
+                                    .foregroundStyle(primaryText)
+                                Text(result.snippet)
+                                    .font(.subheadline)
+                                    .foregroundStyle(secondaryText)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, DesignTokens.Spacing.md)
+                            .padding(.horizontal, DesignTokens.Spacing.lg)
+                            .glassCard(cornerRadius: DesignTokens.CornerRadius.large, padding: 0, shadowStyle: DesignTokens.Shadow.subtle)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
-
-                Text("Scope: \(appState.selectedSearchScope.rawValue)")
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(secondaryText)
-                    .padding(.top, DesignTokens.Spacing.md)
             }
-            .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
         }
     }
 
-    private var sampleResults: [String] {
-        ["Al-Fatiha", "Ayat al-Kursi", "Reciter Maher Al-Muaiqly"]
+    private var mockResults: [SearchResult] {
+        let surah = SurahPlaceholder.examples.first { $0.name.contains("Baqarah") } ?? SurahPlaceholder(name: "Al-Baqarah", index: 2)
+        return (0..<10).map { index in
+            let ayah = 255 + index
+            return SearchResult(
+                title: "Al-Baqarah — Ayah \(ayah) (placeholder)",
+                snippet: "… placeholder text …",
+                destination: ReaderDestination(surah: surah, ayah: ayah)
+            )
+        }
+    }
+
+    private func open(_ result: SearchResult) {
+        searchQuery = ""
+        appState.isSearchFocused = false
+        appState.pendingReaderDestination = result.destination
+        appState.selectedTab = .read
+        appState.showSurahDashboard = true
     }
 
     private var primaryText: Color {
@@ -133,6 +120,13 @@ struct SearchPage: View {
     private var accentColor: Color {
         ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
     }
+}
+
+private struct SearchResult: Identifiable {
+    let id = UUID()
+    let title: String
+    let snippet: String
+    let destination: ReaderDestination
 }
 
 #Preview {
