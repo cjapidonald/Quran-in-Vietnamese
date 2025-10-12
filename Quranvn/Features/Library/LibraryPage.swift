@@ -6,111 +6,146 @@ struct LibraryPage: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: DesignTokens.Spacing.xl) {
+            VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
                 header
                 actionButtons
                 libraryPreview
             }
             .padding(DesignTokens.Spacing.xl)
         }
-        .background(ThemeManager.backgroundGradient(for: colorScheme).ignoresSafeArea())
+        .background(
+            ThemeManager
+                .backgroundGradient(style: appState.selectedThemeGradient, for: colorScheme)
+                .ignoresSafeArea()
+        )
+        .tint(accentColor)
     }
 
     private var header: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             Text("Library")
                 .font(.largeTitle.bold())
+                .foregroundStyle(primaryText)
             Text("Organize favourite recitations and translations")
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(secondaryText)
         }
+        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
     private var actionButtons: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
-            Button(action: { withAnimation(.spring) { appState.isLibraryExpanded.toggle() } }) {
-                StubButtonLabel(title: appState.isLibraryExpanded ? "Collapse Collections" : "Browse Collections", subtitle: "Reveal placeholder collection groups")
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
+            PrimaryButton(
+                title: appState.isLibraryExpanded ? "Collapse Collections" : "Browse Collections",
+                subtitle: "Reveal placeholder collection groups",
+                icon: "square.grid.2x2",
+                theme: appState.selectedThemeGradient
+            ) {
+                withAnimation(.spring) { appState.isLibraryExpanded.toggle() }
             }
 
-            Button(action: { withAnimation(.easeInOut) { appState.showLibraryFilters.toggle() } }) {
-                StubButtonLabel(title: appState.showLibraryFilters ? "Hide Filters" : "Show Filters", subtitle: "Toggle filtering controls")
+            PrimaryButton(
+                title: appState.showLibraryFilters ? "Hide Filters" : "Show Filters",
+                subtitle: "Toggle filtering controls",
+                icon: "line.3.horizontal.decrease.circle",
+                theme: appState.selectedThemeGradient
+            ) {
+                withAnimation(.easeInOut) { appState.showLibraryFilters.toggle() }
             }
 
-            Button(action: {}) {
-                StubButtonLabel(title: "Create Playlist", subtitle: "Placeholder for playlist creation flow")
-            }
+            PrimaryButton(
+                title: "Create Playlist",
+                subtitle: "Placeholder for playlist creation flow",
+                icon: "music.note.list",
+                theme: appState.selectedThemeGradient
+            ) {}
         }
     }
 
     private var libraryPreview: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
             Text("Preview")
                 .font(.headline)
+                .foregroundStyle(primaryText)
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
                 if appState.isLibraryExpanded {
-                    CollectionPlaceholder(title: "Favourite Surahs", items: ["Al-Fatiha", "Al-Baqarah", "Yasin"])
-                    CollectionPlaceholder(title: "Recently Played", items: ["Al-Kahf", "Al-Mulk"])
+                    CollectionPlaceholder(
+                        title: "Favourite Surahs",
+                        items: ["Al-Fatiha", "Al-Baqarah", "Yasin"],
+                        theme: appState.selectedThemeGradient,
+                        colorScheme: colorScheme
+                    )
+                    CollectionPlaceholder(
+                        title: "Recently Played",
+                        items: ["Al-Kahf", "Al-Mulk"],
+                        theme: appState.selectedThemeGradient,
+                        colorScheme: colorScheme
+                    )
                 } else {
                     Text("Collections hidden")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(secondaryText)
                 }
 
                 if appState.showLibraryFilters {
-                    FilterPlaceholder()
+                    FilterPlaceholder(theme: appState.selectedThemeGradient)
                 }
             }
-            .padding(DesignTokens.Spacing.lg)
-            .background(ThemeManager.cardBackground(for: colorScheme))
-            .clipShape(RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.medium, style: .continuous))
-            .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.18 : 0.08), radius: DesignTokens.Shadow.subtle.radius, x: DesignTokens.Shadow.subtle.x, y: DesignTokens.Shadow.subtle.y)
+            .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
         }
+    }
+
+    private var primaryText: Color {
+        ThemeManager.semanticColor(.primary, for: appState.selectedThemeGradient, colorScheme: colorScheme)
+    }
+
+    private var secondaryText: Color {
+        ThemeManager.semanticColor(.secondary, for: appState.selectedThemeGradient, colorScheme: colorScheme)
+    }
+
+    private var accentColor: Color {
+        ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
     }
 }
 
 private struct CollectionPlaceholder: View {
     let title: String
     let items: [String]
+    let theme: ThemeManager.ThemeGradient
+    let colorScheme: ColorScheme
 
     var body: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             Text(title)
                 .font(.title3.weight(.semibold))
+                .foregroundStyle(ThemeManager.semanticColor(.primary, for: theme, colorScheme: colorScheme))
             ForEach(items, id: \.self) { item in
                 Label(item, systemImage: "heart")
                     .font(.subheadline)
+                    .foregroundStyle(ThemeManager.semanticColor(.secondary, for: theme, colorScheme: colorScheme))
             }
         }
     }
 }
 
 private struct FilterPlaceholder: View {
+    let theme: ThemeManager.ThemeGradient
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
             Text("Filters")
                 .font(.headline)
+                .foregroundStyle(ThemeManager.semanticColor(.primary, for: theme, colorScheme: colorScheme))
             HStack(spacing: DesignTokens.Spacing.sm) {
-                TagView(title: "All")
-                TagView(title: "Downloaded")
-                TagView(title: "Favourites")
+                SegmentPill(title: "All", isSelected: true, theme: theme, action: {})
+                SegmentPill(title: "Downloaded", isSelected: false, theme: theme, action: {})
+                SegmentPill(title: "Favourites", isSelected: false, theme: theme, action: {})
             }
             Slider(value: .constant(0.5))
+                .tint(ThemeManager.accentColor(for: theme, colorScheme: colorScheme))
         }
-        .padding()
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.small, style: .continuous))
-    }
-}
-
-private struct TagView: View {
-    let title: String
-
-    var body: some View {
-        Text(title)
-            .padding(.horizontal, DesignTokens.Spacing.md)
-            .padding(.vertical, DesignTokens.Spacing.xs)
-            .background(Color.accentColor.opacity(0.2))
-            .clipShape(Capsule())
+        .glassCard(cornerRadius: DesignTokens.CornerRadius.medium)
     }
 }
 

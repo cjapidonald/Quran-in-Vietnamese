@@ -6,74 +6,105 @@ struct SettingsPage: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: DesignTokens.Spacing.xl) {
+            VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
                 header
                 preferenceToggles
+                gradientSelection
                 typographyControls
                 aboutSection
             }
             .padding(DesignTokens.Spacing.xl)
         }
-        .background(ThemeManager.backgroundGradient(for: colorScheme).ignoresSafeArea())
+        .background(
+            ThemeManager
+                .backgroundGradient(style: appState.selectedThemeGradient, for: colorScheme)
+                .ignoresSafeArea()
+        )
+        .tint(accentColor)
     }
 
     private var header: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             Text("Settings")
                 .font(.largeTitle.bold())
+                .foregroundStyle(primaryText)
             Text("Customize your reading experience")
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(secondaryText)
         }
+        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
     private var preferenceToggles: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
-            Button(action: { appState.useSystemTheme.toggle() }) {
-                StubButtonLabel(title: appState.useSystemTheme ? "Use Custom Theme" : "Use System Theme", subtitle: "Switch between predefined appearance styles")
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
+            PrimaryButton(
+                title: appState.useSystemTheme ? "Use Custom Theme" : "Use System Theme",
+                subtitle: "Switch between predefined appearance styles",
+                icon: "paintbrush.pointed",
+                theme: appState.selectedThemeGradient
+            ) {
+                appState.useSystemTheme.toggle()
             }
 
             Toggle(isOn: $appState.enableNotifications) {
                 Text("Enable notifications (placeholder)")
+                    .foregroundStyle(primaryText)
             }
-            .toggleStyle(SwitchToggleStyle(tint: ThemeManager.accentColor(for: colorScheme)))
-            .padding()
-            .background(ThemeManager.cardBackground(for: colorScheme))
-            .clipShape(RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.medium, style: .continuous))
-            .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.16 : 0.08), radius: DesignTokens.Shadow.subtle.radius, x: DesignTokens.Shadow.subtle.x, y: DesignTokens.Shadow.subtle.y)
+            .toggleStyle(SwitchToggleStyle(tint: accentColor))
+            .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
         }
     }
 
+    private var gradientSelection: some View {
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
+            Text("Background Gradient")
+                .font(.headline)
+                .foregroundStyle(primaryText)
+
+            HStack(spacing: DesignTokens.Spacing.lg) {
+                ForEach(ThemeManager.ThemeGradient.allCases) { option in
+                    GradientSwatch(
+                        gradient: option,
+                        isSelected: option == appState.selectedThemeGradient
+                    ) {
+                        withAnimation(.easeInOut) {
+                            appState.selectedThemeGradient = option
+                        }
+                    }
+                }
+            }
+        }
+        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
+    }
+
     private var typographyControls: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
             Text("Font Size")
                 .font(.headline)
+                .foregroundStyle(primaryText)
 
             HStack(spacing: DesignTokens.Spacing.sm) {
                 ForEach(FontSizeOption.allCases) { option in
-                    Button(option.rawValue) {
+                    SegmentPill(
+                        title: option.rawValue,
+                        isSelected: option == appState.selectedFontSize,
+                        theme: appState.selectedThemeGradient
+                    ) {
                         withAnimation(.easeInOut) {
                             appState.selectedFontSize = option
                         }
                     }
-                    .padding(.horizontal, DesignTokens.Spacing.md)
-                    .padding(.vertical, DesignTokens.Spacing.sm)
-                    .background(option == appState.selectedFontSize ? ThemeManager.accentColor(for: colorScheme) : ThemeManager.cardBackground(for: colorScheme).opacity(0.6))
-                    .foregroundStyle(option == appState.selectedFontSize ? Color.white : .primary)
-                    .clipShape(RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.small, style: .continuous))
                 }
             }
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
                 Text("Preview")
                     .font(.headline)
+                    .foregroundStyle(primaryText)
                 Text(sampleText(for: appState.selectedFontSize))
                     .font(font(for: appState.selectedFontSize))
-                    .padding()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(ThemeManager.cardBackground(for: colorScheme))
-                    .clipShape(RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.medium, style: .continuous))
-                    .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.14 : 0.08), radius: DesignTokens.Shadow.subtle.radius, x: DesignTokens.Shadow.subtle.x, y: DesignTokens.Shadow.subtle.y)
+                    .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
             }
         }
     }
@@ -82,15 +113,14 @@ struct SettingsPage: View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
             Text("About")
                 .font(.headline)
+                .foregroundStyle(primaryText)
             Text("Version 0.1.0 (placeholder)")
-                .foregroundStyle(.secondary)
+                .foregroundStyle(secondaryText)
             Text("Built for studying the Quran in Arabic and Vietnamese with English assistance.")
                 .font(.footnote)
+                .foregroundStyle(secondaryText)
         }
-        .padding(DesignTokens.Spacing.lg)
-        .background(ThemeManager.cardBackground(for: colorScheme))
-        .clipShape(RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.medium, style: .continuous))
-        .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.12 : 0.08), radius: DesignTokens.Shadow.subtle.radius, x: DesignTokens.Shadow.subtle.x, y: DesignTokens.Shadow.subtle.y)
+        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
     private func font(for option: FontSizeOption) -> Font {
@@ -113,6 +143,18 @@ struct SettingsPage: View {
         case .large:
             return "Large print for comfortable night reading."
         }
+    }
+
+    private var primaryText: Color {
+        ThemeManager.semanticColor(.primary, for: appState.selectedThemeGradient, colorScheme: colorScheme)
+    }
+
+    private var secondaryText: Color {
+        ThemeManager.semanticColor(.secondary, for: appState.selectedThemeGradient, colorScheme: colorScheme)
+    }
+
+    private var accentColor: Color {
+        ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
     }
 }
 
