@@ -13,9 +13,7 @@ final class AppState: ObservableObject {
     @Published var isSearchFocused = false
     @Published var selectedSearchScope: SearchScope = .all
 
-    @Published var useSystemTheme = true
-    @Published var enableNotifications = false
-    @Published var selectedFontSize: FontSizeOption = .medium
+    @Published var themeStyle: ThemeStyle = .auto
     @Published var selectedThemeGradient: ThemeManager.ThemeGradient = .dawn
 }
 
@@ -34,10 +32,32 @@ enum SearchScope: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
-enum FontSizeOption: String, CaseIterable, Identifiable {
-    case small = "Small"
-    case medium = "Medium"
-    case large = "Large"
+extension AppState {
+    enum ThemeStyle: String, CaseIterable, Identifiable {
+        case auto
+        case light
+        case dark
 
-    var id: String { rawValue }
+        var id: String { rawValue }
+
+        var displayName: String {
+            switch self {
+            case .auto: "Auto"
+            case .light: "Light"
+            case .dark: "Dark"
+            }
+        }
+
+        var preferredColorScheme: ColorScheme? {
+            switch self {
+            case .auto: return nil
+            case .light: return .light
+            case .dark: return .dark
+            }
+        }
+
+        func resolvedColorScheme(for system: ColorScheme) -> ColorScheme {
+            preferredColorScheme ?? system
+        }
+    }
 }
