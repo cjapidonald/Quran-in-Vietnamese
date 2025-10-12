@@ -24,6 +24,7 @@ struct ReaderDashboardView: View {
     @State private var highlightedAyahID: UUID?
     @State private var highlightIsActive = false
     @State private var hasActivatedHighlight = false
+    @State private var lastHandledLanguageEnforcementID: UUID?
 
     private let surahOptions = SurahPlaceholder.examples
 
@@ -130,6 +131,11 @@ struct ReaderDashboardView: View {
         .simultaneousGesture(exitFullScreenGesture)
         .navigationDestination(isPresented: $isShowingFullPlayer) {
             FullPlayerView()
+        }
+        .onChange(of: readerStore.lastLanguageEnforcementID) { newValue in
+            guard let newValue, newValue != lastHandledLanguageEnforcementID else { return }
+            lastHandledLanguageEnforcementID = newValue
+            showToast(message: "Always keep one language on")
         }
     }
 

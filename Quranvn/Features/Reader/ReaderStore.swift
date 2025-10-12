@@ -42,6 +42,8 @@ final class ReaderStore: ObservableObject {
     @Published var showVietnamese: Bool = true
     @Published var showEnglish: Bool = false
 
+    @Published private(set) var lastLanguageEnforcementID: UUID?
+
     @Published var isFlowMode: Bool = true
     @Published var fontSize: CGFloat = 18
 
@@ -77,10 +79,15 @@ final class ReaderStore: ObservableObject {
         }
     }
 
-    func ensureNonEmptyLanguages() {
+    @discardableResult
+    func ensureNonEmptyLanguages() -> Bool {
         if !showArabic && !showVietnamese && !showEnglish {
             showArabic = true
+            lastLanguageEnforcementID = UUID()
+            return true
         }
+
+        return false
     }
 
     func toggleLanguage(_ language: ReaderLanguage) {
