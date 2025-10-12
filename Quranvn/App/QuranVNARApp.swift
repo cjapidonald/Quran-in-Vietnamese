@@ -39,12 +39,18 @@ private struct RootTabView: View {
                 .tag(AppTab.search)
 
             SettingsPage()
+                .environmentObject(readerStore)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
                 .tag(AppTab.settings)
         }
-        .tint(ThemeManager.accentColor(for: colorScheme))
-        .background(ThemeManager.backgroundGradient(for: colorScheme))
+        .tint(ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: effectiveColorScheme))
+        .background(ThemeManager.backgroundGradient(style: appState.selectedThemeGradient, for: effectiveColorScheme))
+        .preferredColorScheme(appState.themeStyle.preferredColorScheme)
+    }
+
+    private var effectiveColorScheme: ColorScheme {
+        appState.themeStyle.resolvedColorScheme(for: colorScheme)
     }
 }

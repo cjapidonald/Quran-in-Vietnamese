@@ -8,6 +8,36 @@ final class ReaderStore: ObservableObject {
         case accent
     }
 
+    enum ArabicFontOption: String, CaseIterable, Identifiable {
+        case uthmani
+        case naskh
+        case diwani
+
+        var id: String { rawValue }
+
+        var displayName: String {
+            switch self {
+            case .uthmani: "Uthmani"
+            case .naskh: "Naskh"
+            case .diwani: "Diwani"
+            }
+        }
+    }
+
+    enum TranslationFontOption: String, CaseIterable, Identifiable {
+        case serif
+        case sans
+
+        var id: String { rawValue }
+
+        var displayName: String {
+            switch self {
+            case .serif: "Serif"
+            case .sans: "Sans"
+            }
+        }
+    }
+
     @Published var showArabic: Bool = true
     @Published var showVietnamese: Bool = true
     @Published var showEnglish: Bool = false
@@ -17,6 +47,9 @@ final class ReaderStore: ObservableObject {
 
     @Published var gradientIndex: Int = 0
     @Published var textColorIndex: Int = 0
+
+    @Published var arabicFontSelection: ArabicFontOption = .uthmani
+    @Published var translationFontSelection: TranslationFontOption = .serif
 
     @Published var isFullScreen: Bool = false
 
@@ -30,6 +63,18 @@ final class ReaderStore: ObservableObject {
 
     private var textColorStyles: [TextColorStyle] {
         TextColorStyle.allCases
+    }
+
+    func selectGradient(_ gradient: ThemeManager.ThemeGradient) {
+        if let index = gradientOptions.firstIndex(of: gradient) {
+            gradientIndex = index
+        }
+    }
+
+    func selectTextColorStyle(_ style: TextColorStyle) {
+        if let index = textColorStyles.firstIndex(of: style) {
+            textColorIndex = index
+        }
     }
 
     func ensureNonEmptyLanguages() {
@@ -122,6 +167,41 @@ final class ReaderStore: ObservableObject {
             return ThemeManager.semanticColor(.primary, for: selectedGradient, colorScheme: colorScheme)
         case .accent:
             return ThemeManager.accentColor(for: selectedGradient, colorScheme: colorScheme)
+        }
+    }
+
+    func translationTextColor(
+        for style: TextColorStyle,
+        colorScheme: ColorScheme,
+        gradient: ThemeManager.ThemeGradient
+    ) -> Color {
+        switch style {
+        case .soft:
+            return ThemeManager.semanticColor(.secondary, for: gradient, colorScheme: colorScheme)
+        case .strong:
+            return ThemeManager.semanticColor(.primary, for: gradient, colorScheme: colorScheme)
+        case .accent:
+            return ThemeManager.accentColor(for: gradient, colorScheme: colorScheme)
+        }
+    }
+
+    func arabicFont(for size: CGFloat) -> Font {
+        switch arabicFontSelection {
+        case .uthmani:
+            return .system(size: size + 6, weight: .semibold, design: .default)
+        case .naskh:
+            return .system(size: size + 4, weight: .regular, design: .serif)
+        case .diwani:
+            return .system(size: size + 8, weight: .medium, design: .rounded)
+        }
+    }
+
+    func translationFont(for size: CGFloat) -> Font {
+        switch translationFontSelection {
+        case .serif:
+            return .system(size: size, weight: .regular, design: .serif)
+        case .sans:
+            return .system(size: size, weight: .regular, design: .default)
         }
     }
 }

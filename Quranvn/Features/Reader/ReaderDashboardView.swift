@@ -142,7 +142,7 @@ struct ReaderDashboardView: View {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                     if readerStore.showArabic {
                         Text("آية Placeholder #\(ayah.number)")
-                            .font(.title3.weight(.semibold))
+                            .font(arabicFont)
                             .foregroundStyle(primaryText)
                     }
 
@@ -348,7 +348,11 @@ struct ReaderDashboardView: View {
     }
 
     private var translationFont: Font {
-        .system(size: readerStore.fontSize, weight: .regular, design: .default)
+        readerStore.translationFont(for: readerStore.fontSize)
+    }
+
+    private var arabicFont: Font {
+        readerStore.arabicFont(for: readerStore.fontSize)
     }
 
     private var highlightColor: Color {
