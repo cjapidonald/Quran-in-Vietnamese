@@ -4,6 +4,7 @@ import SafariServices
 #endif
 
 struct ReaderDashboardView: View {
+    @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
 
@@ -18,6 +19,7 @@ struct ReaderDashboardView: View {
     @State private var isPresentingNoteSheet = false
     @State private var noteDraft = ""
     @State private var noteAyahID: UUID?
+    @State private var isShowingFullPlayer = false
 
     private let surahOptions = SurahPlaceholder.examples
 
@@ -52,11 +54,20 @@ struct ReaderDashboardView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .navigationBar)
         .safeAreaInset(edge: .bottom) {
-            SurahDock(
-                surahs: surahOptions,
-                selectedSurah: $selectedSurah
-            ) { surah in
-                updateAyahs(for: surah)
+            VStack(spacing: DesignTokens.Spacing.md) {
+                if appState.showMiniPlayer {
+                    MiniPlayerBar {
+                        isShowingFullPlayer = true
+                    }
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+
+                SurahDock(
+                    surahs: surahOptions,
+                    selectedSurah: $selectedSurah
+                ) { surah in
+                    updateAyahs(for: surah)
+                }
             }
             .padding(.horizontal, DesignTokens.Spacing.xl)
             .padding(.top, DesignTokens.Spacing.md)
@@ -72,6 +83,9 @@ struct ReaderDashboardView: View {
             noteSheet
         }
         .overlay(toastView, alignment: .top)
+        .navigationDestination(isPresented: $isShowingFullPlayer) {
+            FullPlayerView()
+        }
     }
 
     private var background: some View {
