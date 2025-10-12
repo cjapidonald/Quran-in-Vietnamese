@@ -56,7 +56,9 @@ struct ReaderDashboardView: View {
             background
 
             VStack(spacing: DesignTokens.Spacing.lg) {
-                ReaderToolbar()
+                if !readerStore.isFullScreen {
+                    ReaderToolbar()
+                }
 
                 ScrollViewReader { proxy in
                     ScrollView {
@@ -83,32 +85,37 @@ struct ReaderDashboardView: View {
                     }
                 }
             }
-            .padding(.horizontal, DesignTokens.Spacing.xl)
+            .padding(.horizontal, readerStore.isFullScreen ? DesignTokens.Spacing.lg : DesignTokens.Spacing.xl)
             .padding(.top, DesignTokens.Spacing.xl)
+            .padding(.bottom, readerStore.isFullScreen ? DesignTokens.Spacing.xl : 0)
         }
         .ignoresSafeArea(edges: readerStore.isFullScreen ? .all : .horizontal)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .navigationBar)
         .safeAreaInset(edge: .bottom) {
-            VStack(spacing: DesignTokens.Spacing.md) {
-                if appState.showMiniPlayer {
-                    MiniPlayerBar {
-                        isShowingFullPlayer = true
-                    }
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
+            Group {
+                if !readerStore.isFullScreen {
+                    VStack(spacing: DesignTokens.Spacing.md) {
+                        if appState.showMiniPlayer {
+                            MiniPlayerBar {
+                                isShowingFullPlayer = true
+                            }
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                        }
 
-                SurahDock(
-                    surahs: surahOptions,
-                    selectedSurah: $selectedSurah
-                ) { surah in
-                    updateAyahs(for: surah)
+                        SurahDock(
+                            surahs: surahOptions,
+                            selectedSurah: $selectedSurah
+                        ) { surah in
+                            updateAyahs(for: surah)
+                        }
+                    }
+                    .padding(.horizontal, DesignTokens.Spacing.xl)
+                    .padding(.top, DesignTokens.Spacing.md)
+                    .padding(.bottom, DesignTokens.Spacing.lg)
+                    .background(.clear)
                 }
             }
-            .padding(.horizontal, DesignTokens.Spacing.xl)
-            .padding(.top, DesignTokens.Spacing.md)
-            .padding(.bottom, DesignTokens.Spacing.lg)
-            .background(.clear)
         }
         .sheet(isPresented: $isShowingSafari) {
             if let safariURL {
@@ -119,6 +126,8 @@ struct ReaderDashboardView: View {
             noteSheet
         }
         .overlay(toastView, alignment: .top)
+        .overlay(fullScreenControls, alignment: .topTrailing)
+        .simultaneousGesture(exitFullScreenGesture)
         .navigationDestination(isPresented: $isShowingFullPlayer) {
             FullPlayerView()
         }
@@ -401,6 +410,67 @@ struct ReaderDashboardView: View {
                 }
             }
         }
+    }
+
+    private var fullScreenControls: some View {
+        Group {
+            if readerStore.isFullScreen {
+                HStack(spacing: DesignTokens.Spacing.sm) {
+                    fullScreenControlButton(title: "Close") {
+                        exitFullScreen()
+                    }
+
+                    fullScreenControlButton(title: "A−", isEnabled: readerStore.canDecreaseFontSize) {
+                        readerStore.decreaseFontSize()
+                    }
+
+                    fullScreenControlButton(title: "A+", isEnabled: readerStore.canIncreaseFontSize) {
+                        readerStore.increaseFontSize()
+                    }
+                }
+                .padding(.horizontal, DesignTokens.Spacing.md)
+                .padding(.vertical, DesignTokens.Spacing.sm)
+                .background(.thinMaterial, in: Capsule())
+                .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.4 : 0.18), radius: 18, x: 0, y: 12)
+                .padding(.top, DesignTokens.Spacing.xl)
+                .padding(.trailing, DesignTokens.Spacing.xl)
+            }
+        }
+    }
+
+    private func fullScreenControlButton(title: String, isEnabled: Bool = true, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(primaryText.opacity(isEnabled ? 1 : 0.45))
+                .padding(.vertical, DesignTokens.Spacing.xs)
+                .padding(.horizontal, DesignTokens.Spacing.sm)
+        }
+        .buttonStyle(.plain)
+        .disabled(!isEnabled)
+        .opacity(isEnabled ? 1 : 0.6)
+        .contentShape(Rectangle())
+    }
+
+    private func exitFullScreen() {
+        guard readerStore.isFullScreen else { return }
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+            readerStore.toggleFullScreen()
+        }
+    }
+
+    private var exitFullScreenGesture: some Gesture {
+        DragGesture(minimumDistance: 25, coordinateSpace: .local)
+            .onEnded { value in
+                guard readerStore.isFullScreen else { return }
+
+                let verticalTranslation = value.translation.height
+                let horizontalTranslation = abs(value.translation.width)
+
+                if verticalTranslation > 80, verticalTranslation > horizontalTranslation {
+                    exitFullScreen()
+                }
+            }
     }
 }
 
