@@ -5,6 +5,8 @@ struct ReaderPage: View {
     @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
 
+    @State private var isShowingFullPlayer = false
+
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -23,7 +25,9 @@ struct ReaderPage: View {
                 }
 
                 if appState.showMiniPlayer {
-                    MiniPlayerPlaceholder()
+                    MiniPlayerBar {
+                        isShowingFullPlayer = true
+                    }
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                         .padding(.horizontal, DesignTokens.Spacing.xl)
                         .padding(.bottom, DesignTokens.Spacing.lg)
@@ -31,6 +35,9 @@ struct ReaderPage: View {
             }
             .navigationDestination(isPresented: $appState.showSurahDashboard) {
                 ReaderDashboardView()
+            }
+            .navigationDestination(isPresented: $isShowingFullPlayer) {
+                FullPlayerView()
             }
         }
         .tint(accentColor)
@@ -156,43 +163,6 @@ struct ReaderPage: View {
             return ReaderLanguage.arabic.displayTitle
         }
         return active.map(\.displayTitle).joined(separator: ", ")
-    }
-}
-
-private struct MiniPlayerPlaceholder: View {
-    @EnvironmentObject private var appState: AppState
-    @EnvironmentObject private var readerStore: ReaderStore
-    @Environment(\.colorScheme) private var colorScheme
-
-    private var accentColor: Color {
-        ThemeManager.accentColor(for: readerStore.selectedGradient, colorScheme: colorScheme)
-    }
-
-    var body: some View {
-        HStack(spacing: DesignTokens.Spacing.md) {
-            RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.small, style: .continuous)
-                .fill(accentColor)
-                .frame(width: 48, height: 48)
-                .overlay(Image(systemName: "play.fill").foregroundStyle(Color.white))
-
-            VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                Text("Mini Player")
-                    .font(.headline)
-                    .foregroundStyle(ThemeManager.semanticColor(.primary, for: appState.selectedThemeGradient, colorScheme: colorScheme))
-                Text("Placeholder playback controls")
-                    .font(.caption)
-                    .foregroundStyle(ThemeManager.semanticColor(.secondary, for: appState.selectedThemeGradient, colorScheme: colorScheme))
-            }
-
-            Spacer()
-
-            Button(action: {}) {
-                Image(systemName: "forward.end.fill")
-                    .font(.title3)
-                    .foregroundStyle(accentColor)
-            }
-        }
-        .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
     }
 }
 
