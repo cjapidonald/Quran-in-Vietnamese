@@ -4,12 +4,9 @@ import SafariServices
 #endif
 
 struct ReaderDashboardView: View {
-    @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
 
-    @State private var activeLanguages: Set<ReaderLanguage> = Set(ReaderLanguage.allCases)
-    @State private var layoutMode: ReaderLayoutMode = .flow
-    @State private var fontScale: CGFloat = 1.0
     @State private var selectedSurah: SurahPlaceholder
     @State private var ayahs: [AyahPlaceholder]
     @State private var favoriteAyahs: Set<UUID> = []
@@ -35,16 +32,10 @@ struct ReaderDashboardView: View {
             background
 
             VStack(spacing: DesignTokens.Spacing.lg) {
-                ReaderToolbar(
-                    theme: appState.selectedThemeGradient,
-                    activeLanguages: $activeLanguages,
-                    layoutMode: $layoutMode,
-                    fontScale: $fontScale,
-                    isFullScreen: $appState.isReaderFullScreen
-                )
+                ReaderToolbar()
 
                 ScrollView {
-                    LazyVStack(spacing: layoutMode == .flow ? DesignTokens.Spacing.md : DesignTokens.Spacing.lg) {
+                    LazyVStack(spacing: readerStore.isFlowMode ? DesignTokens.Spacing.md : DesignTokens.Spacing.lg) {
                         surahHeader
                         ForEach(ayahs) { ayah in
                             ayahCard(for: ayah)
@@ -57,12 +48,11 @@ struct ReaderDashboardView: View {
             .padding(.horizontal, DesignTokens.Spacing.xl)
             .padding(.top, DesignTokens.Spacing.xl)
         }
-        .ignoresSafeArea(edges: appState.isReaderFullScreen ? .all : .horizontal)
+        .ignoresSafeArea(edges: readerStore.isFullScreen ? .all : .horizontal)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .navigationBar)
         .safeAreaInset(edge: .bottom) {
             SurahDock(
-                theme: appState.selectedThemeGradient,
                 surahs: surahOptions,
                 selectedSurah: $selectedSurah
             ) { surah in
@@ -85,9 +75,9 @@ struct ReaderDashboardView: View {
     }
 
     private var background: some View {
-        ThemeManager.backgroundGradient(style: appState.selectedThemeGradient, for: colorScheme)
+        ThemeManager.backgroundGradient(style: readerStore.selectedGradient, for: colorScheme)
             .overlay(
-                appState.isReaderFullScreen
+                readerStore.isFullScreen
                     ? Color.black.opacity(colorScheme == .dark ? 0.35 : 0.25)
                     : Color.clear
             )
@@ -98,26 +88,24 @@ struct ReaderDashboardView: View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                    if activeLanguages.contains(.arabic) {
+                    if readerStore.showArabic {
                         Text("آية Placeholder #\(ayah.number)")
                             .font(.title3.weight(.semibold))
                             .foregroundStyle(primaryText)
                     }
 
-                    if activeLanguages.contains(.vietnamese) {
+                    if readerStore.showVietnamese {
                         Text("Đây là đoạn văn mô phỏng cho câu số \(ayah.number).")
-                            .font(.body)
-                            .foregroundStyle(secondaryText)
+                            .font(translationFont)
+                            .foregroundStyle(translationText)
                             .lineSpacing(4)
-                            .scaleEffect(fontScale, anchor: .leading)
                     }
 
-                    if activeLanguages.contains(.english) {
+                    if readerStore.showEnglish {
                         Text("This is placeholder translation content for ayah \(ayah.number).")
-                            .font(.body)
-                            .foregroundStyle(secondaryText)
+                            .font(translationFont)
+                            .foregroundStyle(translationText)
                             .lineSpacing(4)
-                            .scaleEffect(fontScale, anchor: .leading)
                     }
                 }
 
@@ -274,7 +262,7 @@ struct ReaderDashboardView: View {
             Text(selectedSurah.name)
                 .font(.title2.weight(.semibold))
                 .foregroundStyle(primaryText)
-            Text("Mode: \(layoutMode == .flow ? "Flow" : "Verse")")
+            Text("Mode: \(readerStore.isFlowMode ? "Flow" : "Verse")")
                 .font(.footnote.weight(.medium))
                 .foregroundStyle(secondaryText.opacity(0.8))
         }
@@ -282,11 +270,19 @@ struct ReaderDashboardView: View {
     }
 
     private var primaryText: Color {
-        ThemeManager.semanticColor(.primary, for: appState.selectedThemeGradient, colorScheme: colorScheme)
+        ThemeManager.semanticColor(.primary, for: readerStore.selectedGradient, colorScheme: colorScheme)
     }
 
     private var secondaryText: Color {
-        ThemeManager.semanticColor(.secondary, for: appState.selectedThemeGradient, colorScheme: colorScheme)
+        ThemeManager.semanticColor(.secondary, for: readerStore.selectedGradient, colorScheme: colorScheme)
+    }
+
+    private var translationText: Color {
+        readerStore.translationTextColor(for: colorScheme)
+    }
+
+    private var translationFont: Font {
+        .system(size: readerStore.fontSize, weight: .regular, design: .default)
     }
 
     private static func generateAyahs(for surah: SurahPlaceholder) -> [AyahPlaceholder] {
@@ -335,9 +331,4 @@ struct SurahPlaceholder: Identifiable, Hashable {
         SurahPlaceholder(name: "Al-A'rāf", index: 7),
         SurahPlaceholder(name: "Al-Anfāl", index: 8)
     ]
-}
-
-enum ReaderLayoutMode: String, CaseIterable {
-    case flow
-    case verse
 }
