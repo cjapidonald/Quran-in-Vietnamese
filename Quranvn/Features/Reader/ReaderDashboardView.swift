@@ -77,7 +77,7 @@ struct ReaderDashboardView: View {
                         guard let target = scrollTarget else { return }
                         scrollTo(target, using: proxy)
                     }
-                    .onChange(of: scrollTarget) { target in
+                    .onChange(of: scrollTarget) { _, target in
                         guard let target else { return }
                         scrollTo(target, using: proxy)
                     }
@@ -132,7 +132,7 @@ struct ReaderDashboardView: View {
         .navigationDestination(isPresented: $isShowingFullPlayer) {
             FullPlayerView()
         }
-        .onChange(of: readerStore.lastLanguageEnforcementID) { newValue in
+        .onChange(of: readerStore.lastLanguageEnforcementID) { _, newValue in
             guard let newValue, newValue != lastHandledLanguageEnforcementID else { return }
             lastHandledLanguageEnforcementID = newValue
             showToast(message: "Always keep one language on")
@@ -141,7 +141,7 @@ struct ReaderDashboardView: View {
             applyDebugAyahOverrideIfNeeded()
         }
 #if DEBUG
-        .onChange(of: appState.debugAyahCountOverride) { _ in
+        .onChange(of: appState.debugAyahCountOverride) {
             applyDebugAyahOverrideIfNeeded()
         }
 #endif
@@ -160,7 +160,7 @@ struct ReaderDashboardView: View {
     private func ayahCard(for ayah: AyahPlaceholder) -> some View {
         let isHighlighted = highlightIsActive && highlightedAyahID == ayah.id
 
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
+        return VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                     if readerStore.showArabic {
