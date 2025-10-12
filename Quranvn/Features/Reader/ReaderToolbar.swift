@@ -1,16 +1,8 @@
 import SwiftUI
 
 struct ReaderToolbar: View {
-    let theme: ThemeManager.ThemeGradient
-    @Binding var activeLanguages: Set<ReaderLanguage>
-    @Binding var layoutMode: ReaderLayoutMode
-    @Binding var fontScale: CGFloat
-    @Binding var isFullScreen: Bool
-
+    @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
-
-    private let fontScaleRange: ClosedRange<CGFloat> = 0.8...1.4
-    private let fontScaleStep: CGFloat = 0.1
 
     var body: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
@@ -57,10 +49,12 @@ struct ReaderToolbar: View {
                 ForEach(ReaderLanguage.allCases) { language in
                     SegmentPill(
                         title: language.displayTitle,
-                        isSelected: activeLanguages.contains(language),
+                        isSelected: readerStore.isLanguageEnabled(language),
                         theme: theme
                     ) {
-                        toggleLanguage(language)
+                        withAnimation(.easeInOut) {
+                            readerStore.toggleLanguage(language)
+                        }
                     }
                 }
             }
@@ -78,37 +72,55 @@ struct ReaderToolbar: View {
                     SegmentPill(
                         title: "Flow",
                         icon: "text.justify",
-                        isSelected: layoutMode == .flow,
+                        isSelected: readerStore.isFlowMode,
                         theme: theme
                     ) {
-                        layoutMode = .flow
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                            readerStore.selectLayoutMode(.flow)
+                        }
                     }
 
                     SegmentPill(
                         title: "Verse",
                         icon: "list.number",
-                        isSelected: layoutMode == .verse,
+                        isSelected: !readerStore.isFlowMode,
                         theme: theme
                     ) {
-                        layoutMode = .verse
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                            readerStore.selectLayoutMode(.verse)
+                        }
                     }
                 }
 
                 Spacer()
 
                 HStack(spacing: DesignTokens.Spacing.xs) {
-                    adjustablePillButton(icon: "textformat.size.smaller", isEnabled: canDecreaseFont) {
-                        fontScale = max(fontScaleRange.lowerBound, fontScale - fontScaleStep)
+                    adjustablePillButton(icon: "textformat.size.smaller", isEnabled: readerStore.canDecreaseFontSize) {
+                        readerStore.decreaseFontSize()
                     }
 
-                    adjustablePillButton(icon: "textformat.size.larger", isEnabled: canIncreaseFont) {
-                        fontScale = min(fontScaleRange.upperBound, fontScale + fontScaleStep)
+                    adjustablePillButton(icon: "textformat.size.larger", isEnabled: readerStore.canIncreaseFontSize) {
+                        readerStore.increaseFontSize()
                     }
                 }
 
-                pillButton(icon: isFullScreen ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right") {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                        isFullScreen.toggle()
+                HStack(spacing: DesignTokens.Spacing.xs) {
+                    pillButton(icon: "paintpalette") {
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                            readerStore.cycleGradient()
+                        }
+                    }
+
+                    pillButton(icon: "eyedropper") {
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                            readerStore.cycleTextColor()
+                        }
+                    }
+
+                    pillButton(icon: readerStore.isFullScreen ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right") {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                            readerStore.toggleFullScreen()
+                        }
                     }
                 }
             }
@@ -145,17 +157,6 @@ struct ReaderToolbar: View {
         .opacity(isEnabled ? 1 : 0.6)
     }
 
-    private func toggleLanguage(_ language: ReaderLanguage) {
-        if activeLanguages.contains(language) {
-            activeLanguages.remove(language)
-            if activeLanguages.isEmpty {
-                activeLanguages.insert(.arabic)
-            }
-        } else {
-            activeLanguages.insert(language)
-        }
-    }
-
     private var primaryText: Color {
         ThemeManager.semanticColor(.primary, for: theme, colorScheme: colorScheme)
     }
@@ -164,11 +165,7 @@ struct ReaderToolbar: View {
         ThemeManager.accentColor(for: theme, colorScheme: colorScheme)
     }
 
-    private var canDecreaseFont: Bool {
-        fontScale > fontScaleRange.lowerBound + 0.001
-    }
-
-    private var canIncreaseFont: Bool {
-        fontScale < fontScaleRange.upperBound - 0.001
+    private var theme: ThemeManager.ThemeGradient {
+        readerStore.selectedGradient
     }
 }

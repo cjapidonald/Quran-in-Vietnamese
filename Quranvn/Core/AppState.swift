@@ -1,9 +1,7 @@
 import SwiftUI
 
 final class AppState: ObservableObject {
-    @Published var isReaderFullScreen = false
     @Published var showMiniPlayer = false
-    @Published var selectedReaderLanguage: ReaderLanguage = .arabic
     @Published var showSurahDashboard = false
 
     @Published var isLibraryExpanded = false
@@ -16,15 +14,6 @@ final class AppState: ObservableObject {
     @Published var enableNotifications = false
     @Published var selectedFontSize: FontSizeOption = .medium
     @Published var selectedThemeGradient: ThemeManager.ThemeGradient = .dawn
-}
-
-enum ReaderLanguage: String, CaseIterable, Identifiable {
-    case arabic = "AR"
-    case vietnamese = "VI"
-    case english = "EN"
-
-    var id: String { rawValue }
-    var displayTitle: String { rawValue }
 }
 
 enum SearchScope: String, CaseIterable, Identifiable {

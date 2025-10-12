@@ -13,11 +13,13 @@ struct QuranVNARApp: App {
 }
 
 private struct RootTabView: View {
+    @StateObject private var readerStore = ReaderStore()
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         TabView {
             ReaderPage()
+                .environmentObject(readerStore)
                 .tabItem {
                     Label("Read", systemImage: "book")
                 }

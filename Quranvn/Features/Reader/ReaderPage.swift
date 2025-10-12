@@ -2,12 +2,13 @@ import SwiftUI
 
 struct ReaderPage: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                ThemeManager.backgroundGradient(style: appState.selectedThemeGradient, for: colorScheme)
+                ThemeManager.backgroundGradient(style: readerStore.selectedGradient, for: colorScheme)
                     .ignoresSafeArea()
 
                 ScrollView {
@@ -53,18 +54,18 @@ struct ReaderPage: View {
                 title: "Open Surah",
                 subtitle: "Navigate to a placeholder Surah dashboard",
                 icon: "book",
-                theme: appState.selectedThemeGradient
+                theme: readerStore.selectedGradient
             ) {
                 appState.showSurahDashboard = true
             }
 
             PrimaryButton(
-                title: appState.isReaderFullScreen ? "Exit Full Screen" : "Enter Full Screen",
-                subtitle: appState.isReaderFullScreen ? "Showing immersive layout" : "Showing standard layout",
+                title: readerStore.isFullScreen ? "Exit Full Screen" : "Enter Full Screen",
+                subtitle: readerStore.isFullScreen ? "Showing immersive layout" : "Showing standard layout",
                 icon: "arrow.up.left.and.arrow.down.right",
-                theme: appState.selectedThemeGradient
+                theme: readerStore.selectedGradient
             ) {
-                withAnimation { appState.isReaderFullScreen.toggle() }
+                withAnimation { readerStore.toggleFullScreen() }
             }
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
@@ -75,11 +76,11 @@ struct ReaderPage: View {
                     ForEach(ReaderLanguage.allCases) { option in
                         SegmentPill(
                             title: option.displayTitle,
-                            isSelected: option == appState.selectedReaderLanguage,
-                            theme: appState.selectedThemeGradient
+                            isSelected: readerStore.isLanguageEnabled(option),
+                            theme: readerStore.selectedGradient
                         ) {
                             withAnimation(.easeInOut) {
-                                appState.selectedReaderLanguage = option
+                                readerStore.toggleLanguage(option)
                             }
                         }
                     }
@@ -90,7 +91,7 @@ struct ReaderPage: View {
                 title: appState.showMiniPlayer ? "Hide Mini Player" : "Show Mini Player",
                 subtitle: "Reveal a mock playback bar",
                 icon: "play.rectangle.on.rectangle",
-                theme: appState.selectedThemeGradient
+                theme: readerStore.selectedGradient
             ) {
                 withAnimation(.spring) { appState.showMiniPlayer.toggle() }
             }
@@ -104,7 +105,7 @@ struct ReaderPage: View {
                 .foregroundStyle(primaryText)
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                if appState.isReaderFullScreen {
+                if readerStore.isFullScreen {
                     Text("Full Screen Reader")
                         .font(.title3.bold())
                         .foregroundStyle(primaryText)
@@ -118,34 +119,53 @@ struct ReaderPage: View {
                         .foregroundStyle(secondaryText)
                 }
 
-                Text("Language: \(appState.selectedReaderLanguage.displayTitle)")
-                    .font(.footnote.weight(.medium))
-                    .foregroundStyle(secondaryText)
-                    .padding(.top, DesignTokens.Spacing.sm)
+                VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
+                    Text("Flow Mode: \(readerStore.isFlowMode ? "Flow" : "Verse")")
+                        .font(.footnote.weight(.medium))
+                        .foregroundStyle(secondaryText)
+
+                    Text("Languages: \(activeLanguageSummary)")
+                        .font(.footnote.weight(.medium))
+                        .foregroundStyle(secondaryText)
+
+                    Text("Font Size: \(Int(readerStore.fontSize)) pt")
+                        .font(.footnote.weight(.medium))
+                        .foregroundStyle(secondaryText)
+                }
+                .padding(.top, DesignTokens.Spacing.sm)
             }
             .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
         }
     }
 
     private var primaryText: Color {
-        ThemeManager.semanticColor(.primary, for: appState.selectedThemeGradient, colorScheme: colorScheme)
+        ThemeManager.semanticColor(.primary, for: readerStore.selectedGradient, colorScheme: colorScheme)
     }
 
     private var secondaryText: Color {
-        ThemeManager.semanticColor(.secondary, for: appState.selectedThemeGradient, colorScheme: colorScheme)
+        ThemeManager.semanticColor(.secondary, for: readerStore.selectedGradient, colorScheme: colorScheme)
     }
 
     private var accentColor: Color {
-        ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
+        ThemeManager.accentColor(for: readerStore.selectedGradient, colorScheme: colorScheme)
+    }
+
+    private var activeLanguageSummary: String {
+        let active = ReaderLanguage.allCases.filter { readerStore.isLanguageEnabled($0) }
+        if active.isEmpty {
+            return ReaderLanguage.arabic.displayTitle
+        }
+        return active.map(\.displayTitle).joined(separator: ", ")
     }
 }
 
 private struct MiniPlayerPlaceholder: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
 
     private var accentColor: Color {
-        ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
+        ThemeManager.accentColor(for: readerStore.selectedGradient, colorScheme: colorScheme)
     }
 
     var body: some View {
@@ -179,4 +199,5 @@ private struct MiniPlayerPlaceholder: View {
 #Preview {
     ReaderPage()
         .environmentObject(AppState())
+        .environmentObject(ReaderStore())
 }

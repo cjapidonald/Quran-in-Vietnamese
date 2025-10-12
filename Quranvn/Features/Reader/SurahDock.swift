@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct SurahDock: View {
-    let theme: ThemeManager.ThemeGradient
     let surahs: [SurahPlaceholder]
     @Binding var selectedSurah: SurahPlaceholder
     var onSelection: (SurahPlaceholder) -> Void
 
+    @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
@@ -15,7 +15,7 @@ struct SurahDock: View {
                     SegmentPill(
                         title: surah.name,
                         isSelected: surah == selectedSurah,
-                        theme: theme
+                        theme: readerStore.selectedGradient
                     ) {
                         guard selectedSurah != surah else { return }
                         selectedSurah = surah
