@@ -48,6 +48,12 @@ private struct RootTabView: View {
         .tint(ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: effectiveColorScheme))
         .background(ThemeManager.backgroundGradient(style: appState.selectedThemeGradient, for: effectiveColorScheme))
         .preferredColorScheme(appState.themeStyle.preferredColorScheme)
+        .onOpenURL { url in
+            Router.handle(url: url, appState: appState)
+        }
+        .alert(item: $appState.routingAlert) { alert in
+            Alert(title: Text(alert.message))
+        }
     }
 
     private var effectiveColorScheme: ColorScheme {
