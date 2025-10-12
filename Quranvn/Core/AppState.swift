@@ -6,6 +6,7 @@ final class AppState: ObservableObject {
     @Published var showSurahDashboard = false
 
     @Published var pendingReaderDestination: ReaderDestination?
+    @Published var routingAlert: RoutingAlert?
 
     @Published var isLibraryExpanded = false
     @Published var showLibraryFilters = false
@@ -15,6 +16,11 @@ final class AppState: ObservableObject {
 
     @Published var themeStyle: ThemeStyle = .auto
     @Published var selectedThemeGradient: ThemeManager.ThemeGradient = .dawn
+}
+
+struct RoutingAlert: Identifiable {
+    let id = UUID()
+    let message: String
 }
 
 enum AppTab: Hashable {
