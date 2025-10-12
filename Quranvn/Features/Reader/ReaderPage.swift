@@ -21,10 +21,10 @@ struct ReaderPage: View {
                     }
                     .padding(.horizontal, DesignTokens.Spacing.xl)
                     .padding(.top, DesignTokens.Spacing.xl)
-                    .padding(.bottom, appState.showMiniPlayer ? 120 : DesignTokens.Spacing.xl)
+                    .padding(.bottom, appState.isMiniPlayerVisible ? 120 : DesignTokens.Spacing.xl)
                 }
 
-                if appState.showMiniPlayer {
+                if appState.isMiniPlayerVisible {
                     MiniPlayerBar {
                         isShowingFullPlayer = true
                     }
@@ -101,12 +101,18 @@ struct ReaderPage: View {
             }
 
             PrimaryButton(
-                title: appState.showMiniPlayer ? "Hide Mini Player" : "Show Mini Player",
+                title: appState.isMiniPlayerVisible ? "Hide Mini Player" : "Show Mini Player",
                 subtitle: "Reveal a mock playback bar",
                 icon: "play.rectangle.on.rectangle",
                 theme: readerStore.selectedGradient
             ) {
-                withAnimation(.spring) { appState.showMiniPlayer.toggle() }
+                withAnimation(.spring) {
+                    if appState.alwaysShowMiniPlayer {
+                        appState.showMiniPlayer = true
+                    } else {
+                        appState.showMiniPlayer.toggle()
+                    }
+                }
             }
         }
     }

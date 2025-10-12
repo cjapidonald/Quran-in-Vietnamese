@@ -3,6 +3,7 @@ import SwiftUI
 final class AppState: ObservableObject {
     @Published var selectedTab: AppTab = .read
     @Published var showMiniPlayer = false
+    @Published var alwaysShowMiniPlayer = false
     @Published var showSurahDashboard = false
 
     @Published var pendingReaderDestination: ReaderDestination?
@@ -16,6 +17,21 @@ final class AppState: ObservableObject {
 
     @Published var themeStyle: ThemeStyle = .auto
     @Published var selectedThemeGradient: ThemeManager.ThemeGradient = .dawn
+
+    var isMiniPlayerVisible: Bool {
+        showMiniPlayer || alwaysShowMiniPlayer
+    }
+
+#if DEBUG
+    @Published var debugAyahCountOverride: Int?
+    @Published var debugLibraryFavoritesOverride: [FavoriteItem]?
+    @Published var debugLibraryNotesOverride: [NoteItem]?
+
+    func resetLibraryOverrides() {
+        debugLibraryFavoritesOverride = nil
+        debugLibraryNotesOverride = nil
+    }
+#endif
 }
 
 struct RoutingAlert: Identifiable {

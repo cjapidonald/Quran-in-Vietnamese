@@ -4,19 +4,12 @@ struct FavoritesPage: View {
     let theme: ThemeManager.ThemeGradient
     let onSelect: (FavoriteItem) -> Void
 
+    @EnvironmentObject private var appState: AppState
     @Environment(\.colorScheme) private var colorScheme
-
-    private let favorites: [FavoriteItem] = [
-        FavoriteItem(surah: SurahPlaceholder.examples[0], ayah: 1),
-        FavoriteItem(surah: SurahPlaceholder.examples[1], ayah: 7),
-        FavoriteItem(surah: SurahPlaceholder.examples[2], ayah: 5),
-        FavoriteItem(surah: SurahPlaceholder.examples[3], ayah: 12),
-        FavoriteItem(surah: SurahPlaceholder.examples[4], ayah: 3)
-    ]
 
     var body: some View {
         VStack(spacing: DesignTokens.Spacing.md) {
-            ForEach(favorites) { item in
+            ForEach(currentFavorites) { item in
                 Button {
                     onSelect(item)
                 } label: {
@@ -61,12 +54,29 @@ struct FavoritesPage: View {
     private var accentColor: Color {
         ThemeManager.accentColor(for: theme, colorScheme: colorScheme)
     }
+
+    private var currentFavorites: [FavoriteItem] {
+#if DEBUG
+        if let override = appState.debugLibraryFavoritesOverride {
+            return override
+        }
+#endif
+        return FavoriteItem.samples
+    }
 }
 
 struct FavoriteItem: Identifiable {
     let id = UUID()
     let surah: SurahPlaceholder
     let ayah: Int
+
+    static let samples: [FavoriteItem] = [
+        FavoriteItem(surah: SurahPlaceholder.examples[0], ayah: 1),
+        FavoriteItem(surah: SurahPlaceholder.examples[1], ayah: 7),
+        FavoriteItem(surah: SurahPlaceholder.examples[2], ayah: 5),
+        FavoriteItem(surah: SurahPlaceholder.examples[3], ayah: 12),
+        FavoriteItem(surah: SurahPlaceholder.examples[4], ayah: 3)
+    ]
 
     var destination: ReaderDestination {
         ReaderDestination(surah: surah, ayah: ayah)
@@ -75,4 +85,5 @@ struct FavoriteItem: Identifiable {
 
 #Preview {
     FavoritesPage(theme: .dawn) { _ in }
+        .environmentObject(AppState())
 }
