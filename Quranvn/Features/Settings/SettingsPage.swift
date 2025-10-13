@@ -1,8 +1,10 @@
+import AuthenticationServices
 import SwiftUI
 
 struct SettingsPage: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
+    @EnvironmentObject private var cloudAuthManager: CloudAuthManager
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var reminderTime = Self.defaultReminderTime
@@ -14,6 +16,7 @@ struct SettingsPage: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
+                    accountSection
                     appearanceSection
                     typographySection
                     readingSection
@@ -38,6 +41,52 @@ struct SettingsPage: View {
                 .environmentObject(readerStore)
         }
 #endif
+    }
+
+    private var accountSection: some View {
+        settingsSection(title: "Tài khoản") {
+            VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
+                HStack(spacing: DesignTokens.Spacing.md) {
+                    ZStack {
+                        Circle()
+                            .fill(accountStatusColor.opacity(0.15))
+                        Image(systemName: "applelogo")
+                            .font(.title3.weight(.semibold))
+                            .foregroundStyle(accountStatusColor)
+                    }
+                    .frame(width: 44, height: 44)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(Text(cloudAuthManager.isSignedIn ? "Đăng nhập Apple đang bật" : "Đăng nhập Apple chưa được bật"))
+
+                    VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
+                        Text(cloudAuthManager.status)
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(primaryText)
+
+                        Text(cloudAuthManager.isSignedIn ? "Đồng bộ hóa đang hoạt động." : "Đăng nhập để đồng bộ dữ liệu.")
+                            .font(.footnote)
+                            .foregroundStyle(secondaryText)
+                    }
+
+                    Spacer()
+                }
+
+                SignInWithAppleButton(.signIn) { request in
+                    cloudAuthManager.prepareAuthorizationRequest(request)
+                } onCompletion: { result in
+                    cloudAuthManager.handleAuthorization(result: result)
+                }
+                .frame(maxWidth: .infinity, minHeight: 44)
+                .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
+
+                if cloudAuthManager.isSignedIn {
+                    Button("Đăng xuất") {
+                        cloudAuthManager.signOut()
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            }
+        }
     }
 
     private var appearanceSection: some View {
@@ -331,6 +380,10 @@ struct SettingsPage: View {
         ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: activeColorScheme)
     }
 
+    private var accountStatusColor: Color {
+        cloudAuthManager.isSignedIn ? .green : .red
+    }
+
     private var reciterOptions: [String] {
         ["Mishary Rashid Alafasy"]
     }
@@ -347,4 +400,5 @@ struct SettingsPage: View {
     SettingsPage()
         .environmentObject(AppState())
         .environmentObject(ReaderStore())
+        .environmentObject(CloudAuthManager())
 }
