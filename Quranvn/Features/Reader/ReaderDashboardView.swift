@@ -26,8 +26,6 @@ struct ReaderDashboardView: View {
     @State private var highlightIsActive = false
     @State private var hasActivatedHighlight = false
     @State private var lastHandledLanguageEnforcementID: UUID?
-    private let surahOptions = SurahPlaceholder.examples
-
     init(initialSurah: SurahPlaceholder? = nil, initialAyah: Int? = nil, highlightAyah: Int? = nil) {
         let defaultSurah = SurahPlaceholder.examples.first ?? SurahPlaceholder(name: "Tạm thời", index: 1)
         let resolvedSurah = initialSurah ?? defaultSurah
@@ -100,19 +98,12 @@ struct ReaderDashboardView: View {
         .safeAreaInset(edge: .bottom) {
             Group {
                 if !readerStore.isFullScreen {
-                    VStack(spacing: DesignTokens.Spacing.md) {
+                    Group {
                         if appState.isMiniPlayerVisible {
                             MiniPlayerBar {
                                 isShowingFullPlayer = true
                             }
                             .transition(.move(edge: .bottom).combined(with: .opacity))
-                        }
-
-                        SurahDock(
-                            surahs: surahOptions,
-                            selectedSurah: $selectedSurah
-                        ) { surah in
-                            updateAyahs(for: surah)
                         }
                     }
                     .padding(.horizontal, readerHorizontalPadding)
@@ -302,17 +293,6 @@ struct ReaderDashboardView: View {
 
     private func chantGPTPrompt(for ayah: AyahPlaceholder) -> String {
         "Hãy giải thích ý nghĩa và bối cảnh câu kinh số \(ayah.number) trong chương \(selectedSurah.vietnameseName) của Kinh Qur'an."
-    }
-
-    private func updateAyahs(for surah: SurahPlaceholder) {
-        selectedSurah = surah
-        ayahs = resolvedAyahs(for: surah)
-        favoriteAyahs.removeAll()
-        ayahNotes.removeAll()
-        scrollTarget = nil
-        highlightedAyahID = nil
-        highlightIsActive = false
-        hasActivatedHighlight = false
     }
 
     private func showToast(message: String) {
