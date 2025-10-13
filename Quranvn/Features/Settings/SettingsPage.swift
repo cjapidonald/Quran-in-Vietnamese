@@ -34,6 +34,9 @@ struct SettingsPage: View {
             .tint(accentColor)
             .navigationBarTitleDisplayMode(.inline)
         }
+        .task {
+            cloudAuthManager.refreshCredentialState()
+        }
 #if DEBUG
         .sheet(isPresented: $isShowingDebugMenu) {
             DebugMenu()
@@ -59,7 +62,7 @@ struct SettingsPage: View {
                     .accessibilityLabel(Text(cloudAuthManager.isSignedIn ? "Đăng nhập Apple đang bật" : "Đăng nhập Apple chưa được bật"))
 
                     VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                        Text(cloudAuthManager.status)
+                        Text(cloudAuthManager.statusDescription)
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(primaryText)
 
