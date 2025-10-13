@@ -202,8 +202,14 @@ struct ReaderDashboardView: View {
         }
         .padding(.vertical, DesignTokens.Spacing.md)
         .padding(.horizontal, DesignTokens.Spacing.lg)
-        .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
-        .contentShape(Rectangle())
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(alignment: .center) {
+            if isHighlighted {
+                RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.large, style: .continuous)
+                    .fill(highlightColor.opacity(colorScheme == .dark ? 0.25 : 0.18))
+                    .transition(.opacity.combined(with: .scale))
+            }
+        }
         .overlay {
             if isHighlighted {
                 RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.large, style: .continuous)
@@ -212,6 +218,7 @@ struct ReaderDashboardView: View {
                     .transition(.scale.combined(with: .opacity))
             }
         }
+        .contentShape(Rectangle())
         .scaleEffect(isHighlighted ? 1.02 : 1)
         .animation(.spring(response: 0.55, dampingFraction: 0.75), value: isHighlighted)
         .onTapGesture(count: 2) {
