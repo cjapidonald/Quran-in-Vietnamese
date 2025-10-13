@@ -48,7 +48,7 @@ final class CloudAuthManager: NSObject, ObservableObject {
         return nil
     }
 
-    private let containerIdentifier = "iCloud.vn.quran.app"
+    private let containerIdentifier = "iCloud.com.donald.quranvn"
     private var cachedUserRecordID: CKRecord.ID?
     private var cachedAppleUserID: String?
 
