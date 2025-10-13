@@ -5,29 +5,10 @@ struct ReaderToolbar: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
-            languageSection
-            layoutSection
-        }
-        .padding(.vertical, DesignTokens.Spacing.lg)
-        .padding(.horizontal, DesignTokens.Spacing.lg)
-        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
-    }
-
-    private var languageSection: some View {
-        HStack(spacing: DesignTokens.Spacing.sm) {
-            ForEach(ReaderLanguage.allCases) { language in
-                SegmentPill(
-                    title: language.displayTitle,
-                    isSelected: readerStore.isLanguageEnabled(language),
-                    theme: theme
-                ) {
-                    withAnimation(.easeInOut) {
-                        readerStore.toggleLanguage(language)
-                    }
-                }
-            }
-        }
+        layoutSection
+            .padding(.vertical, DesignTokens.Spacing.lg)
+            .padding(.horizontal, DesignTokens.Spacing.lg)
+            .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
     private var layoutSection: some View {
@@ -39,6 +20,24 @@ struct ReaderToolbar: View {
 
                 adjustablePillButton(icon: "textformat.size.larger", isEnabled: readerStore.canIncreaseFontSize) {
                     readerStore.increaseFontSize()
+                }
+
+                languageToggleButton(
+                    title: "AR",
+                    isSelected: readerStore.showArabic
+                ) {
+                    withAnimation(.easeInOut) {
+                        readerStore.toggleLanguage(.arabic)
+                    }
+                }
+
+                languageToggleButton(
+                    title: "VN",
+                    isSelected: readerStore.showVietnamese
+                ) {
+                    withAnimation(.easeInOut) {
+                        readerStore.toggleLanguage(.vietnamese)
+                    }
                 }
             }
 
@@ -94,6 +93,21 @@ struct ReaderToolbar: View {
         .buttonStyle(.plain)
         .disabled(!isEnabled)
         .opacity(isEnabled ? 1 : 0.6)
+    }
+
+    private func languageToggleButton(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(.system(size: 16, weight: .semibold))
+                .frame(width: 40, height: 40)
+                .foregroundStyle(primaryText.opacity(isSelected ? 1 : 0.4))
+                .background(
+                    Circle()
+                        .fill(primaryText.opacity(isSelected ? 0.12 : 0.04))
+                )
+        }
+        .buttonStyle(.plain)
+        .opacity(isSelected ? 1 : 0.8)
     }
 
     private var primaryText: Color {
