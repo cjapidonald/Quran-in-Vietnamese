@@ -10,9 +10,9 @@ enum ThemeManager {
 
         var displayName: String {
             switch self {
-            case .dawn: return "Dawn"
-            case .oasis: return "Oasis"
-            case .twilight: return "Twilight"
+            case .dawn: return "Bình minh"
+            case .oasis: return "Ốc đảo"
+            case .twilight: return "Hoàng hôn"
             }
         }
     }

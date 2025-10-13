@@ -33,15 +33,14 @@ final class ReaderStore: ObservableObject {
 
         var displayName: String {
             switch self {
-            case .serif: "Serif"
-            case .sans: "Sans"
+            case .serif: "Chữ có chân"
+            case .sans: "Chữ không chân"
             }
         }
     }
 
     @Published var showArabic: Bool = true
     @Published var showVietnamese: Bool = true
-    @Published var showEnglish: Bool = false
 
     @Published private(set) var lastLanguageEnforcementID: UUID?
 
@@ -82,7 +81,7 @@ final class ReaderStore: ObservableObject {
 
     @discardableResult
     func ensureNonEmptyLanguages() -> Bool {
-        if !showArabic && !showVietnamese && !showEnglish {
+        if !showArabic && !showVietnamese {
             showArabic = true
             lastLanguageEnforcementID = UUID()
             return true
@@ -97,8 +96,6 @@ final class ReaderStore: ObservableObject {
             showArabic.toggle()
         case .vietnamese:
             showVietnamese.toggle()
-        case .english:
-            showEnglish.toggle()
         }
 
         ensureNonEmptyLanguages()
@@ -110,8 +107,6 @@ final class ReaderStore: ObservableObject {
             return showArabic
         case .vietnamese:
             return showVietnamese
-        case .english:
-            return showEnglish
         }
     }
 
@@ -207,9 +202,9 @@ final class ReaderStore: ObservableObject {
     func translationFont(for size: CGFloat) -> Font {
         switch translationFontSelection {
         case .serif:
-            return .system(size: size, weight: .regular, design: .serif)
+            return .custom("Times New Roman", size: size)
         case .sans:
-            return .system(size: size, weight: .regular, design: .default)
+            return .custom("Helvetica Neue", size: size)
         }
     }
 }
@@ -217,10 +212,17 @@ final class ReaderStore: ObservableObject {
 enum ReaderLanguage: String, CaseIterable, Identifiable {
     case arabic = "AR"
     case vietnamese = "VI"
-    case english = "EN"
 
     var id: String { rawValue }
-    var displayTitle: String { rawValue }
+
+    var displayTitle: String {
+        switch self {
+        case .arabic:
+            return "Ả Rập"
+        case .vietnamese:
+            return "Tiếng Việt"
+        }
+    }
 }
 
 enum ReaderLayoutMode: String, CaseIterable {

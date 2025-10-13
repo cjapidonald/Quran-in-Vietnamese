@@ -22,7 +22,7 @@ struct FullPlayerView: View {
                             .multilineTextAlignment(.center)
                             .foregroundStyle(primaryText)
 
-                        Text("Placeholder recitation UI")
+                        Text("Giao diện nghe thử nghiệm")
                             .font(.callout)
                             .foregroundStyle(secondaryText)
                     }
@@ -39,7 +39,7 @@ struct FullPlayerView: View {
             }
             .scrollIndicators(.hidden)
         }
-        .navigationTitle("Now Playing")
+        .navigationTitle("Đang phát")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { toolbarContent }
     }

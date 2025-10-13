@@ -7,14 +7,14 @@ struct AttributionPage: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
-                Text("Content Attributions")
+                Text("Nguồn nội dung")
                     .font(.largeTitle.bold())
                     .foregroundStyle(primaryText)
 
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-                    attributionRow(title: "Arabic text source…")
-                    attributionRow(title: "VN translation source…")
-                    attributionRow(title: "Audio source…")
+                    attributionRow(title: "Nguồn văn bản Ả Rập…")
+                    attributionRow(title: "Nguồn bản dịch tiếng Việt…")
+                    attributionRow(title: "Nguồn âm thanh…")
                 }
             }
             .padding(DesignTokens.Spacing.xl)
@@ -24,7 +24,7 @@ struct AttributionPage: View {
                 .backgroundGradient(style: appState.selectedThemeGradient, for: activeColorScheme)
                 .ignoresSafeArea()
         )
-        .navigationTitle("Attributions")
+        .navigationTitle("Nguồn trích dẫn")
         .navigationBarTitleDisplayMode(.inline)
     }
 

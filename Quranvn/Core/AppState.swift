@@ -48,9 +48,9 @@ enum AppTab: Hashable {
 }
 
 enum SearchScope: String, CaseIterable, Identifiable {
-    case all = "All"
-    case surahs = "Surahs"
-    case reciters = "Reciters"
+    case all = "Tất cả"
+    case surahs = "Chương"
+    case reciters = "Qari"
 
     var id: String { rawValue }
 }
@@ -65,9 +65,9 @@ extension AppState {
 
         var displayName: String {
             switch self {
-            case .auto: "Auto"
-            case .light: "Light"
-            case .dark: "Dark"
+            case .auto: "Tự động"
+            case .light: "Sáng"
+            case .dark: "Tối"
             }
         }
 
