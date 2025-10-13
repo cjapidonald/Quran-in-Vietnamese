@@ -540,7 +540,6 @@ struct ReaderDashboardView: View {
     }
 
     private func navigateBackToSurahs() {
-        guard appState.showSurahDashboard else { return }
         appState.showSurahDashboard = false
         dismiss()
     }
