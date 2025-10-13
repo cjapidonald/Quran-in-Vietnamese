@@ -14,7 +14,6 @@ struct SettingsPage: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
-                    header
                     appearanceSection
                     typographySection
                     readingSection
@@ -39,23 +38,6 @@ struct SettingsPage: View {
                 .environmentObject(readerStore)
         }
 #endif
-    }
-
-    private var header: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            Text("Settings")
-                .font(.largeTitle.bold())
-                .foregroundStyle(primaryText)
-#if DEBUG
-                .onLongPressGesture {
-                    isShowingDebugMenu = true
-                }
-#endif
-            Text("Customize your reading experience")
-                .font(.subheadline)
-                .foregroundStyle(secondaryText)
-        }
-        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
     private var appearanceSection: some View {
