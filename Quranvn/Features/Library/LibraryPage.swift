@@ -114,8 +114,7 @@ struct LibraryPage: View {
                 openReader(for: item.destination)
             }
         case .surahs:
-            SurahsPage(theme: appState.selectedThemeGradient) { surah in
-                let destination = ReaderDestination(surah: surah, ayah: 1)
+            SurahsPage(theme: appState.selectedThemeGradient) { destination in
                 openReader(for: destination)
             }
         case .notes:
