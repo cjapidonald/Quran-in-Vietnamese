@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 
 final class AppState: ObservableObject {
-    @Published var selectedTab: AppTab = .read
+    @Published var selectedTab: AppTab = .library
     @Published var showMiniPlayer = false
     @Published var alwaysShowMiniPlayer = false
     @Published var showSurahDashboard = false
@@ -14,6 +14,7 @@ final class AppState: ObservableObject {
     @Published var showLibraryFilters = false
 
     @Published var isSearchFocused = false
+    @Published var isSearchPresented = false
     @Published var selectedSearchScope: SearchScope = .all
 
     @Published var themeStyle: ThemeStyle = .auto
@@ -41,9 +42,8 @@ struct RoutingAlert: Identifiable {
 }
 
 enum AppTab: Hashable {
-    case read
     case library
-    case search
+    case read
     case settings
 }
 

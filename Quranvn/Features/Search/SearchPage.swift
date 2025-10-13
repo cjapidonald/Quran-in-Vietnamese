@@ -25,6 +25,13 @@ struct SearchPage: View {
             }
             .navigationTitle("Search")
             .toolbarBackground(.hidden, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Close") {
+                        close()
+                    }
+                }
+            }
         }
         .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search the Quran")
         .onChange(of: searchQuery) { _, newValue in
@@ -107,6 +114,13 @@ struct SearchPage: View {
         appState.pendingReaderDestination = result.destination
         appState.selectedTab = .read
         appState.showSurahDashboard = true
+        close()
+    }
+
+    private func close() {
+        withAnimation(.easeInOut) {
+            appState.isSearchPresented = false
+        }
     }
 
     private var primaryText: Color {
