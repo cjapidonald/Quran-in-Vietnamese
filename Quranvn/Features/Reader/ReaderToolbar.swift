@@ -6,7 +6,6 @@ struct ReaderToolbar: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
-            progressSection
             languageSection
             layoutSection
         }
@@ -15,46 +14,16 @@ struct ReaderToolbar: View {
         .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
-    private var progressSection: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-            HStack(alignment: .firstTextBaseline) {
-                Text("Tiến độ tổng quan")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(primaryText)
-                Spacer()
-                Text("42%")
-                    .font(.callout.weight(.semibold))
-                    .foregroundStyle(primaryText)
-            }
-
-            ProgressView(value: 0.42)
-                .progressViewStyle(.linear)
-                .tint(accentColor)
-                .frame(height: 6)
-                .background(
-                    Capsule()
-                        .fill(primaryText.opacity(0.08))
-                )
-                .clipShape(Capsule())
-        }
-    }
-
     private var languageSection: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            Text("Ngôn ngữ")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(primaryText)
-
-            HStack(spacing: DesignTokens.Spacing.sm) {
-                ForEach(ReaderLanguage.allCases) { language in
-                    SegmentPill(
-                        title: language.displayTitle,
-                        isSelected: readerStore.isLanguageEnabled(language),
-                        theme: theme
-                    ) {
-                        withAnimation(.easeInOut) {
-                            readerStore.toggleLanguage(language)
-                        }
+        HStack(spacing: DesignTokens.Spacing.sm) {
+            ForEach(ReaderLanguage.allCases) { language in
+                SegmentPill(
+                    title: language.displayTitle,
+                    isSelected: readerStore.isLanguageEnabled(language),
+                    theme: theme
+                ) {
+                    withAnimation(.easeInOut) {
+                        readerStore.toggleLanguage(language)
                     }
                 }
             }
@@ -62,41 +31,35 @@ struct ReaderToolbar: View {
     }
 
     private var layoutSection: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            Text("Bố cục & hiển thị")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(primaryText)
+        HStack(spacing: DesignTokens.Spacing.sm) {
+            HStack(spacing: DesignTokens.Spacing.xs) {
+                adjustablePillButton(icon: "textformat.size.smaller", isEnabled: readerStore.canDecreaseFontSize) {
+                    readerStore.decreaseFontSize()
+                }
 
-            HStack(spacing: DesignTokens.Spacing.sm) {
-                HStack(spacing: DesignTokens.Spacing.xs) {
-                    adjustablePillButton(icon: "textformat.size.smaller", isEnabled: readerStore.canDecreaseFontSize) {
-                        readerStore.decreaseFontSize()
-                    }
+                adjustablePillButton(icon: "textformat.size.larger", isEnabled: readerStore.canIncreaseFontSize) {
+                    readerStore.increaseFontSize()
+                }
+            }
 
-                    adjustablePillButton(icon: "textformat.size.larger", isEnabled: readerStore.canIncreaseFontSize) {
-                        readerStore.increaseFontSize()
+            Spacer()
+
+            HStack(spacing: DesignTokens.Spacing.xs) {
+                pillButton(icon: "paintpalette") {
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                        readerStore.cycleGradient()
                     }
                 }
 
-                Spacer()
-
-                HStack(spacing: DesignTokens.Spacing.xs) {
-                    pillButton(icon: "paintpalette") {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                            readerStore.cycleGradient()
-                        }
+                pillButton(icon: "eyedropper") {
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                        readerStore.cycleTextColor()
                     }
+                }
 
-                    pillButton(icon: "eyedropper") {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                            readerStore.cycleTextColor()
-                        }
-                    }
-
-                    pillButton(icon: readerStore.isFullScreen ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right") {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                            readerStore.toggleFullScreen()
-                        }
+                pillButton(icon: readerStore.isFullScreen ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right") {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                        readerStore.toggleFullScreen()
                     }
                 }
             }
@@ -106,8 +69,8 @@ struct ReaderToolbar: View {
     private func pillButton(icon: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: icon)
-                .font(.footnote.weight(.semibold))
-                .frame(width: 32, height: 32)
+                .font(.system(size: 18, weight: .semibold))
+                .frame(width: 40, height: 40)
                 .foregroundStyle(primaryText)
                 .background(
                     Circle()
@@ -120,8 +83,8 @@ struct ReaderToolbar: View {
     private func adjustablePillButton(icon: String, isEnabled: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: icon)
-                .font(.footnote.weight(.semibold))
-                .frame(width: 32, height: 32)
+                .font(.system(size: 18, weight: .semibold))
+                .frame(width: 40, height: 40)
                 .foregroundStyle(primaryText.opacity(isEnabled ? 1 : 0.4))
                 .background(
                     Circle()
@@ -135,10 +98,6 @@ struct ReaderToolbar: View {
 
     private var primaryText: Color {
         ThemeManager.semanticColor(.primary, for: theme, colorScheme: colorScheme)
-    }
-
-    private var accentColor: Color {
-        ThemeManager.accentColor(for: theme, colorScheme: colorScheme)
     }
 
     private var theme: ThemeManager.ThemeGradient {
