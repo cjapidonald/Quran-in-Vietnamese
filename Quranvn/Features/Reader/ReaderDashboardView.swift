@@ -52,6 +52,10 @@ struct ReaderDashboardView: View {
         }
     }
 
+    private var readerHorizontalPadding: CGFloat {
+        readerStore.isFullScreen ? DesignTokens.Spacing.sm : DesignTokens.Spacing.md
+    }
+
     var body: some View {
         ZStack {
             background
@@ -86,7 +90,7 @@ struct ReaderDashboardView: View {
                     }
                 }
             }
-            .padding(.horizontal, readerStore.isFullScreen ? DesignTokens.Spacing.lg : DesignTokens.Spacing.xl)
+            .padding(.horizontal, readerHorizontalPadding)
             .padding(.top, DesignTokens.Spacing.xl)
             .padding(.bottom, readerStore.isFullScreen ? DesignTokens.Spacing.xl : 0)
         }
@@ -111,9 +115,9 @@ struct ReaderDashboardView: View {
                             updateAyahs(for: surah)
                         }
                     }
-                    .padding(.horizontal, DesignTokens.Spacing.xl)
+                    .padding(.horizontal, readerHorizontalPadding)
                     .padding(.top, DesignTokens.Spacing.md)
-                    .padding(.bottom, DesignTokens.Spacing.lg)
+                    .padding(.bottom, readerHorizontalPadding)
                     .background(.clear)
                 }
             }
