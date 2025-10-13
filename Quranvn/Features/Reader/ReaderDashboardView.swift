@@ -7,6 +7,7 @@ struct ReaderDashboardView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.dismiss) private var dismiss
 
     @State private var selectedSurah: SurahPlaceholder
     @State private var ayahs: [AyahPlaceholder]
@@ -133,6 +134,7 @@ struct ReaderDashboardView: View {
         .overlay(toastView, alignment: .top)
         .overlay(fullScreenControls, alignment: .topTrailing)
         .simultaneousGesture(exitFullScreenGesture)
+        .highPriorityGesture(backNavigationGesture)
         .navigationDestination(isPresented: $isShowingFullPlayer) {
             FullPlayerView()
         }
@@ -641,6 +643,12 @@ struct ReaderDashboardView: View {
         }
     }
 
+    private func navigateBackToSurahs() {
+        guard appState.showSurahDashboard else { return }
+        appState.showSurahDashboard = false
+        dismiss()
+    }
+
     private var exitFullScreenGesture: some Gesture {
         DragGesture(minimumDistance: 25, coordinateSpace: .local)
             .onEnded { value in
@@ -651,6 +659,20 @@ struct ReaderDashboardView: View {
 
                 if verticalTranslation > 80, verticalTranslation > horizontalTranslation {
                     exitFullScreen()
+                }
+            }
+    }
+
+    private var backNavigationGesture: some Gesture {
+        DragGesture(minimumDistance: 40, coordinateSpace: .local)
+            .onEnded { value in
+                guard !readerStore.isFullScreen else { return }
+
+                let horizontalTranslation = value.translation.width
+                let verticalTranslation = abs(value.translation.height)
+
+                if horizontalTranslation > 80, horizontalTranslation > verticalTranslation {
+                    navigateBackToSurahs()
                 }
             }
     }

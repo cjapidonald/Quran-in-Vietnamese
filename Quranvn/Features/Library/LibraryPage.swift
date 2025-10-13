@@ -5,7 +5,7 @@ struct LibraryPage: View {
     @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
 
-    @State private var selectedSegment: LibrarySegment = .favorites
+    @State private var selectedSegment: LibrarySegment = .surahs
 
     var body: some View {
         NavigationStack {
@@ -98,8 +98,8 @@ struct LibraryPage: View {
 
     private var segmentedControl: some View {
         Picker("Phần thư viện", selection: $selectedSegment) {
-            Text("Yêu thích").tag(LibrarySegment.favorites)
             Text("Chương (Tiếng Việt)").tag(LibrarySegment.surahs)
+            Text("Yêu thích").tag(LibrarySegment.favorites)
             Text("Ghi chú").tag(LibrarySegment.notes)
         }
         .pickerStyle(.segmented)
