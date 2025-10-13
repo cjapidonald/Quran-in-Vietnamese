@@ -1,0 +1,16 @@
+{
+  "source": "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Library/SurahsPage.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Chương %lld • %@",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 34
+        }
+      }
+    ]
+  },
+  "version": 1
+}

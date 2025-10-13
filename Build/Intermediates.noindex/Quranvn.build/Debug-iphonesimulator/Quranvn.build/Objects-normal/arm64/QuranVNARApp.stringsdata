@@ -1,0 +1,24 @@
+{
+  "source": "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/App/QuranVNARApp.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Thư viện",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cài đặt",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 36
+        }
+      }
+    ]
+  },
+  "version": 1
+}

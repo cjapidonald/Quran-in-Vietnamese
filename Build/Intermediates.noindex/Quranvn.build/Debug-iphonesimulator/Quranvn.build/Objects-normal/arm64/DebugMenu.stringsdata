@@ -1,0 +1,96 @@
+{
+  "source": "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Core/DebugMenu.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Trình đơn gỡ lỗi",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "Trình đọc",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 12
+        }
+      },
+      {
+        "comment": "",
+        "key": "Thư viện",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Giao diện",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "Điều hướng",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tạo 30 câu kinh giả lập",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 13
+        }
+      },
+      {
+        "comment": "",
+        "key": "Luôn hiện trình phát mini khi chụp màn hình",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 14
+        }
+      },
+      {
+        "comment": "",
+        "key": "Xóa yêu thích/ghi chú",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 18
+        }
+      },
+      {
+        "comment": "",
+        "key": "Đổi toàn bộ gradient",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chuyển đến chương Al-Kahf",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Đóng",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 32
+        }
+      }
+    ]
+  },
+  "version": 1
+}

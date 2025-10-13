@@ -1,0 +1,88 @@
+{
+  "source": "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Search/SearchPage.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Tìm kiếm Quran",
+        "location": {
+          "startingColumn": 104,
+          "startingLine": 36
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tìm kiếm",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Đóng",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 30
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tìm kiếm",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 47
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hình dung trải nghiệm tìm kiếm với dữ liệu mô phỏng",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 50
+        }
+      },
+      {
+        "comment": "",
+        "key": "Kết quả",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 60
+        }
+      },
+      {
+        "comment": "",
+        "key": "Không tìm thấy chương nào trùng \"%@\"",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "Nhập nội dung để xem thử trải nghiệm tìm kiếm trực quan.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chức năng tìm kiếm thật chưa khả dụng — toàn bộ đều là mô phỏng.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 68
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chương %lld • %@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 90
+        }
+      }
+    ]
+  },
+  "version": 1
+}

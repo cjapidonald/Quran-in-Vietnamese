@@ -1,0 +1,96 @@
+{
+  "source": "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderDashboardView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "آية minh họa #%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 163
+        }
+      },
+      {
+        "comment": "",
+        "key": "Đây là đoạn văn mô phỏng cho câu số %lld.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 169
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ghi chú %lld: %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 184
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sao chép câu kinh",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 227
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hỏi ChantGPT",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 234
+        }
+      },
+      {
+        "comment": "",
+        "key": "Thêm ghi chú",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 240
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ghi chú",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 339
+        }
+      },
+      {
+        "comment": "",
+        "key": "Thêm ghi chú",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 327
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hủy",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 342
+        }
+      },
+      {
+        "comment": "",
+        "key": "Lưu",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 347
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chế độ hiển thị: %@",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 385
+        }
+      }
+    ]
+  },
+  "version": 1
+}
