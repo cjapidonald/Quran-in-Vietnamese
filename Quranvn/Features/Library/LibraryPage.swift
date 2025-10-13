@@ -24,14 +24,30 @@ struct LibraryPage: View {
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            Text("Library")
-                .font(.largeTitle.bold())
-                .foregroundStyle(primaryText)
-            Text("Jump to saved favourites or personal notes")
-                .font(.subheadline)
-                .foregroundStyle(secondaryText)
+        Button {
+            withAnimation(.easeInOut) {
+                appState.isSearchPresented = true
+            }
+        } label: {
+            HStack(spacing: DesignTokens.Spacing.md) {
+                Image(systemName: "magnifyingglass")
+                    .font(.title2.weight(.semibold))
+                    .foregroundStyle(primaryText)
+
+                VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
+                    Text("Search the Quran")
+                        .font(.headline)
+                        .foregroundStyle(primaryText)
+                    Text("Find surahs, reciters, and more")
+                        .font(.subheadline)
+                        .foregroundStyle(secondaryText)
+                }
+
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .buttonStyle(.plain)
         .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 

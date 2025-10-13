@@ -19,24 +19,18 @@ private struct RootTabView: View {
 
     var body: some View {
         TabView(selection: $appState.selectedTab) {
-            ReaderPage()
-                .environmentObject(readerStore)
-                .tabItem {
-                    Label("Read", systemImage: "book")
-                }
-                .tag(AppTab.read)
-
             LibraryPage()
                 .tabItem {
                     Label("Library", systemImage: "heart.text.square")
                 }
                 .tag(AppTab.library)
 
-            SearchPage()
+            ReaderPage()
+                .environmentObject(readerStore)
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Label("Read", systemImage: "book")
                 }
-                .tag(AppTab.search)
+                .tag(AppTab.read)
 
             SettingsPage()
                 .environmentObject(readerStore)
@@ -53,6 +47,10 @@ private struct RootTabView: View {
         }
         .alert(item: $appState.routingAlert) { alert in
             Alert(title: Text(alert.message))
+        }
+        .sheet(isPresented: $appState.isSearchPresented) {
+            SearchPage()
+                .environmentObject(appState)
         }
     }
 
