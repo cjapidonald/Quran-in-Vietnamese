@@ -162,7 +162,7 @@ struct ReaderDashboardView: View {
         let isHighlighted = highlightIsActive && highlightedAyahID == ayah.id
 
         return VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            HStack(alignment: .top) {
+            HStack(alignment: .top, spacing: DesignTokens.Spacing.md) {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                     if readerStore.showArabic {
                         Text("آية minh họa #\(ayah.number)")
@@ -201,18 +201,30 @@ struct ReaderDashboardView: View {
             }
         }
         .padding(.vertical, DesignTokens.Spacing.md)
-        .padding(.horizontal, DesignTokens.Spacing.lg)
-        .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
-        .contentShape(Rectangle())
-        .overlay {
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
             if isHighlighted {
-                RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.large, style: .continuous)
-                    .stroke(highlightColor.opacity(0.9), lineWidth: 3)
-                    .shadow(color: highlightColor.opacity(0.25), radius: 18)
-                    .transition(.scale.combined(with: .opacity))
+                Rectangle()
+                    .fill(highlightColor.opacity(colorScheme == .dark ? 0.28 : 0.18))
+                    .transition(.opacity.combined(with: .scale))
             }
         }
-        .scaleEffect(isHighlighted ? 1.02 : 1)
+        .overlay(alignment: .leading) {
+            if isHighlighted {
+                Rectangle()
+                    .fill(highlightColor)
+                    .frame(width: 4)
+                    .cornerRadius(2)
+                    .transition(.move(edge: .leading).combined(with: .opacity))
+            }
+        }
+        .overlay(alignment: .bottomLeading) {
+            Divider()
+                .blendMode(.overlay)
+                .opacity(0.4)
+        }
+        .contentShape(Rectangle())
+        .scaleEffect(isHighlighted ? 1.01 : 1)
         .animation(.spring(response: 0.55, dampingFraction: 0.75), value: isHighlighted)
         .onTapGesture(count: 2) {
             toggleFavorite(for: ayah.id)
