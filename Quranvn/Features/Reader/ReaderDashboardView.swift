@@ -703,3 +703,24 @@ struct ReaderDestination {
     let surah: SurahPlaceholder
     let ayah: Int
 }
+
+extension SurahPlaceholder {
+    var vietnameseName: String {
+        if let mapped = Self.vietnameseTitles[index] {
+            return mapped
+        }
+        return name
+    }
+
+    private static let vietnameseTitles: [Int: String] = [
+        1: "Al-Fātiḥah — Lời Mở Đầu",
+        2: "Al-Baqarah — Con Bò Cái",
+        3: "Āl ʿImrān — Gia Đình Imran",
+        4: "An-Nisāʾ — Phụ Nữ",
+        5: "Al-Mā'idah — Bàn Tiệc",
+        6: "Al-An'ām — Đàn Gia Súc",
+        7: "Al-A'rāf — Thành Trì Cao",
+        8: "Al-Anfāl — Chiến Lợi Phẩm",
+        18: "Al-Kahf — Hang Động"
+    ]
+}

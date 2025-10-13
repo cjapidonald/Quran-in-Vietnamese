@@ -46,7 +46,7 @@ enum Router {
 
         appState.routingAlert = nil
         appState.pendingReaderDestination = ReaderDestination(surah: surah, ayah: ayahNumber ?? 1)
-        appState.selectedTab = .read
+        appState.selectedTab = .library
         appState.showSurahDashboard = true
     }
 

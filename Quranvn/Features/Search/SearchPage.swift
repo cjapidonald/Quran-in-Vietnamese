@@ -112,7 +112,7 @@ struct SearchPage: View {
         searchQuery = ""
         appState.isSearchFocused = false
         appState.pendingReaderDestination = result.destination
-        appState.selectedTab = .read
+        appState.selectedTab = .library
         appState.showSurahDashboard = true
         close()
     }

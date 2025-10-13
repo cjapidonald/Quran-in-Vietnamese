@@ -81,7 +81,7 @@ struct DebugMenu: View {
         }
 
         appState.pendingReaderDestination = ReaderDestination(surah: surah, ayah: 1)
-        appState.selectedTab = .read
+        appState.selectedTab = .library
         appState.showSurahDashboard = true
         dismiss()
     }
