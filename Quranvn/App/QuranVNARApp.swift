@@ -3,11 +3,13 @@ import SwiftUI
 @main
 struct QuranVNARApp: App {
     @StateObject private var appState = AppState()
+    @StateObject private var readingProgressStore = ReadingProgressStore()
 
     var body: some Scene {
         WindowGroup {
             RootTabView()
                 .environmentObject(appState)
+                .environmentObject(readingProgressStore)
         }
     }
 }
