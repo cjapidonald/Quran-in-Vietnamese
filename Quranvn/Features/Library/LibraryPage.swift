@@ -16,7 +16,6 @@ struct LibraryPage: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
-                        header
                         readingProgress
                         segmentedControl
                         segmentContent
@@ -38,33 +37,6 @@ struct LibraryPage: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .tint(accentColor)
-    }
-
-    private var header: some View {
-        Button {
-            appState.showSurahDashboard = true
-            appState.isSearchFocused = true
-        } label: {
-            HStack(spacing: DesignTokens.Spacing.md) {
-                Image(systemName: "magnifyingglass")
-                    .font(.title2.weight(.semibold))
-                    .foregroundStyle(primaryText)
-
-                VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                    Text("Tìm kiếm Quran")
-                        .font(.headline)
-                        .foregroundStyle(primaryText)
-                    Text("Tìm chương, qari và nhiều nội dung khác")
-                        .font(.subheadline)
-                        .foregroundStyle(secondaryText)
-                }
-
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        .buttonStyle(.plain)
-        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
     private var readingProgress: some View {
