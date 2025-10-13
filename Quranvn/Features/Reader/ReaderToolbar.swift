@@ -68,32 +68,6 @@ struct ReaderToolbar: View {
                 .foregroundStyle(primaryText)
 
             HStack(spacing: DesignTokens.Spacing.sm) {
-                HStack(spacing: DesignTokens.Spacing.sm) {
-                    SegmentPill(
-                        title: "Dạng dòng",
-                        icon: "text.justify",
-                        isSelected: readerStore.isFlowMode,
-                        theme: theme
-                    ) {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                            readerStore.selectLayoutMode(.flow)
-                        }
-                    }
-
-                    SegmentPill(
-                        title: "Theo câu",
-                        icon: "list.number",
-                        isSelected: !readerStore.isFlowMode,
-                        theme: theme
-                    ) {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                            readerStore.selectLayoutMode(.verse)
-                        }
-                    }
-                }
-
-                Spacer()
-
                 HStack(spacing: DesignTokens.Spacing.xs) {
                     adjustablePillButton(icon: "textformat.size.smaller", isEnabled: readerStore.canDecreaseFontSize) {
                         readerStore.decreaseFontSize()
@@ -103,6 +77,8 @@ struct ReaderToolbar: View {
                         readerStore.increaseFontSize()
                     }
                 }
+
+                Spacer()
 
                 HStack(spacing: DesignTokens.Spacing.xs) {
                     pillButton(icon: "paintpalette") {

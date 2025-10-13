@@ -61,7 +61,7 @@ struct SearchPage: View {
                 .font(.headline)
                 .foregroundStyle(primaryText)
 
-            if searchQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if trimmedSearchQuery.isEmpty {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
                     Text("Nhập nội dung để xem thử trải nghiệm tìm kiếm trực quan.")
                         .foregroundStyle(secondaryText)
@@ -70,17 +70,24 @@ struct SearchPage: View {
                         .foregroundStyle(secondaryText.opacity(0.8))
                 }
                 .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
+            } else if filteredSurahResults.isEmpty {
+                Text("Không tìm thấy chương nào trùng \"\(trimmedSearchQuery)\"")
+                    .font(.footnote)
+                    .foregroundStyle(secondaryText.opacity(0.8))
+                    .padding(.vertical, DesignTokens.Spacing.md)
+                    .padding(.horizontal, DesignTokens.Spacing.lg)
+                    .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
             } else {
                 VStack(spacing: DesignTokens.Spacing.sm) {
-                    ForEach(mockResults) { result in
+                    ForEach(filteredSurahResults) { surah in
                         Button {
-                            open(result)
+                            open(surah)
                         } label: {
                             VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                                Text(result.title)
+                                Text(surah.vietnameseName)
                                     .font(.headline)
                                     .foregroundStyle(primaryText)
-                                Text(result.snippet)
+                                Text("Chương \(surah.index) • \(surah.name)")
                                     .font(.subheadline)
                                     .foregroundStyle(secondaryText)
                             }
@@ -96,22 +103,24 @@ struct SearchPage: View {
         }
     }
 
-    private var mockResults: [SearchResult] {
-        let surah = SurahPlaceholder.examples.first { $0.name.contains("Baqarah") } ?? SurahPlaceholder(name: "Al-Baqarah", index: 2)
-        return (0..<10).map { index in
-            let ayah = 255 + index
-            return SearchResult(
-                title: "Al-Baqarah — câu \(ayah) (giả lập)",
-                snippet: "… đoạn mô phỏng …",
-                destination: ReaderDestination(surah: surah, ayah: ayah)
-            )
+    private var trimmedSearchQuery: String {
+        searchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var filteredSurahResults: [SurahPlaceholder] {
+        guard !trimmedSearchQuery.isEmpty else { return [] }
+
+        return SurahPlaceholder.examples.filter { surah in
+            surah.vietnameseName.localizedCaseInsensitiveContains(trimmedSearchQuery) ||
+                surah.name.localizedCaseInsensitiveContains(trimmedSearchQuery) ||
+                String(surah.index).contains(trimmedSearchQuery)
         }
     }
 
-    private func open(_ result: SearchResult) {
+    private func open(_ surah: SurahPlaceholder) {
         searchQuery = ""
         appState.isSearchFocused = false
-        appState.pendingReaderDestination = result.destination
+        appState.pendingReaderDestination = ReaderDestination(surah: surah, ayah: 1)
         appState.selectedTab = .library
         appState.showSurahDashboard = true
         close()
@@ -134,13 +143,6 @@ struct SearchPage: View {
     private var accentColor: Color {
         ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
     }
-}
-
-private struct SearchResult: Identifiable {
-    let id = UUID()
-    let title: String
-    let snippet: String
-    let destination: ReaderDestination
 }
 
 #Preview {
