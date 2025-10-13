@@ -48,10 +48,6 @@ private struct RootTabView: View {
         .alert(item: $appState.routingAlert) { alert in
             Alert(title: Text(alert.message))
         }
-        .sheet(isPresented: $appState.isSearchPresented) {
-            SearchPage()
-                .environmentObject(appState)
-        }
     }
 
     private var effectiveColorScheme: ColorScheme {

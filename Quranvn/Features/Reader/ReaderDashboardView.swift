@@ -25,6 +25,8 @@ struct ReaderDashboardView: View {
     @State private var highlightIsActive = false
     @State private var hasActivatedHighlight = false
     @State private var lastHandledLanguageEnforcementID: UUID?
+    @State private var surahSearchText: String = ""
+    @FocusState private var isSurahSearchFieldFocused: Bool
 
     private let surahOptions = SurahPlaceholder.examples
 
@@ -60,6 +62,8 @@ struct ReaderDashboardView: View {
                 if !readerStore.isFullScreen {
                     ReaderToolbar()
                 }
+
+                surahSearchSection
 
                 ScrollViewReader { proxy in
                     ScrollView {
@@ -137,7 +141,19 @@ struct ReaderDashboardView: View {
             lastHandledLanguageEnforcementID = newValue
             showToast(message: "Always keep one language on")
         }
+        .onChange(of: appState.isSearchFocused) { _, newValue in
+            guard newValue else { return }
+            focusSurahSearchField()
+        }
+        .onChange(of: isSurahSearchFieldFocused) { _, isFocused in
+            if !isFocused {
+                appState.isSearchFocused = false
+            }
+        }
         .onAppear {
+            if appState.isSearchFocused {
+                focusSurahSearchField()
+            }
             applyDebugAyahOverrideIfNeeded()
         }
 #if DEBUG
@@ -155,6 +171,78 @@ struct ReaderDashboardView: View {
                     : Color.clear
             )
             .ignoresSafeArea()
+    }
+
+    private var surahSearchSection: some View {
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
+            HStack(spacing: DesignTokens.Spacing.sm) {
+                Image(systemName: "magnifyingglass")
+                    .font(.headline.weight(.semibold))
+                    .foregroundStyle(secondaryText.opacity(0.9))
+
+                TextField("Search Surahs", text: $surahSearchText)
+                    .textInputAutocapitalization(.words)
+                    .disableAutocorrection(true)
+                    .focused($isSurahSearchFieldFocused)
+                    .foregroundStyle(primaryText)
+                    .submitLabel(.search)
+                    .onSubmit {
+                        submitSurahSearch()
+                    }
+            }
+            .padding(.vertical, DesignTokens.Spacing.sm)
+            .padding(.horizontal, DesignTokens.Spacing.md)
+            .background(
+                RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.medium, style: .continuous)
+                    .fill(searchFieldBackground)
+            )
+
+            if shouldShowSearchResults {
+                VStack(spacing: DesignTokens.Spacing.xs) {
+                    ForEach(filteredSurahResults) { surah in
+                        Button {
+                            selectSurahFromSearch(surah)
+                        } label: {
+                            HStack(spacing: DesignTokens.Spacing.sm) {
+                                VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
+                                    Text(surah.name)
+                                        .font(.subheadline.weight(.semibold))
+                                        .foregroundStyle(primaryText)
+
+                                    Text("Surah \(surah.index)")
+                                        .font(.caption)
+                                        .foregroundStyle(secondaryText.opacity(0.9))
+                                }
+
+                                Spacer(minLength: DesignTokens.Spacing.md)
+
+                                Image(systemName: surah == selectedSurah ? "checkmark.circle.fill" : "arrow.up.right")
+                                    .font(.footnote.weight(.semibold))
+                                    .foregroundStyle(
+                                        surah == selectedSurah
+                                            ? highlightColor
+                                            : secondaryText.opacity(0.8)
+                                    )
+                            }
+                            .padding(.vertical, DesignTokens.Spacing.xs)
+                            .padding(.horizontal, DesignTokens.Spacing.sm)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(
+                                RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.medium, style: .continuous)
+                                    .fill(surah == selectedSurah ? selectedResultBackground : searchResultBackground)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .transition(.opacity.combined(with: .move(edge: .top)))
+            } else if showNoSearchResultsMessage {
+                Text("No surahs match \"\(trimmedSurahSearchText)\"")
+                    .font(.caption)
+                    .foregroundStyle(secondaryText.opacity(0.8))
+            }
+        }
+        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
     private func ayahCard(for ayah: AyahPlaceholder) -> some View {
@@ -273,6 +361,30 @@ struct ReaderDashboardView: View {
         hasActivatedHighlight = false
     }
 
+    private func focusSurahSearchField() {
+        surahSearchText = ""
+        DispatchQueue.main.async {
+            isSurahSearchFieldFocused = true
+            appState.isSearchFocused = false
+        }
+    }
+
+    private func submitSurahSearch() {
+        guard let firstResult = filteredSurahResults.first else { return }
+        selectSurahFromSearch(firstResult)
+    }
+
+    private func selectSurahFromSearch(_ surah: SurahPlaceholder) {
+        if surah != selectedSurah {
+            updateAyahs(for: surah)
+        }
+        surahSearchText = ""
+        DispatchQueue.main.async {
+            isSurahSearchFieldFocused = false
+            appState.isSearchFocused = false
+        }
+    }
+
     private func showToast(message: String) {
         toastMessage = message
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
@@ -356,6 +468,42 @@ struct ReaderDashboardView: View {
                 .foregroundStyle(secondaryText.opacity(0.8))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var trimmedSurahSearchText: String {
+        surahSearchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var filteredSurahResults: [SurahPlaceholder] {
+        guard !trimmedSurahSearchText.isEmpty else { return [] }
+        return surahOptions.filter { surah in
+            surah.name.localizedCaseInsensitiveContains(trimmedSurahSearchText)
+                || String(surah.index).contains(trimmedSurahSearchText)
+        }
+    }
+
+    private var shouldShowSearchResults: Bool {
+        !filteredSurahResults.isEmpty
+    }
+
+    private var showNoSearchResultsMessage: Bool {
+        !trimmedSurahSearchText.isEmpty && filteredSurahResults.isEmpty
+    }
+
+    private var searchFieldBackground: Color {
+        let base = colorScheme == .dark ? Color.white : Color.black
+        let opacity = colorScheme == .dark ? 0.16 : 0.08
+        return base.opacity(opacity)
+    }
+
+    private var searchResultBackground: Color {
+        let base = colorScheme == .dark ? Color.white : Color.black
+        let opacity = colorScheme == .dark ? 0.12 : 0.06
+        return base.opacity(opacity)
+    }
+
+    private var selectedResultBackground: Color {
+        highlightColor.opacity(colorScheme == .dark ? 0.28 : 0.18)
     }
 
     private var primaryText: Color {

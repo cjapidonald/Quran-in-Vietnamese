@@ -25,9 +25,9 @@ struct LibraryPage: View {
 
     private var header: some View {
         Button {
-            withAnimation(.easeInOut) {
-                appState.isSearchPresented = true
-            }
+            appState.selectedTab = .read
+            appState.showSurahDashboard = true
+            appState.isSearchFocused = true
         } label: {
             HStack(spacing: DesignTokens.Spacing.md) {
                 Image(systemName: "magnifyingglass")
