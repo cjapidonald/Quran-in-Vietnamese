@@ -51,6 +51,6 @@ enum Router {
     }
 
     private static func presentNotFoundAlert(on appState: AppState) {
-        appState.routingAlert = RoutingAlert(message: "Not found (placeholder)")
+        appState.routingAlert = RoutingAlert(message: "Không tìm thấy (mô phỏng)")
     }
 }

@@ -26,7 +26,7 @@ struct FavoritesPage: View {
                 Text(item.surah.name)
                     .font(.headline)
                     .foregroundStyle(primaryText)
-                Text("Ayah #\(item.ayah)")
+                Text("Câu số \(item.ayah)")
                     .font(.subheadline)
                     .foregroundStyle(secondaryText)
             }

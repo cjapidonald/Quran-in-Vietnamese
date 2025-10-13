@@ -9,27 +9,27 @@ struct DebugMenu: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("Reader") {
-                    Button("Populate 30 placeholder ayahs", action: populatePlaceholderAyahs)
-                    Toggle("Always show mini player for screenshots", isOn: alwaysShowMiniPlayerBinding)
+                Section("Trình đọc") {
+                    Button("Tạo 30 câu mô phỏng", action: populatePlaceholderAyahs)
+                    Toggle("Luôn hiển thị trình phát nhỏ để chụp màn hình", isOn: alwaysShowMiniPlayerBinding)
                 }
 
-                Section("Library") {
-                    Button("Clear favorites/notes", role: .destructive, action: clearFavoritesAndNotes)
+                Section("Thư viện") {
+                    Button("Xóa mục yêu thích/ghi chú", role: .destructive, action: clearFavoritesAndNotes)
                 }
 
-                Section("Appearance") {
-                    Button("Cycle all gradients", action: cycleGradients)
+                Section("Giao diện") {
+                    Button("Đổi lần lượt các gradient", action: cycleGradients)
                 }
 
-                Section("Navigation") {
-                    Button("Jump to Al-Kahf", action: jumpToAlKahf)
+                Section("Điều hướng") {
+                    Button("Đi tới chương Al-Kahf", action: jumpToAlKahf)
                 }
             }
-            .navigationTitle("Debug Menu")
+            .navigationTitle("Trình đơn gỡ lỗi")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Close", role: .cancel) { dismiss() }
+                    Button("Đóng", role: .cancel) { dismiss() }
                 }
             }
         }
