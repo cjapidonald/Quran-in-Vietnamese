@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+@MainActor
 final class AppState: ObservableObject {
     @Published var selectedTab: AppTab = .library
     @Published var showMiniPlayer = false
