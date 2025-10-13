@@ -41,13 +41,13 @@ struct SettingsPage: View {
     }
 
     private var appearanceSection: some View {
-        settingsSection(title: "Appearance") {
+        settingsSection(title: "Giao diện") {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Theme")
+                Text("Chủ đề")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(secondaryText)
 
-                Picker("Theme", selection: $appState.themeStyle) {
+                Picker("Chủ đề", selection: $appState.themeStyle) {
                     ForEach(AppState.ThemeStyle.allCases) { option in
                         Text(option.displayName).tag(option)
                     }
@@ -56,7 +56,7 @@ struct SettingsPage: View {
             }
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Background gradient")
+                Text("Hiệu ứng nền")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(secondaryText)
 
@@ -76,7 +76,7 @@ struct SettingsPage: View {
             }
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Translation text color")
+                Text("Màu chữ bản dịch")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(secondaryText)
 
@@ -97,9 +97,9 @@ struct SettingsPage: View {
     }
 
     private var typographySection: some View {
-        settingsSection(title: "Typography") {
+        settingsSection(title: "Kiểu chữ") {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Arabic font")
+                Text("Phông chữ tiếng Ả Rập")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(secondaryText)
 
@@ -119,7 +119,7 @@ struct SettingsPage: View {
             }
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Vietnamese / English font")
+                Text("Phông chữ tiếng Việt")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(secondaryText)
 
@@ -140,7 +140,7 @@ struct SettingsPage: View {
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
                 HStack {
-                    Text("Font size")
+                    Text("Cỡ chữ")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(secondaryText)
                     Spacer()
@@ -159,12 +159,12 @@ struct SettingsPage: View {
                     in: 16...28,
                     step: 1
                 ) {
-                    Text("Font size")
+                    Text("Cỡ chữ")
                 }
             }
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                Text("Preview")
+                Text("Xem thử")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(secondaryText)
 
@@ -173,9 +173,6 @@ struct SettingsPage: View {
                         .font(readerStore.arabicFont(for: readerStore.fontSize))
                         .foregroundStyle(primaryText)
                     Text("Đây là đoạn dịch thử nghiệm để xem kích thước chữ.")
-                        .font(readerStore.translationFont(for: readerStore.fontSize))
-                        .foregroundStyle(secondaryText)
-                    Text("This is a placeholder English translation preview.")
                         .font(readerStore.translationFont(for: readerStore.fontSize))
                         .foregroundStyle(secondaryText)
                 }
@@ -187,15 +184,15 @@ struct SettingsPage: View {
     }
 
     private var readingSection: some View {
-        settingsSection(title: "Reading") {
+        settingsSection(title: "Trải nghiệm đọc") {
             Toggle(isOn: $readerStore.isFlowMode) {
-                Text("Flow mode")
+                Text("Chế độ đọc liền mạch")
                     .foregroundStyle(primaryText)
             }
             .toggleStyle(SwitchToggleStyle(tint: accentColor))
 
             Toggle(isOn: alwaysArabicBinding) {
-                Text("Always show Arabic")
+                Text("Luôn hiển thị tiếng Ả Rập")
                     .foregroundStyle(primaryText)
             }
             .toggleStyle(SwitchToggleStyle(tint: accentColor))
@@ -203,12 +200,12 @@ struct SettingsPage: View {
     }
 
     private var audioSection: some View {
-        settingsSection(title: "Audio") {
+        settingsSection(title: "Âm thanh") {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                Text("Reciter")
+                Text("Qari")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(secondaryText)
-                Picker("Reciter", selection: .constant(reciterOptions.first!)) {
+                Picker("Qari", selection: .constant(reciterOptions.first!)) {
                     ForEach(reciterOptions, id: \.self) { option in
                         Text(option).tag(option)
                     }
@@ -223,7 +220,7 @@ struct SettingsPage: View {
             }
 
             Toggle(isOn: $appState.showMiniPlayer) {
-                Text("Mini player on Read page")
+                Text("Hiển thị trình phát nhỏ trong mục Đọc")
                     .foregroundStyle(primaryText)
             }
             .toggleStyle(SwitchToggleStyle(tint: accentColor))
@@ -231,10 +228,10 @@ struct SettingsPage: View {
     }
 
     private var remindersSection: some View {
-        settingsSection(title: "Reminders") {
+        settingsSection(title: "Nhắc nhở") {
             HStack {
                 DatePicker(
-                    "Reminder time",
+                    "Thời gian nhắc nhở",
                     selection: $reminderTime,
                     displayedComponents: .hourAndMinute
                 )
@@ -243,7 +240,7 @@ struct SettingsPage: View {
 
                 Spacer()
 
-                Text("Coming soon")
+                Text("Sắp ra mắt")
                     .font(.footnote.weight(.medium))
                     .foregroundStyle(secondaryText)
             }
@@ -251,16 +248,16 @@ struct SettingsPage: View {
     }
 
     private var aboutSection: some View {
-        settingsSection(title: "About") {
+        settingsSection(title: "Giới thiệu") {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Learn about the sources used in this preview app.")
+                Text("Tìm hiểu về các nguồn sử dụng trong ứng dụng thử nghiệm này.")
                     .foregroundStyle(secondaryText)
 
                 NavigationLink {
                     AttributionPage()
                 } label: {
                     HStack {
-                        Text("View content attributions")
+                        Text("Xem nguồn nội dung")
                             .foregroundStyle(primaryText)
                         Spacer()
                         Image(systemName: "chevron.right")

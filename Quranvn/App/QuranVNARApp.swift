@@ -21,21 +21,21 @@ private struct RootTabView: View {
         TabView(selection: $appState.selectedTab) {
             LibraryPage()
                 .tabItem {
-                    Label("Library", systemImage: "heart.text.square")
+                    Label("Thư viện", systemImage: "heart.text.square")
                 }
                 .tag(AppTab.library)
 
             ReaderPage()
                 .environmentObject(readerStore)
                 .tabItem {
-                    Label("Read", systemImage: "book")
+                    Label("Đọc", systemImage: "book")
                 }
                 .tag(AppTab.read)
 
             SettingsPage()
                 .environmentObject(readerStore)
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Cài đặt", systemImage: "gear")
                 }
                 .tag(AppTab.settings)
         }

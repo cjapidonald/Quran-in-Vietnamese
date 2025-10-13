@@ -16,7 +16,7 @@ struct MiniPlayerBar: View {
                 Text("Mishary — Al-Fātiḥah")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(primaryText)
-                Text(isPlaying ? "Now playing" : "Paused")
+                Text(isPlaying ? "Đang phát" : "Đang tạm dừng")
                     .font(.caption)
                     .foregroundStyle(secondaryText)
             }
