@@ -68,7 +68,7 @@ final class CloudAuthManager: NSObject, ObservableObject {
             cachedAppleUserID = credential.user
 
             Task { [weak self] in
-                guard let self else { return }
+                guard let self = self else { return }
 
                 do {
                     let summary = try await self.completeSignIn(with: credential)
@@ -101,7 +101,7 @@ final class CloudAuthManager: NSObject, ObservableObject {
 
         ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID) { [weak self] state, error in
             Task { @MainActor in
-                guard let self else { return }
+                guard let self = self else { return }
 
                 if let error {
                     self.status = .error(error.localizedDescription)
