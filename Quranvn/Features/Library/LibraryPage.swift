@@ -35,10 +35,10 @@ struct LibraryPage: View {
                     .foregroundStyle(primaryText)
 
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                    Text("Search the Quran")
+                    Text("Tìm kiếm Quran")
                         .font(.headline)
                         .foregroundStyle(primaryText)
-                    Text("Find surahs, reciters, and more")
+                    Text("Tìm chương, qari và nhiều nội dung khác")
                         .font(.subheadline)
                         .foregroundStyle(secondaryText)
                 }
@@ -52,9 +52,9 @@ struct LibraryPage: View {
     }
 
     private var segmentedControl: some View {
-        Picker("Library Section", selection: $selectedSegment) {
-            Text("Favorites").tag(LibrarySegment.favorites)
-            Text("Notes").tag(LibrarySegment.notes)
+        Picker("Phần thư viện", selection: $selectedSegment) {
+            Text("Yêu thích").tag(LibrarySegment.favorites)
+            Text("Ghi chú").tag(LibrarySegment.notes)
         }
         .pickerStyle(.segmented)
         .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)

@@ -31,7 +31,7 @@ struct ReaderDashboardView: View {
     private let surahOptions = SurahPlaceholder.examples
 
     init(initialSurah: SurahPlaceholder? = nil, initialAyah: Int? = nil, highlightAyah: Int? = nil) {
-        let defaultSurah = SurahPlaceholder.examples.first ?? SurahPlaceholder(name: "Placeholder", index: 1)
+        let defaultSurah = SurahPlaceholder.examples.first ?? SurahPlaceholder(name: "Tạm thời", index: 1)
         let resolvedSurah = initialSurah ?? defaultSurah
         let highlightTarget = highlightAyah ?? initialAyah
         var generatedAyahs = ReaderDashboardView.generateAyahs(for: resolvedSurah)
@@ -139,7 +139,7 @@ struct ReaderDashboardView: View {
         .onChange(of: readerStore.lastLanguageEnforcementID) { _, newValue in
             guard let newValue, newValue != lastHandledLanguageEnforcementID else { return }
             lastHandledLanguageEnforcementID = newValue
-            showToast(message: "Always keep one language on")
+            showToast(message: "Luôn bật ít nhất một ngôn ngữ")
         }
         .onChange(of: appState.isSearchFocused) { _, newValue in
             guard newValue else { return }
@@ -180,7 +180,7 @@ struct ReaderDashboardView: View {
                     .font(.headline.weight(.semibold))
                     .foregroundStyle(secondaryText.opacity(0.9))
 
-                TextField("Search Surahs", text: $surahSearchText)
+                TextField("Tìm chương", text: $surahSearchText)
                     .textInputAutocapitalization(.words)
                     .disableAutocorrection(true)
                     .focused($isSurahSearchFieldFocused)
@@ -209,7 +209,7 @@ struct ReaderDashboardView: View {
                                         .font(.subheadline.weight(.semibold))
                                         .foregroundStyle(primaryText)
 
-                                    Text("Surah \(surah.index)")
+                                    Text("Chương \(surah.index)")
                                         .font(.caption)
                                         .foregroundStyle(secondaryText.opacity(0.9))
                                 }
@@ -237,7 +237,7 @@ struct ReaderDashboardView: View {
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             } else if showNoSearchResultsMessage {
-                Text("No surahs match \"\(trimmedSurahSearchText)\"")
+                Text("Không tìm thấy chương nào trùng \"\(trimmedSurahSearchText)\"")
                     .font(.caption)
                     .foregroundStyle(secondaryText.opacity(0.8))
             }
@@ -252,20 +252,13 @@ struct ReaderDashboardView: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                     if readerStore.showArabic {
-                        Text("آية Placeholder #\(ayah.number)")
+                        Text("آية minh họa #\(ayah.number)")
                             .font(arabicFont)
                             .foregroundStyle(primaryText)
                     }
 
                     if readerStore.showVietnamese {
                         Text("Đây là đoạn văn mô phỏng cho câu số \(ayah.number).")
-                            .font(translationFont)
-                            .foregroundStyle(translationText)
-                            .lineSpacing(4)
-                    }
-
-                    if readerStore.showEnglish {
-                        Text("This is placeholder translation content for ayah \(ayah.number).")
                             .font(translationFont)
                             .foregroundStyle(translationText)
                             .lineSpacing(4)
@@ -287,7 +280,7 @@ struct ReaderDashboardView: View {
                     .blendMode(.overlay)
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                     ForEach(Array(notes.enumerated()), id: \.offset) { entry in
-                        Text("Note \(entry.offset + 1): \(entry.element)")
+                        Text("Ghi chú \(entry.offset + 1): \(entry.element)")
                             .font(.footnote)
                             .foregroundStyle(secondaryText.opacity(0.85))
                     }
@@ -313,9 +306,9 @@ struct ReaderDashboardView: View {
         }
         .contextMenu {
             Button {
-                showToast(message: "No content yet")
+                showToast(message: "Chưa có nội dung")
             } label: {
-                Label("Copy Ayah", systemImage: "doc.on.doc")
+                Label("Sao chép câu kinh", systemImage: "doc.on.doc")
                     .foregroundStyle(secondaryText.opacity(0.6))
             }
 
@@ -323,13 +316,13 @@ struct ReaderDashboardView: View {
                 safariURL = URL(string: "https://chat.openai.com")
                 isShowingSafari = true
             } label: {
-                Label("Ask ChatGPT", systemImage: "sparkles")
+                Label("Hỏi ChatGPT", systemImage: "sparkles")
             }
 
             Button {
                 prepareNote(for: ayah.id)
             } label: {
-                Label("Add Note", systemImage: "square.and.pencil")
+                Label("Thêm ghi chú", systemImage: "square.and.pencil")
             }
         }
     }
@@ -405,7 +398,7 @@ struct ReaderDashboardView: View {
     private var noteSheet: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-                Text("Add a Note")
+                Text("Thêm ghi chú")
                     .font(.title3.bold())
                 TextEditor(text: $noteDraft)
                     .frame(minHeight: 160)
@@ -417,15 +410,15 @@ struct ReaderDashboardView: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle("Note")
+            .navigationTitle("Ghi chú")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button("Hủy") {
                         isPresentingNoteSheet = false
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    Button("Lưu") {
                         saveNote()
                         isPresentingNoteSheet = false
                     }
@@ -463,7 +456,7 @@ struct ReaderDashboardView: View {
             Text(selectedSurah.name)
                 .font(.title2.weight(.semibold))
                 .foregroundStyle(primaryText)
-            Text("Mode: \(readerStore.isFlowMode ? "Flow" : "Verse")")
+            Text("Chế độ hiển thị: \(readerStore.isFlowMode ? "Dạng dòng" : "Theo câu")")
                 .font(.footnote.weight(.medium))
                 .foregroundStyle(secondaryText.opacity(0.8))
         }
@@ -605,7 +598,7 @@ struct ReaderDashboardView: View {
         Group {
             if readerStore.isFullScreen {
                 HStack(spacing: DesignTokens.Spacing.sm) {
-                    fullScreenControlButton(title: "Close") {
+                    fullScreenControlButton(title: "Đóng") {
                         exitFullScreen()
                     }
 

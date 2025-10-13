@@ -51,10 +51,10 @@ struct ReaderPage: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            Text("Read")
+            Text("Đọc")
                 .font(.largeTitle.bold())
                 .foregroundStyle(primaryText)
-            Text("Quick actions for the reader experience")
+            Text("Các thao tác nhanh cho trải nghiệm đọc")
                 .font(.subheadline)
                 .foregroundStyle(secondaryText)
         }
@@ -64,8 +64,8 @@ struct ReaderPage: View {
     private var actionButtons: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
             PrimaryButton(
-                title: "Open Surah",
-                subtitle: "Navigate to a placeholder Surah dashboard",
+                title: "Mở chương",
+                subtitle: "Đi tới bảng điều khiển chương mô phỏng",
                 icon: "book",
                 theme: readerStore.selectedGradient
             ) {
@@ -73,8 +73,8 @@ struct ReaderPage: View {
             }
 
             PrimaryButton(
-                title: readerStore.isFullScreen ? "Exit Full Screen" : "Enter Full Screen",
-                subtitle: readerStore.isFullScreen ? "Showing immersive layout" : "Showing standard layout",
+                title: readerStore.isFullScreen ? "Thoát toàn màn hình" : "Vào toàn màn hình",
+                subtitle: readerStore.isFullScreen ? "Đang hiển thị chế độ chìm đắm" : "Đang hiển thị bố cục tiêu chuẩn",
                 icon: "arrow.up.left.and.arrow.down.right",
                 theme: readerStore.selectedGradient
             ) {
@@ -82,7 +82,7 @@ struct ReaderPage: View {
             }
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                Text("Switch Languages")
+                Text("Chuyển ngôn ngữ")
                     .font(.headline)
                     .foregroundStyle(primaryText)
                 HStack(spacing: DesignTokens.Spacing.sm) {
@@ -101,8 +101,8 @@ struct ReaderPage: View {
             }
 
             PrimaryButton(
-                title: appState.isMiniPlayerVisible ? "Hide Mini Player" : "Show Mini Player",
-                subtitle: "Reveal a mock playback bar",
+                title: appState.isMiniPlayerVisible ? "Ẩn trình phát mini" : "Hiện trình phát mini",
+                subtitle: "Hiển thị thanh phát thử nghiệm",
                 icon: "play.rectangle.on.rectangle",
                 theme: readerStore.selectedGradient
             ) {
@@ -119,35 +119,35 @@ struct ReaderPage: View {
 
     private var currentLayoutPreview: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-            Text("Preview")
+            Text("Xem trước")
                 .font(.headline)
                 .foregroundStyle(primaryText)
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
                 if readerStore.isFullScreen {
-                    Text("Full Screen Reader")
+                    Text("Trình đọc toàn màn hình")
                         .font(.title3.bold())
                         .foregroundStyle(primaryText)
-                    Text("Immersive mode hides navigation chrome and focuses on verses.")
+                    Text("Chế độ chìm đắm ẩn thanh điều hướng và tập trung vào từng câu kinh.")
                         .foregroundStyle(secondaryText)
                 } else {
-                    Text("Standard Reader Layout")
+                    Text("Bố cục trình đọc tiêu chuẩn")
                         .font(.title3.bold())
                         .foregroundStyle(primaryText)
-                    Text("Shows header, controls, and translation side panels.")
+                    Text("Hiển thị tiêu đề, điều khiển và khung dịch bên cạnh.")
                         .foregroundStyle(secondaryText)
                 }
 
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                    Text("Flow Mode: \(readerStore.isFlowMode ? "Flow" : "Verse")")
+                    Text("Chế độ hiển thị: \(readerStore.isFlowMode ? "Dạng dòng" : "Theo câu")")
                         .font(.footnote.weight(.medium))
                         .foregroundStyle(secondaryText)
 
-                    Text("Languages: \(activeLanguageSummary)")
+                    Text("Ngôn ngữ: \(activeLanguageSummary)")
                         .font(.footnote.weight(.medium))
                         .foregroundStyle(secondaryText)
 
-                    Text("Font Size: \(Int(readerStore.fontSize)) pt")
+                    Text("Cỡ chữ: \(Int(readerStore.fontSize)) pt")
                         .font(.footnote.weight(.medium))
                         .foregroundStyle(secondaryText)
                 }
