@@ -14,6 +14,7 @@ struct QuranVNARApp: App {
 
 private struct RootTabView: View {
     @StateObject private var readerStore = ReaderStore()
+    @StateObject private var cloudAuthManager = CloudAuthManager()
     @EnvironmentObject private var appState: AppState
     @Environment(\.colorScheme) private var colorScheme
 
@@ -28,6 +29,7 @@ private struct RootTabView: View {
 
             SettingsPage()
                 .environmentObject(readerStore)
+                .environmentObject(cloudAuthManager)
                 .tabItem {
                     Label("Cài đặt", systemImage: "gear")
                 }

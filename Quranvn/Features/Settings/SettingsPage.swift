@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsPage: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
+    @EnvironmentObject private var cloudAuthManager: CloudAuthManager
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var reminderTime = Self.defaultReminderTime
@@ -30,6 +31,9 @@ struct SettingsPage: View {
             )
             .tint(accentColor)
             .navigationBarTitleDisplayMode(.inline)
+            .task {
+                cloudAuthManager.refreshCredentialState()
+            }
         }
 #if DEBUG
         .sheet(isPresented: $isShowingDebugMenu) {
