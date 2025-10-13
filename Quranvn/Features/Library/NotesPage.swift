@@ -72,15 +72,15 @@ struct NoteItem: Identifiable {
     let ayah: Int
 
     static let samples: [NoteItem] = [
-        NoteItem(title: "Remember His mercy", surah: SurahPlaceholder.examples[0], ayah: 3),
-        NoteItem(title: "Patience brings relief", surah: SurahPlaceholder.examples[1], ayah: 4),
-        NoteItem(title: "Trust in the plan", surah: SurahPlaceholder.examples[2], ayah: 9),
-        NoteItem(title: "Stand for justice", surah: SurahPlaceholder.examples[3], ayah: 8),
-        NoteItem(title: "Gratitude multiplies", surah: SurahPlaceholder.examples[4], ayah: 2)
+        NoteItem(title: "Ghi nhớ lòng thương xót của Ngài", surah: SurahPlaceholder.examples[0], ayah: 3),
+        NoteItem(title: "Kiên nhẫn sẽ được giải thoát", surah: SurahPlaceholder.examples[1], ayah: 4),
+        NoteItem(title: "Tin tưởng vào sự sắp đặt", surah: SurahPlaceholder.examples[2], ayah: 9),
+        NoteItem(title: "Kiên định với công lý", surah: SurahPlaceholder.examples[3], ayah: 8),
+        NoteItem(title: "Biết ơn sẽ được nhân lên", surah: SurahPlaceholder.examples[4], ayah: 2)
     ]
 
     var subtitle: String {
-        "Surah \(surah.name), Ayah \(ayah)"
+        "Chương \(surah.name), câu \(ayah)"
     }
 
     var destination: ReaderDestination {

@@ -18,7 +18,7 @@ struct ReaderToolbar: View {
     private var progressSection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
             HStack(alignment: .firstTextBaseline) {
-                Text("Overall Progress")
+                Text("Tiến độ tổng quan")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(primaryText)
                 Spacer()
@@ -41,7 +41,7 @@ struct ReaderToolbar: View {
 
     private var languageSection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            Text("Languages")
+            Text("Ngôn ngữ")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(primaryText)
 
@@ -63,14 +63,14 @@ struct ReaderToolbar: View {
 
     private var layoutSection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            Text("Layout & Display")
+            Text("Bố cục & hiển thị")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(primaryText)
 
             HStack(spacing: DesignTokens.Spacing.sm) {
                 HStack(spacing: DesignTokens.Spacing.sm) {
                     SegmentPill(
-                        title: "Flow",
+                        title: "Liên tục",
                         icon: "text.justify",
                         isSelected: readerStore.isFlowMode,
                         theme: theme
@@ -81,7 +81,7 @@ struct ReaderToolbar: View {
                     }
 
                     SegmentPill(
-                        title: "Verse",
+                        title: "Theo câu",
                         icon: "list.number",
                         isSelected: !readerStore.isFlowMode,
                         theme: theme
