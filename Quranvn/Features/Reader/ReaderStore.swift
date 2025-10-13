@@ -1,5 +1,8 @@
 import SwiftUI
 import Combine
+#if canImport(UIKit)
+import UIKit
+#endif
 
 @MainActor
 final class ReaderStore: ObservableObject {
@@ -33,15 +36,21 @@ final class ReaderStore: ObservableObject {
 
         var displayName: String {
             switch self {
-            case .serif: "Serif"
-            case .sans: "Sans"
+            case .serif: "Times New Roman (có chân)"
+            case .sans: "Helvetica Neue (không chân)"
+            }
+        }
+
+        var fontName: String {
+            switch self {
+            case .serif: "Times New Roman"
+            case .sans: "Helvetica Neue"
             }
         }
     }
 
     @Published var showArabic: Bool = true
     @Published var showVietnamese: Bool = true
-    @Published var showEnglish: Bool = false
 
     @Published private(set) var lastLanguageEnforcementID: UUID?
 
@@ -82,7 +91,7 @@ final class ReaderStore: ObservableObject {
 
     @discardableResult
     func ensureNonEmptyLanguages() -> Bool {
-        if !showArabic && !showVietnamese && !showEnglish {
+        if !showArabic && !showVietnamese {
             showArabic = true
             lastLanguageEnforcementID = UUID()
             return true
@@ -97,8 +106,6 @@ final class ReaderStore: ObservableObject {
             showArabic.toggle()
         case .vietnamese:
             showVietnamese.toggle()
-        case .english:
-            showEnglish.toggle()
         }
 
         ensureNonEmptyLanguages()
@@ -110,8 +117,6 @@ final class ReaderStore: ObservableObject {
             return showArabic
         case .vietnamese:
             return showVietnamese
-        case .english:
-            return showEnglish
         }
     }
 
@@ -205,22 +210,28 @@ final class ReaderStore: ObservableObject {
     }
 
     func translationFont(for size: CGFloat) -> Font {
-        switch translationFontSelection {
-        case .serif:
-            return .system(size: size, weight: .regular, design: .serif)
-        case .sans:
-            return .system(size: size, weight: .regular, design: .default)
+        #if canImport(UIKit)
+        if UIFont(name: translationFontSelection.fontName, size: size) != nil {
+            return .custom(translationFontSelection.fontName, size: size)
         }
+        #endif
+        return .system(size: size, weight: .regular, design: .default)
     }
 }
 
 enum ReaderLanguage: String, CaseIterable, Identifiable {
     case arabic = "AR"
     case vietnamese = "VI"
-    case english = "EN"
 
     var id: String { rawValue }
-    var displayTitle: String { rawValue }
+    var displayTitle: String {
+        switch self {
+        case .arabic:
+            return "Ả Rập"
+        case .vietnamese:
+            return "Việt"
+        }
+    }
 }
 
 enum ReaderLayoutMode: String, CaseIterable {

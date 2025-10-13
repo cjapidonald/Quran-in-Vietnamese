@@ -23,17 +23,17 @@ struct SearchPage: View {
                 }
                 .scrollIndicators(.hidden)
             }
-            .navigationTitle("Search")
+            .navigationTitle("Tìm kiếm")
             .toolbarBackground(.hidden, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Close") {
+                    Button("Đóng") {
                         close()
                     }
                 }
             }
         }
-        .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search the Quran")
+        .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "Tìm kiếm Quran")
         .onChange(of: searchQuery) { _, newValue in
             withAnimation(.easeInOut) {
                 appState.isSearchFocused = !newValue.trimmingCharacters(in: .whitespaces).isEmpty
@@ -44,10 +44,10 @@ struct SearchPage: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            Text("Search")
+            Text("Tìm kiếm")
                 .font(.largeTitle.bold())
                 .foregroundStyle(primaryText)
-            Text("Visualise upcoming search with playful mock data")
+            Text("Hình dung trải nghiệm tìm kiếm với dữ liệu mô phỏng")
                 .font(.subheadline)
                 .foregroundStyle(secondaryText)
         }
@@ -57,15 +57,15 @@ struct SearchPage: View {
     @ViewBuilder
     private var resultsSection: some View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-            Text("Results")
+            Text("Kết quả")
                 .font(.headline)
                 .foregroundStyle(primaryText)
 
             if searchQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-                    Text("Start typing to preview how visual search could feel.")
+                    Text("Nhập nội dung để xem thử trải nghiệm tìm kiếm trực quan.")
                         .foregroundStyle(secondaryText)
-                    Text("No real search yet — everything here is a placeholder experience.")
+                    Text("Chức năng tìm kiếm thật chưa khả dụng — toàn bộ đều là mô phỏng.")
                         .font(.footnote)
                         .foregroundStyle(secondaryText.opacity(0.8))
                 }
@@ -101,8 +101,8 @@ struct SearchPage: View {
         return (0..<10).map { index in
             let ayah = 255 + index
             return SearchResult(
-                title: "Al-Baqarah — Ayah \(ayah) (placeholder)",
-                snippet: "… placeholder text …",
+                title: "Al-Baqarah — câu \(ayah) (giả lập)",
+                snippet: "… đoạn mô phỏng …",
                 destination: ReaderDestination(surah: surah, ayah: ayah)
             )
         }
