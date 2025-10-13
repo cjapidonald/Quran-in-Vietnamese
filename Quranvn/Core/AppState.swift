@@ -43,7 +43,6 @@ struct RoutingAlert: Identifiable {
 
 enum AppTab: Hashable {
     case library
-    case read
     case settings
 }
 

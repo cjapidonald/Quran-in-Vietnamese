@@ -2,30 +2,46 @@ import SwiftUI
 
 struct LibraryPage: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var selectedSegment: LibrarySegment = .favorites
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
-                header
-                segmentedControl
-                segmentContent
+        NavigationStack {
+            ZStack {
+                ThemeManager
+                    .backgroundGradient(style: appState.selectedThemeGradient, for: colorScheme)
+                    .ignoresSafeArea()
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: DesignTokens.Spacing.stack) {
+                        header
+                        readingProgress
+                        segmentedControl
+                        segmentContent
+                    }
+                    .padding(DesignTokens.Spacing.xl)
+                }
+                .scrollIndicators(.hidden)
             }
-            .padding(DesignTokens.Spacing.xl)
+            .navigationDestination(isPresented: $appState.showSurahDashboard) {
+                ReaderDashboardView(
+                    initialSurah: appState.pendingReaderDestination?.surah,
+                    initialAyah: appState.pendingReaderDestination?.ayah
+                )
+                .environmentObject(readerStore)
+                .onAppear {
+                    appState.pendingReaderDestination = nil
+                }
+            }
         }
-        .background(
-            ThemeManager
-                .backgroundGradient(style: appState.selectedThemeGradient, for: colorScheme)
-                .ignoresSafeArea()
-        )
+        .toolbar(.hidden, for: .navigationBar)
         .tint(accentColor)
     }
 
     private var header: some View {
         Button {
-            appState.selectedTab = .read
             appState.showSurahDashboard = true
             appState.isSearchFocused = true
         } label: {
@@ -51,9 +67,39 @@ struct LibraryPage: View {
         .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge)
     }
 
+    private var readingProgress: some View {
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
+            HStack(alignment: .firstTextBaseline) {
+                Text("Tiến độ đọc")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(primaryText)
+
+                Spacer()
+
+                Text("42%")
+                    .font(.callout.weight(.semibold))
+                    .foregroundStyle(primaryText)
+            }
+
+            ProgressView(value: 0.42)
+                .progressViewStyle(.linear)
+                .tint(accentColor)
+                .frame(height: 6)
+                .background(
+                    Capsule()
+                        .fill(primaryText.opacity(0.08))
+                )
+                .clipShape(Capsule())
+        }
+        .padding(.vertical, DesignTokens.Spacing.md)
+        .padding(.horizontal, DesignTokens.Spacing.lg)
+        .glassCard(cornerRadius: DesignTokens.CornerRadius.extraLarge, padding: 0)
+    }
+
     private var segmentedControl: some View {
         Picker("Phần thư viện", selection: $selectedSegment) {
             Text("Yêu thích").tag(LibrarySegment.favorites)
+            Text("Chương (Tiếng Việt)").tag(LibrarySegment.surahs)
             Text("Ghi chú").tag(LibrarySegment.notes)
         }
         .pickerStyle(.segmented)
@@ -67,6 +113,11 @@ struct LibraryPage: View {
             FavoritesPage(theme: appState.selectedThemeGradient) { item in
                 openReader(for: item.destination)
             }
+        case .surahs:
+            SurahsPage(theme: appState.selectedThemeGradient) { surah in
+                let destination = ReaderDestination(surah: surah, ayah: 1)
+                openReader(for: destination)
+            }
         case .notes:
             NotesPage(theme: appState.selectedThemeGradient) { note in
                 openReader(for: note.destination)
@@ -76,7 +127,6 @@ struct LibraryPage: View {
 
     private func openReader(for destination: ReaderDestination) {
         appState.pendingReaderDestination = destination
-        appState.selectedTab = .read
         appState.showSurahDashboard = true
     }
 
@@ -95,10 +145,12 @@ struct LibraryPage: View {
 
 enum LibrarySegment: Hashable {
     case favorites
+    case surahs
     case notes
 }
 
 #Preview {
     LibraryPage()
         .environmentObject(AppState())
+        .environmentObject(ReaderStore())
 }
