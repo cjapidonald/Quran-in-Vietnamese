@@ -6,6 +6,7 @@ import SafariServices
 struct ReaderDashboardView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
+    @EnvironmentObject private var readingProgressStore: ReadingProgressStore
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
 
@@ -216,6 +217,9 @@ struct ReaderDashboardView: View {
         .onTapGesture(count: 2) {
             toggleFavorite(for: ayah.id)
         }
+        .onAppear {
+            recordProgress(for: ayah)
+        }
         .contextMenu {
             Button {
                 showToast(message: "Chưa có nội dung")
@@ -236,6 +240,11 @@ struct ReaderDashboardView: View {
                 Label("Thêm ghi chú", systemImage: "square.and.pencil")
             }
         }
+    }
+
+    private func recordProgress(for ayah: AyahPlaceholder) {
+        let totalAyahs = max(ayahs.count, selectedSurah.placeholderAyahCount)
+        readingProgressStore.markAyah(ayah.number, asReadIn: selectedSurah, totalAyahs: totalAyahs)
     }
 
     private func favoriteBadge(isActive: Bool) -> some View {
@@ -432,7 +441,7 @@ struct ReaderDashboardView: View {
     }
 
     private static func generateAyahs(for surah: SurahPlaceholder) -> [AyahPlaceholder] {
-        let baseCount = 6 + (surah.index % 5) * 2
+        let baseCount = max(surah.placeholderAyahCount, 1)
         return (1...baseCount).map { AyahPlaceholder(number: $0) }
     }
 
@@ -610,6 +619,10 @@ extension SurahPlaceholder {
             return mapped
         }
         return name
+    }
+
+    var placeholderAyahCount: Int {
+        max(6 + (index % 5) * 2, 1)
     }
 
     private static let vietnameseTitles: [Int: String] = [

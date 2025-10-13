@@ -3,6 +3,7 @@ import SwiftUI
 struct LibraryPage: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
+    @EnvironmentObject private var readingProgressStore: ReadingProgressStore
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var selectedSegment: LibrarySegment = .surahs
@@ -30,6 +31,7 @@ struct LibraryPage: View {
                     initialAyah: appState.pendingReaderDestination?.ayah
                 )
                 .environmentObject(readerStore)
+                .environmentObject(readingProgressStore)
                 .onAppear {
                     appState.pendingReaderDestination = nil
                 }
@@ -48,12 +50,12 @@ struct LibraryPage: View {
 
                 Spacer()
 
-                Text("42%")
+                Text(overallProgressText)
                     .font(.callout.weight(.semibold))
                     .foregroundStyle(primaryText)
             }
 
-            ProgressView(value: 0.42)
+            ProgressView(value: overallProgressValue)
                 .progressViewStyle(.linear)
                 .tint(accentColor)
                 .frame(height: 6)
@@ -62,6 +64,7 @@ struct LibraryPage: View {
                         .fill(primaryText.opacity(0.08))
                 )
                 .clipShape(Capsule())
+                .animation(.easeInOut(duration: 0.35), value: overallProgressValue)
         }
         .padding(.vertical, DesignTokens.Spacing.md)
         .padding(.horizontal, DesignTokens.Spacing.lg)
@@ -112,6 +115,14 @@ struct LibraryPage: View {
     private var accentColor: Color {
         ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
     }
+
+    private var overallProgressValue: Double {
+        readingProgressStore.overallProgress
+    }
+
+    private var overallProgressText: String {
+        overallProgressValue.formatted(.percent.precision(.fractionLength(0)))
+    }
 }
 
 enum LibrarySegment: Hashable {
@@ -124,4 +135,5 @@ enum LibrarySegment: Hashable {
     LibraryPage()
         .environmentObject(AppState())
         .environmentObject(ReaderStore())
+        .environmentObject(ReadingProgressStore())
 }

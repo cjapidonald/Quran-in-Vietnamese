@@ -3,6 +3,7 @@ import SwiftUI
 struct ReaderPage: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
+    @EnvironmentObject private var readingProgressStore: ReadingProgressStore
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var isShowingFullPlayer = false
@@ -38,6 +39,7 @@ struct ReaderPage: View {
                     initialSurah: appState.pendingReaderDestination?.surah,
                     initialAyah: appState.pendingReaderDestination?.ayah
                 )
+                .environmentObject(readingProgressStore)
                 .onAppear {
                     appState.pendingReaderDestination = nil
                 }
@@ -182,4 +184,5 @@ struct ReaderPage: View {
     ReaderPage()
         .environmentObject(AppState())
         .environmentObject(ReaderStore())
+        .environmentObject(ReadingProgressStore())
 }
