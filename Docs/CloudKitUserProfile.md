@@ -4,13 +4,13 @@ This document captures the CloudKit configuration required to provision the back
 
 ## CloudKit container
 
-* **Container identifier:** `iCloud.vn.quran.app`
+* **Container identifier:** `iCloud.com.donald.quranvn`
 * Ensure the container is added to the Apple Developer account that owns the bundle identifier. The container name follows the `iCloud.<bundle identifier>` convention so it matches the Xcode project settings and entitlements.
 
 ### Add the container in CloudKit Dashboard
 
 1. Sign in to the [CloudKit Dashboard](https://icloud.developer.apple.com/dashboard/) with an Apple ID that has the **App Manager** or **Admin** role for the team.
-2. Create a new container named `iCloud.vn.quran.app` (or select it if it already exists).
+2. Create a new container named `iCloud.com.donald.quranvn` (or select it if it already exists).
 3. Under **Schema → Record Types**, add the following record types.
 
 ### `UserProfile`
@@ -45,7 +45,7 @@ This document captures the CloudKit configuration required to provision the back
 
 1. In the project editor, select the **Quranvn** target and open the **Signing & Capabilities** tab.
 2. Enable the **iCloud** capability and check the **CloudKit** service.
-3. Under **Containers**, add `iCloud.vn.quran.app`. This updates `Quranvn.entitlements` with the correct container identifier.
+3. Under **Containers**, add `iCloud.com.donald.quranvn`. This updates `Quranvn.entitlements` with the correct container identifier.
 4. Ensure the bundle identifier remains `vn.quran.app` for both Debug and Release configurations so it matches the container naming convention.
 
 ## Team roles and environment requirements
@@ -53,7 +53,7 @@ This document captures the CloudKit configuration required to provision the back
 * The developer performing these steps must belong to the Apple Developer team with either **Admin** or **App Manager** privileges. Editors can work with records but cannot manage schema promotion.
 * Other contributors should:
   1. Pull the latest source code to receive the updated entitlements file.
-  2. Sign into Xcode with a team account that has access to `iCloud.vn.quran.app`.
+  2. Sign into Xcode with a team account that has access to `iCloud.com.donald.quranvn`.
   3. Confirm the container appears under **Signing & Capabilities → iCloud** after signing in.
 * When running locally, use a device or simulator signed into iCloud with the same Apple ID used for development testing so CloudKit requests succeed.
 

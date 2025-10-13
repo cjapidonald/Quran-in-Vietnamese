@@ -10,7 +10,7 @@
         </array>
         <key>com.apple.developer.icloud-container-identifiers</key>
         <array>
-                <string>iCloud.vn.quran.app</string>
+                <string>iCloud.com.donald.quranvn</string>
         </array>
         <key>com.apple.developer.icloud-services</key>
         <array>
