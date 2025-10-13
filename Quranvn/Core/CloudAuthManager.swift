@@ -1,5 +1,6 @@
 import AuthenticationServices
 import CloudKit
+import Combine
 import Foundation
 
 @MainActor
@@ -66,13 +67,19 @@ final class CloudAuthManager: NSObject, ObservableObject {
             status = .authorizing
             cachedAppleUserID = credential.user
 
-            Task {
+            Task { [weak self] in
+                guard let self else { return }
+
                 do {
-                    let summary = try await completeSignIn(with: credential)
-                    status = .signedIn(summary)
+                    let summary = try await self.completeSignIn(with: credential)
+                    await MainActor.run {
+                        self.status = .signedIn(summary)
+                    }
                 } catch {
-                    clearCachedState()
-                    status = .error(error.localizedDescription)
+                    await MainActor.run {
+                        self.clearCachedState()
+                        self.status = .error(error.localizedDescription)
+                    }
                 }
             }
 
@@ -133,7 +140,7 @@ final class CloudAuthManager: NSObject, ObservableObject {
         let profileRecord = try await fetchOrCreateProfileRecord(for: userRecordID, in: database)
         updateProfileRecord(profileRecord, with: credential, userRecordID: userRecordID)
 
-        try await database.modifyRecords(saving: [profileRecord], deleting: [])
+        _ = try await database.modifyRecords(saving: [profileRecord], deleting: [])
 
         let summary = UserSummary(
             appleUserID: credential.user,
