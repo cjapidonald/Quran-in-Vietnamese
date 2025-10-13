@@ -166,30 +166,22 @@ struct ReaderDashboardView: View {
         let isHighlighted = highlightIsActive && highlightedAyahID == ayah.id
 
         return VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
-            HStack(alignment: .top, spacing: DesignTokens.Spacing.md) {
-                VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                    if readerStore.showArabic {
-                        Text("آية minh họa #\(ayah.number)")
-                            .font(arabicFont)
-                            .foregroundStyle(primaryText)
-                    }
-
-                    if readerStore.showVietnamese {
-                        Text("Đây là đoạn văn mô phỏng cho câu số \(ayah.number).")
-                            .font(translationFont)
-                            .foregroundStyle(translationText)
-                            .lineSpacing(4)
-                    }
+            VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
+                if readerStore.showArabic {
+                    Text("آية minh họa #\(ayah.number)")
+                        .font(arabicFont)
+                        .foregroundStyle(primaryText)
                 }
 
-                Spacer(minLength: DesignTokens.Spacing.sm)
-
-                Image(systemName: "heart.fill")
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(.pink)
-                    .opacity(favoriteAyahs.contains(ayah.id) ? 1 : 0)
-                    .scaleEffect(favoriteAyahs.contains(ayah.id) ? 1.1 : 0.5)
-                    .animation(.spring(response: 0.35, dampingFraction: 0.6), value: favoriteAyahs.contains(ayah.id))
+                if readerStore.showVietnamese {
+                    Text("Đây là đoạn văn mô phỏng cho câu số \(ayah.number).")
+                        .font(translationFont)
+                        .foregroundStyle(translationText)
+                        .lineSpacing(4)
+                }
+            }
+            .overlay(alignment: .topTrailing) {
+                favoriteBadge(isActive: favoriteAyahs.contains(ayah.id))
             }
 
             if let notes = ayahNotes[ayah.id], !notes.isEmpty {
@@ -253,6 +245,17 @@ struct ReaderDashboardView: View {
                 Label("Thêm ghi chú", systemImage: "square.and.pencil")
             }
         }
+    }
+
+    private func favoriteBadge(isActive: Bool) -> some View {
+        Image(systemName: "heart.fill")
+            .font(.footnote.weight(.semibold))
+            .foregroundStyle(.pink)
+            .opacity(isActive ? 1 : 0)
+            .scaleEffect(isActive ? 1.1 : 0.5)
+            .animation(.spring(response: 0.35, dampingFraction: 0.6), value: isActive)
+            .allowsHitTesting(false)
+            .accessibilityHidden(!isActive)
     }
 
     private func toggleFavorite(for id: UUID) {
