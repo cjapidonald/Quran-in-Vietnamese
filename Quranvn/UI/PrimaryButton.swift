@@ -18,7 +18,7 @@ struct PrimaryButton: View {
         subtitle: String,
         icon: String? = nil,
         trailingIcon: String? = "chevron.right",
-        theme: ThemeManager.ThemeGradient = .dawn,
+        theme: ThemeManager.ThemeGradient = .emerald,
         action: @escaping () -> Void
     ) {
         self.title = title

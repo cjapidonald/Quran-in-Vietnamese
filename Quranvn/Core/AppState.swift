@@ -17,8 +17,8 @@ final class AppState: ObservableObject {
     @Published var isSearchPresented = false
     @Published var selectedSearchScope: SearchScope = .all
 
-    @Published var themeStyle: ThemeStyle = .auto
-    @Published var selectedThemeGradient: ThemeManager.ThemeGradient = .dawn
+    @Published var themeStyle: ThemeStyle = .dark
+    @Published var selectedThemeGradient: ThemeManager.ThemeGradient = .emerald
 
     var isMiniPlayerVisible: Bool {
         showMiniPlayer || alwaysShowMiniPlayer

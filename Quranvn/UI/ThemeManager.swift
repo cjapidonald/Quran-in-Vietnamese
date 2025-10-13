@@ -2,6 +2,7 @@ import SwiftUI
 
 enum ThemeManager {
     enum ThemeGradient: String, CaseIterable, Identifiable {
+        case emerald
         case dawn
         case oasis
         case twilight
@@ -10,6 +11,7 @@ enum ThemeManager {
 
         var displayName: String {
             switch self {
+            case .emerald: return "Emerald"
             case .dawn: return "Dawn"
             case .oasis: return "Oasis"
             case .twilight: return "Twilight"
@@ -26,6 +28,16 @@ enum ThemeManager {
     static func backgroundGradient(style: ThemeGradient, for colorScheme: ColorScheme) -> LinearGradient {
         let colors: [Color]
         switch (style, colorScheme) {
+        case (.emerald, .dark):
+            colors = [
+                Color(red: 0.01, green: 0.11, blue: 0.09),
+                Color(red: 0.0, green: 0.27, blue: 0.2)
+            ]
+        case (.emerald, _):
+            colors = [
+                Color(red: 0.84, green: 0.97, blue: 0.9),
+                Color(red: 0.64, green: 0.89, blue: 0.78)
+            ]
         case (.dawn, .dark):
             colors = [Color(red: 0.06, green: 0.08, blue: 0.16), Color(red: 0.11, green: 0.17, blue: 0.27)]
         case (.dawn, _):
@@ -45,6 +57,10 @@ enum ThemeManager {
 
     static func accentColor(for style: ThemeGradient, colorScheme: ColorScheme) -> Color {
         switch (style, colorScheme) {
+        case (.emerald, .dark):
+            return Color(red: 0.2, green: 0.78, blue: 0.62)
+        case (.emerald, _):
+            return Color(red: 0.0, green: 0.56, blue: 0.41)
         case (.dawn, .dark):
             return Color(red: 0.46, green: 0.71, blue: 0.98)
         case (.dawn, _):

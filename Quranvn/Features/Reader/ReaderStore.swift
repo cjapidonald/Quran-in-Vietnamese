@@ -160,7 +160,7 @@ final class ReaderStore: ObservableObject {
 
     var selectedGradient: ThemeManager.ThemeGradient {
         guard gradientIndex >= 0, gradientIndex < gradientOptions.count else {
-            return gradientOptions.first ?? .dawn
+            return gradientOptions.first ?? .emerald
         }
         return gradientOptions[gradientIndex]
     }
