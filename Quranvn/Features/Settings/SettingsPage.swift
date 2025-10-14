@@ -5,6 +5,7 @@ struct SettingsPage: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
     @EnvironmentObject private var cloudAuthManager: CloudAuthManager
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var reminderTime = Self.defaultReminderTime
@@ -42,6 +43,7 @@ struct SettingsPage: View {
             DebugMenu()
                 .environmentObject(appState)
                 .environmentObject(readerStore)
+                .environmentObject(quranStore)
         }
 #endif
     }
@@ -404,4 +406,5 @@ struct SettingsPage: View {
         .environmentObject(AppState())
         .environmentObject(ReaderStore())
         .environmentObject(CloudAuthManager())
+        .environmentObject(QuranDataStore())
 }

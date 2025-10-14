@@ -5,6 +5,7 @@ struct NotesPage: View {
     let onSelect: (NoteItem) -> Void
 
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
@@ -61,34 +62,43 @@ struct NotesPage: View {
             return override
         }
 #endif
-        return NoteItem.samples
+        return NoteItem.samples(using: quranStore.surahs)
     }
 }
 
 struct NoteItem: Identifiable {
     let id = UUID()
     let title: String
-    let surah: SurahPlaceholder
+    let surah: Surah
     let ayah: Int
 
-    static let samples: [NoteItem] = [
-        NoteItem(title: "Ghi nhớ lòng thương xót của Ngài", surah: SurahPlaceholder.examples[0], ayah: 3),
-        NoteItem(title: "Kiên nhẫn mang lại an yên", surah: SurahPlaceholder.examples[1], ayah: 4),
-        NoteItem(title: "Tin vào sự sắp đặt", surah: SurahPlaceholder.examples[2], ayah: 9),
-        NoteItem(title: "Kiên định vì công lý", surah: SurahPlaceholder.examples[3], ayah: 8),
-        NoteItem(title: "Biết ơn sẽ tăng phúc lành", surah: SurahPlaceholder.examples[4], ayah: 2)
-    ]
+    static func samples(using surahs: [Surah]) -> [NoteItem] {
+        let entries = surahs.prefix(5)
+        guard entries.count == 5 else { return [] }
+        let titles = [
+            "Ghi nhớ lòng thương xót của Ngài",
+            "Kiên nhẫn mang lại an yên",
+            "Tin vào sự sắp đặt",
+            "Kiên định vì công lý",
+            "Biết ơn sẽ tăng phúc lành"
+        ]
+
+        return zip(entries, titles).enumerated().map { index, pair in
+            NoteItem(title: pair.1, surah: pair.0, ayah: index + 2)
+        }
+    }
 
     var subtitle: String {
-        "Chương \(surah.name), câu \(ayah)"
+        "Chương \(surah.transliteration), câu \(ayah)"
     }
 
     var destination: ReaderDestination {
-        ReaderDestination(surah: surah, ayah: ayah)
+        ReaderDestination(surahNumber: surah.number, ayah: ayah)
     }
 }
 
 #Preview {
     NotesPage(theme: .dawn) { _ in }
         .environmentObject(AppState())
+        .environmentObject(QuranDataStore())
 }
