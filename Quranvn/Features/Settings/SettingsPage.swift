@@ -77,12 +77,25 @@ struct SettingsPage: View {
                 }
 
                 SignInWithAppleButton(.signIn) { request in
+                    guard cloudAuthManager.isSignInAvailable else {
+                        return
+                    }
                     cloudAuthManager.prepareAuthorizationRequest(request)
                 } onCompletion: { result in
+                    guard cloudAuthManager.isSignInAvailable else {
+                        return
+                    }
                     cloudAuthManager.handleAuthorization(result: result)
                 }
+                .disabled(!cloudAuthManager.isSignInAvailable)
                 .frame(maxWidth: .infinity, minHeight: 44)
                 .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
+
+                if !cloudAuthManager.isSignInAvailable {
+                    Text("Chạy ứng dụng trên thiết bị thật đã đăng nhập iCloud để sử dụng Đăng nhập với Apple.")
+                        .font(.footnote)
+                        .foregroundStyle(secondaryText)
+                }
 
                 if cloudAuthManager.isSignedIn {
                     Button("Đăng xuất") {

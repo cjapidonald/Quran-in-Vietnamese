@@ -21,11 +21,21 @@ final class CloudAuthManager: NSObject, ObservableObject {
 
     @Published private(set) var status: SignInStatus = .signedOut
 
+    private static let simulatorUnsupportedMessage = "Trình mô phỏng iOS không hỗ trợ Đăng nhập với Apple. Vui lòng thử trên thiết bị thật đã đăng nhập iCloud."
+
     var isSignedIn: Bool {
         if case .signedIn = status {
             return true
         }
         return false
+    }
+
+    var isSignInAvailable: Bool {
+#if targetEnvironment(simulator)
+        return false
+#else
+        return true
+#endif
     }
 
     var statusDescription: String {
@@ -52,11 +62,27 @@ final class CloudAuthManager: NSObject, ObservableObject {
     private var cachedUserRecordID: CKRecord.ID?
     private var cachedAppleUserID: String?
 
+    override init() {
+        super.init()
+#if targetEnvironment(simulator)
+        status = .error(Self.simulatorUnsupportedMessage)
+#endif
+    }
+
     func prepareAuthorizationRequest(_ request: ASAuthorizationAppleIDRequest) {
+#if targetEnvironment(simulator)
+        status = .error(Self.simulatorUnsupportedMessage)
+        return
+#else
         request.requestedScopes = [.fullName, .email]
+#endif
     }
 
     func handleAuthorization(result: Result<ASAuthorization, Error>) {
+#if targetEnvironment(simulator)
+        status = .error(Self.simulatorUnsupportedMessage)
+        return
+#else
         switch result {
         case let .success(authorization):
             guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
@@ -93,6 +119,7 @@ final class CloudAuthManager: NSObject, ObservableObject {
                 status = .error(userFriendlyMessage(for: error))
             }
         }
+#endif
     }
 
     func refreshCredentialState() {
@@ -141,7 +168,11 @@ final class CloudAuthManager: NSObject, ObservableObject {
         if let authorizationError = error as? ASAuthorizationError {
             switch authorizationError.code {
             case .unknown:
+#if targetEnvironment(simulator)
+                return Self.simulatorUnsupportedMessage
+#else
                 return "Đăng nhập với Apple hiện không khả dụng trên thiết bị này. Vui lòng thử lại trên thiết bị khác đã đăng nhập iCloud."
+#endif
             case .invalidResponse, .notHandled, .failed:
                 return "Không thể hoàn tất đăng nhập với Apple. Vui lòng kiểm tra kết nối mạng và thử lại."
             case .notInteractive:
