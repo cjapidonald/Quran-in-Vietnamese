@@ -124,7 +124,7 @@ struct ReaderDashboardView: View {
         .overlay(toastView, alignment: .top)
         .overlay(fullScreenControls, alignment: .topTrailing)
         .simultaneousGesture(exitFullScreenGesture)
-        .highPriorityGesture(backNavigationGesture)
+        .highPriorityGesture(navigationGesture)
         .navigationDestination(isPresented: $isShowingFullPlayer) {
             FullPlayerView()
         }
@@ -569,6 +569,16 @@ struct ReaderDashboardView: View {
         dismiss()
     }
 
+    private func navigateToSettings() {
+        appState.showSurahDashboard = false
+        dismiss()
+        DispatchQueue.main.async {
+            withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+                appState.selectedTab = .settings
+            }
+        }
+    }
+
     private var exitFullScreenGesture: some Gesture {
         DragGesture(minimumDistance: 25, coordinateSpace: .local)
             .onEnded { value in
@@ -583,16 +593,21 @@ struct ReaderDashboardView: View {
             }
     }
 
-    private var backNavigationGesture: some Gesture {
+    private var navigationGesture: some Gesture {
         DragGesture(minimumDistance: 40, coordinateSpace: .local)
             .onEnded { value in
                 guard !readerStore.isFullScreen else { return }
 
                 let horizontalTranslation = value.translation.width
+                let absoluteHorizontalTranslation = abs(horizontalTranslation)
                 let verticalTranslation = abs(value.translation.height)
 
-                if horizontalTranslation > 80, horizontalTranslation > verticalTranslation {
+                guard absoluteHorizontalTranslation > 80, absoluteHorizontalTranslation > verticalTranslation else { return }
+
+                if horizontalTranslation > 0 {
                     navigateBackToSurahs()
+                } else {
+                    navigateToSettings()
                 }
             }
     }
