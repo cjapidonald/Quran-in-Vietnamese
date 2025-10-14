@@ -304,7 +304,8 @@ struct ReaderDashboardView: View {
     }
 
     private func chantGPTPrompt(for ayah: Ayah) -> String {
-        "Hãy giải thích ý nghĩa và bối cảnh câu kinh số \(ayah.number) trong chương \(selectedSurah.vietnameseName) của Kinh Qur'an."
+        let surahName = selectedSurah.vietnameseName
+        return "Hãy giải thích ý nghĩa và bối cảnh câu kinh số \(ayah.number) trong chương \(surahName) của Kinh Qur'an."
     }
 
     private func showToast(message: String) {
