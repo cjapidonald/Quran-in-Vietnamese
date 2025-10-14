@@ -159,17 +159,18 @@ struct ReaderDashboardView: View {
 
     private func ayahCard(for ayah: Ayah) -> some View {
         let isHighlighted = highlightIsActive && highlightedAyahID == ayah.id
+        let arabicIncludesNumber = readerStore.showArabic && !readerStore.showVietnamese
 
         return VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                 if readerStore.showArabic {
-                    Text(ayah.arabic)
+                    Text(formattedAyahText(ayah.arabic, number: ayah.number, includeNumber: arabicIncludesNumber))
                         .font(arabicFont)
                         .foregroundStyle(primaryText)
                 }
 
                 if readerStore.showVietnamese {
-                    Text(ayah.vietnamese)
+                    Text(formattedAyahText(ayah.vietnamese, number: ayah.number, includeNumber: true))
                         .font(translationFont)
                         .foregroundStyle(translationText)
                         .lineSpacing(4)
@@ -192,6 +193,7 @@ struct ReaderDashboardView: View {
             }
         }
         .padding(.vertical, DesignTokens.Spacing.md)
+        .padding(.horizontal, DesignTokens.Spacing.pad)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background {
             if isHighlighted {
@@ -248,6 +250,11 @@ struct ReaderDashboardView: View {
     private func recordProgress(for ayah: Ayah) {
         let totalAyahs = max(ayahs.count, selectedSurah.ayahCount)
         readingProgressStore.markAyah(ayah.number, asReadIn: selectedSurah, totalAyahs: totalAyahs)
+    }
+
+    private func formattedAyahText(_ text: String, number: Int, includeNumber: Bool) -> String {
+        guard includeNumber else { return text }
+        return "\(text) ﴿\(number)﴾"
     }
 
     private func favoriteBadge(isActive: Bool) -> some View {
