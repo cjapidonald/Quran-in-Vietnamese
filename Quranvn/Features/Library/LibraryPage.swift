@@ -4,6 +4,7 @@ struct LibraryPage: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
     @EnvironmentObject private var readingProgressStore: ReadingProgressStore
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var selectedSegment: LibrarySegment = .surahs
@@ -27,7 +28,7 @@ struct LibraryPage: View {
             }
             .navigationDestination(isPresented: $appState.showSurahDashboard) {
                 ReaderDashboardView(
-                    initialSurah: appState.pendingReaderDestination?.surah,
+                    initialSurah: destinationSurah,
                     initialAyah: appState.pendingReaderDestination?.ayah
                 )
                 .environmentObject(readerStore)
@@ -116,8 +117,13 @@ struct LibraryPage: View {
         ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: colorScheme)
     }
 
+    private var destinationSurah: Surah? {
+        guard let destination = appState.pendingReaderDestination else { return nil }
+        return quranStore.surah(number: destination.surahNumber)
+    }
+
     private var overallProgressValue: Double {
-        readingProgressStore.overallProgress
+        readingProgressStore.overallProgress(for: quranStore.surahs)
     }
 
     private var overallProgressText: String {
@@ -136,4 +142,5 @@ enum LibrarySegment: Hashable {
         .environmentObject(AppState())
         .environmentObject(ReaderStore())
         .environmentObject(ReadingProgressStore())
+        .environmentObject(QuranDataStore())
 }

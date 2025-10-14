@@ -4,6 +4,7 @@ import SwiftUI
 struct DebugMenu: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -49,8 +50,8 @@ struct DebugMenu: View {
 
     private func populatePlaceholderAyahs() {
         appState.debugAyahCountOverride = 30
-        appState.debugLibraryFavoritesOverride = FavoriteItem.samples
-        appState.debugLibraryNotesOverride = NoteItem.samples
+        appState.debugLibraryFavoritesOverride = FavoriteItem.samples(using: quranStore.surahs)
+        appState.debugLibraryNotesOverride = NoteItem.samples(using: quranStore.surahs)
     }
 
     private func clearFavoritesAndNotes() {
@@ -76,11 +77,11 @@ struct DebugMenu: View {
     }
 
     private func jumpToAlKahf() {
-        guard let surah = SurahPlaceholder.examples.first(where: { $0.name.contains("Al-Kahf") || $0.index == 18 }) else {
+        guard let surah = quranStore.surah(number: 18) else {
             return
         }
 
-        appState.pendingReaderDestination = ReaderDestination(surah: surah, ayah: 1)
+        appState.pendingReaderDestination = ReaderDestination(surahNumber: surah.number, ayah: 1)
         appState.selectedTab = .library
         appState.showSurahDashboard = true
         dismiss()
