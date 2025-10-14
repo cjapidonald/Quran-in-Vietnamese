@@ -254,7 +254,7 @@ struct ReaderDashboardView: View {
 
     private func formattedAyahText(_ text: String, number: Int, includeNumber: Bool) -> String {
         guard includeNumber else { return text }
-        return "\(text) ﴿\(number)﴾"
+        return "\(text) \(number)"
     }
 
     private func favoriteBadge(isActive: Bool) -> some View {
