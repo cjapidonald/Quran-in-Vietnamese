@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 struct QuranLibrary: Decodable {
     let metadata: QuranMetadata
