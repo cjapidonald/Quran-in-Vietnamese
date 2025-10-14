@@ -24,7 +24,16 @@ This document captures the CloudKit configuration required to provision the back
 | `lastSignIn`  | Date      | Sortable            | Tracks the most recent sign-in timestamp                    |
 | `userRecord`  | Reference | —                   | Reference to the owner’s `_defaultOwner` user record        |
 
-*Add query indexes on `appleUserID` and `email` to enable efficient lookups.*
+**Indexes**
+
+```
+INDEXES {
+  QUERY(appleUserID)
+  QUERY(email)
+}
+```
+
+These query indexes enable efficient lookups by either the Sign in with Apple identifier or email address when users sign in or recover access.
 
 ### `AccountDeletionRequest`
 
@@ -36,7 +45,17 @@ This document captures the CloudKit configuration required to provision the back
 | `status`     | String    | Queryable           | Workflow state (e.g. `pending`, `processing`, `completed`, `error`)    |
 | `notes`      | String    | Optional            | Optional field for operational comments                               |
 
-*Add a query index on `appleUserID` and a sort index on `requestedAt` for the `AccountDeletionRequest` record type. A composite query index on (`status`, `requestedAt`) is recommended if you plan to filter by status frequently.*
+**Indexes**
+
+```
+INDEXES {
+  QUERY(appleUserID)
+  SORT(requestedAt)
+  QUERY(status, requestedAt)
+}
+```
+
+The `appleUserID` query index keeps audit lookups fast, the `requestedAt` sort index supports timeline views, and the composite `(status, requestedAt)` query index optimizes dashboards filtered by request status.
 
 4. In **Schema → Indexes**, confirm the indexes above exist. For query indexes, select the appropriate fields and press **Save**.
 5. Use **Deploy → Production** to promote the schema so it is available outside the development environment.
