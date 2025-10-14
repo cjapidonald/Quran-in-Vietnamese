@@ -5,52 +5,132 @@
       "name": "UserProfile",
       "defaultFieldValue": null,
       "fields": [
-        { "name": "appleUserID", "type": "STRING", "attributes": ["QUERYABLE"], "defaultValue": null },
+        {
+          "name": "appleUserID",
+          "type": "STRING",
+          "attributes": [
+            "QUERYABLE"
+          ],
+          "defaultValue": null
+        },
         {
           "name": "email",
           "type": "STRING",
-          "attributes": ["QUERYABLE", "OPTIONAL"],
+          "attributes": [
+            "QUERYABLE",
+            "OPTIONAL"
+          ],
           "defaultValue": null
         },
         {
           "name": "givenName",
           "type": "STRING",
-          "attributes": ["OPTIONAL"],
+          "attributes": [
+            "OPTIONAL"
+          ],
           "defaultValue": null
         },
         {
           "name": "familyName",
           "type": "STRING",
-          "attributes": ["OPTIONAL"],
+          "attributes": [
+            "OPTIONAL"
+          ],
           "defaultValue": null
         },
-        { "name": "lastSignIn", "type": "DATE_TIME", "attributes": ["SORTABLE"], "defaultValue": null },
-        { "name": "userRecord", "type": "REFERENCE", "attributes": [], "defaultValue": null }
+        {
+          "name": "lastSignIn",
+          "type": "DATE_TIME",
+          "attributes": [
+            "SORTABLE"
+          ],
+          "defaultValue": null
+        },
+        {
+          "name": "userRecord",
+          "type": "REFERENCE",
+          "attributes": [],
+          "defaultValue": null
+        }
       ],
       "indexes": [
-        { "type": "QUERYABLE", "fieldNames": ["appleUserID"] },
-        { "type": "QUERYABLE", "fieldNames": ["email"] }
+        {
+          "type": "QUERYABLE",
+          "fieldNames": [
+            "appleUserID"
+          ]
+        },
+        {
+          "type": "QUERYABLE",
+          "fieldNames": [
+            "email"
+          ]
+        }
       ]
     },
     {
       "name": "AccountDeletionRequest",
       "defaultFieldValue": null,
       "fields": [
-        { "name": "userRecord", "type": "REFERENCE", "attributes": [], "defaultValue": null },
-        { "name": "appleUserID", "type": "STRING", "attributes": ["QUERYABLE"], "defaultValue": null },
-        { "name": "requestedAt", "type": "DATE_TIME", "attributes": ["SORTABLE"], "defaultValue": null },
-        { "name": "status", "type": "STRING", "attributes": ["QUERYABLE"], "defaultValue": "pending" },
+        {
+          "name": "userRecord",
+          "type": "REFERENCE",
+          "attributes": [],
+          "defaultValue": null
+        },
+        {
+          "name": "appleUserID",
+          "type": "STRING",
+          "attributes": [
+            "QUERYABLE"
+          ],
+          "defaultValue": null
+        },
+        {
+          "name": "requestedAt",
+          "type": "DATE_TIME",
+          "attributes": [
+            "SORTABLE"
+          ],
+          "defaultValue": null
+        },
+        {
+          "name": "status",
+          "type": "STRING",
+          "attributes": [
+            "QUERYABLE"
+          ],
+          "defaultValue": "pending"
+        },
         {
           "name": "notes",
           "type": "STRING",
-          "attributes": ["OPTIONAL"],
+          "attributes": [
+            "OPTIONAL"
+          ],
           "defaultValue": null
         }
       ],
       "indexes": [
-        { "type": "QUERYABLE", "fieldNames": ["appleUserID"] },
-        { "type": "SORTABLE", "fieldNames": ["requestedAt"] },
-        { "type": "QUERYABLE", "fieldNames": ["status", "requestedAt"] }
+        {
+          "type": "QUERYABLE",
+          "fieldNames": [
+            "appleUserID"
+          ]
+        },
+        {
+          "type": "SORTABLE",
+          "fieldNames": [
+            "requestedAt"
+          ]
+        },
+        {
+          "type": "QUERYABLE",
+          "fieldNames": [
+            "status",
+            "requestedAt"
+          ]
+        }
       ]
     }
   ]
