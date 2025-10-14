@@ -390,7 +390,7 @@ struct ReaderDashboardView: View {
                 Text(selectedSurah.vietnameseName)
                     .font(.callout.weight(.medium))
                     .foregroundStyle(secondaryText)
-                Text("Chế độ hiển thị: \(readerStore.isFlowMode ? \"Dạng dòng\" : \"Theo câu\")")
+                Text("Chế độ hiển thị: \(readerStore.isFlowMode ? "Dạng dòng" : "Theo câu")")
                     .font(.footnote.weight(.medium))
                     .foregroundStyle(secondaryText.opacity(0.8))
             }
