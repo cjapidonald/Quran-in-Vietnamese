@@ -60,7 +60,7 @@ final class ReaderStore: ObservableObject {
     @Published var gradientIndex: Int = 0
     @Published var textColorIndex: Int = 0
 
-    @Published var arabicFontSelection: ArabicFontOption = .uthmani
+    @Published var arabicFontSelection: ArabicFontOption = .naskh
     @Published var translationFontSelection: TranslationFontOption = .serif
 
     @Published var isFullScreen: Bool = false
