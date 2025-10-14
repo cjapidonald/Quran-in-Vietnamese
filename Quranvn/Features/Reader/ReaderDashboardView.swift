@@ -392,7 +392,7 @@ struct ReaderDashboardView: View {
                     .foregroundStyle(secondaryText)
                 Text("Chế độ hiển thị: \(readerStore.isFlowMode ? \"Dạng dòng\" : \"Theo câu\")")
                     .font(.footnote.weight(.medium))
-                    .foregroundStyle(secondaryText.opacity(0.8)verbatim: <#String#>verbatim: <#String#>)
+                    .foregroundStyle(secondaryText.opacity(0.8))
             }
 
             SurahDock(
