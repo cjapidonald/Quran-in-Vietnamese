@@ -7,7 +7,7 @@
         "key": "Đăng xuất",
         "location": {
           "startingColumn": 28,
-          "startingLine": 86
+          "startingLine": 88
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Đăng nhập Apple đang bật",
         "location": {
           "startingColumn": 76,
-          "startingLine": 62
+          "startingLine": 64
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Đăng nhập Apple chưa được bật",
         "location": {
           "startingColumn": 112,
-          "startingLine": 62
+          "startingLine": 64
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Đồng bộ hóa đang hoạt động.",
         "location": {
           "startingColumn": 60,
-          "startingLine": 69
+          "startingLine": 71
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Đăng nhập để đồng bộ dữ liệu.",
         "location": {
           "startingColumn": 104,
-          "startingLine": 69
+          "startingLine": 71
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "Chủ đề",
         "location": {
           "startingColumn": 22,
-          "startingLine": 98
+          "startingLine": 100
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Chủ đề",
         "location": {
           "startingColumn": 24,
-          "startingLine": 102
+          "startingLine": 104
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "Hiệu ứng nền",
         "location": {
           "startingColumn": 22,
-          "startingLine": 111
+          "startingLine": 113
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "Màu chữ bản dịch",
         "location": {
           "startingColumn": 22,
-          "startingLine": 131
+          "startingLine": 133
         }
       },
       {
@@ -79,7 +79,7 @@
         "key": "Phông chữ tiếng Ả Rập",
         "location": {
           "startingColumn": 22,
-          "startingLine": 154
+          "startingLine": 156
         }
       },
       {
@@ -87,7 +87,7 @@
         "key": "Phông chữ tiếng Việt",
         "location": {
           "startingColumn": 22,
-          "startingLine": 174
+          "startingLine": 176
         }
       },
       {
@@ -95,7 +95,7 @@
         "key": "Cỡ chữ",
         "location": {
           "startingColumn": 26,
-          "startingLine": 195
+          "startingLine": 197
         }
       },
       {
@@ -103,7 +103,7 @@
         "key": "%lld pt",
         "location": {
           "startingColumn": 26,
-          "startingLine": 199
+          "startingLine": 201
         }
       },
       {
@@ -111,7 +111,7 @@
         "key": "Cỡ chữ",
         "location": {
           "startingColumn": 26,
-          "startingLine": 214
+          "startingLine": 216
         }
       },
       {
@@ -119,7 +119,7 @@
         "key": "Xem thử",
         "location": {
           "startingColumn": 22,
-          "startingLine": 219
+          "startingLine": 221
         }
       },
       {
@@ -127,7 +127,7 @@
         "key": "ٱلسَّلَامُ عَلَيْكُمْ",
         "location": {
           "startingColumn": 26,
-          "startingLine": 224
+          "startingLine": 226
         }
       },
       {
@@ -135,7 +135,7 @@
         "key": "Đây là đoạn dịch thử nghiệm để xem kích thước chữ.",
         "location": {
           "startingColumn": 26,
-          "startingLine": 227
+          "startingLine": 229
         }
       },
       {
@@ -143,7 +143,7 @@
         "key": "Chế độ dạng dòng",
         "location": {
           "startingColumn": 22,
-          "startingLine": 241
+          "startingLine": 243
         }
       },
       {
@@ -151,7 +151,7 @@
         "key": "Luôn hiển thị tiếng Ả Rập",
         "location": {
           "startingColumn": 22,
-          "startingLine": 247
+          "startingLine": 249
         }
       },
       {
@@ -159,7 +159,7 @@
         "key": "Người đọc",
         "location": {
           "startingColumn": 22,
-          "startingLine": 257
+          "startingLine": 259
         }
       },
       {
@@ -167,7 +167,7 @@
         "key": "Người đọc",
         "location": {
           "startingColumn": 24,
-          "startingLine": 260
+          "startingLine": 262
         }
       },
       {
@@ -175,7 +175,7 @@
         "key": "Hiện trình phát mini trong tab Đọc",
         "location": {
           "startingColumn": 22,
-          "startingLine": 275
+          "startingLine": 277
         }
       },
       {
@@ -183,7 +183,7 @@
         "key": "Sắp ra mắt",
         "location": {
           "startingColumn": 22,
-          "startingLine": 295
+          "startingLine": 297
         }
       },
       {
@@ -191,7 +191,7 @@
         "key": "Thời gian nhắc",
         "location": {
           "startingColumn": 21,
-          "startingLine": 286
+          "startingLine": 288
         }
       },
       {
@@ -199,7 +199,7 @@
         "key": "Tìm hiểu về các nguồn dữ liệu được sử dụng trong bản thử nghiệm này.",
         "location": {
           "startingColumn": 22,
-          "startingLine": 305
+          "startingLine": 307
         }
       },
       {
@@ -207,7 +207,7 @@
         "key": "Xem nguồn nội dung",
         "location": {
           "startingColumn": 30,
-          "startingLine": 312
+          "startingLine": 314
         }
       }
     ]

@@ -7,7 +7,7 @@
         "key": "Đọc",
         "location": {
           "startingColumn": 18,
-          "startingLine": 56
+          "startingLine": 57
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Các thao tác nhanh cho trải nghiệm đọc",
         "location": {
           "startingColumn": 18,
-          "startingLine": 59
+          "startingLine": 60
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Chuyển ngôn ngữ",
         "location": {
           "startingColumn": 22,
-          "startingLine": 87
+          "startingLine": 88
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Xem trước",
         "location": {
           "startingColumn": 18,
-          "startingLine": 124
+          "startingLine": 125
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Trình đọc toàn màn hình",
         "location": {
           "startingColumn": 26,
-          "startingLine": 130
+          "startingLine": 131
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "Chế độ chìm đắm ẩn thanh điều hướng và tập trung vào từng câu kinh.",
         "location": {
           "startingColumn": 26,
-          "startingLine": 133
+          "startingLine": 134
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Bố cục trình đọc tiêu chuẩn",
         "location": {
           "startingColumn": 26,
-          "startingLine": 136
+          "startingLine": 137
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "Hiển thị tiêu đề, điều khiển và khung dịch bên cạnh.",
         "location": {
           "startingColumn": 26,
-          "startingLine": 139
+          "startingLine": 140
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "Chế độ hiển thị: %@",
         "location": {
           "startingColumn": 26,
-          "startingLine": 144
+          "startingLine": 145
         }
       },
       {
@@ -79,7 +79,7 @@
         "key": "Ngôn ngữ: %@",
         "location": {
           "startingColumn": 26,
-          "startingLine": 148
+          "startingLine": 149
         }
       },
       {
@@ -87,7 +87,7 @@
         "key": "Cỡ chữ: %lld pt",
         "location": {
           "startingColumn": 26,
-          "startingLine": 152
+          "startingLine": 153
         }
       }
     ]

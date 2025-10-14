@@ -7,7 +7,7 @@
         "key": "Thư viện",
         "location": {
           "startingColumn": 27,
-          "startingLine": 28
+          "startingLine": 31
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Cài đặt",
         "location": {
           "startingColumn": 27,
-          "startingLine": 36
+          "startingLine": 39
         }
       }
     ]

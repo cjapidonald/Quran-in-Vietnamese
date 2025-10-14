@@ -4,26 +4,10 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "آية minh họa #%lld",
-        "location": {
-          "startingColumn": 26,
-          "startingLine": 163
-        }
-      },
-      {
-        "comment": "",
-        "key": "Đây là đoạn văn mô phỏng cho câu số %lld.",
-        "location": {
-          "startingColumn": 26,
-          "startingLine": 169
-        }
-      },
-      {
-        "comment": "",
         "key": "Ghi chú %lld: %@",
         "location": {
           "startingColumn": 30,
-          "startingLine": 184
+          "startingLine": 188
         }
       },
       {
@@ -31,15 +15,15 @@
         "key": "Sao chép câu kinh",
         "location": {
           "startingColumn": 23,
-          "startingLine": 227
+          "startingLine": 232
         }
       },
       {
         "comment": "",
-        "key": "Hỏi ChantGPT",
+        "key": "Hỏi ChatGPT",
         "location": {
           "startingColumn": 23,
-          "startingLine": 234
+          "startingLine": 239
         }
       },
       {
@@ -47,7 +31,7 @@
         "key": "Thêm ghi chú",
         "location": {
           "startingColumn": 23,
-          "startingLine": 240
+          "startingLine": 245
         }
       },
       {
@@ -55,7 +39,7 @@
         "key": "Ghi chú",
         "location": {
           "startingColumn": 30,
-          "startingLine": 339
+          "startingLine": 350
         }
       },
       {
@@ -63,7 +47,7 @@
         "key": "Thêm ghi chú",
         "location": {
           "startingColumn": 22,
-          "startingLine": 327
+          "startingLine": 338
         }
       },
       {
@@ -71,7 +55,7 @@
         "key": "Hủy",
         "location": {
           "startingColumn": 28,
-          "startingLine": 342
+          "startingLine": 353
         }
       },
       {
@@ -79,15 +63,15 @@
         "key": "Lưu",
         "location": {
           "startingColumn": 28,
-          "startingLine": 347
+          "startingLine": 358
         }
       },
       {
         "comment": "",
         "key": "Chế độ hiển thị: %@",
         "location": {
-          "startingColumn": 18,
-          "startingLine": 385
+          "startingColumn": 22,
+          "startingLine": 400
         }
       }
     ]

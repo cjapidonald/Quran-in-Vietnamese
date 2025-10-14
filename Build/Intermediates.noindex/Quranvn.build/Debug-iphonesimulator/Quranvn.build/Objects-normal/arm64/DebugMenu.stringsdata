@@ -7,7 +7,7 @@
         "key": "Trình đơn gỡ lỗi",
         "location": {
           "startingColumn": 30,
-          "startingLine": 29
+          "startingLine": 30
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Trình đọc",
         "location": {
           "startingColumn": 25,
-          "startingLine": 12
+          "startingLine": 13
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Thư viện",
         "location": {
           "startingColumn": 25,
-          "startingLine": 17
+          "startingLine": 18
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Giao diện",
         "location": {
           "startingColumn": 25,
-          "startingLine": 21
+          "startingLine": 22
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Điều hướng",
         "location": {
           "startingColumn": 25,
-          "startingLine": 25
+          "startingLine": 26
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "Tạo 30 câu kinh giả lập",
         "location": {
           "startingColumn": 28,
-          "startingLine": 13
+          "startingLine": 14
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Luôn hiện trình phát mini khi chụp màn hình",
         "location": {
           "startingColumn": 28,
-          "startingLine": 14
+          "startingLine": 15
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "Xóa yêu thích/ghi chú",
         "location": {
           "startingColumn": 28,
-          "startingLine": 18
+          "startingLine": 19
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "Đổi toàn bộ gradient",
         "location": {
           "startingColumn": 28,
-          "startingLine": 22
+          "startingLine": 23
         }
       },
       {
@@ -79,7 +79,7 @@
         "key": "Chuyển đến chương Al-Kahf",
         "location": {
           "startingColumn": 28,
-          "startingLine": 26
+          "startingLine": 27
         }
       },
       {
@@ -87,7 +87,7 @@
         "key": "Đóng",
         "location": {
           "startingColumn": 28,
-          "startingLine": 32
+          "startingLine": 33
         }
       }
     ]

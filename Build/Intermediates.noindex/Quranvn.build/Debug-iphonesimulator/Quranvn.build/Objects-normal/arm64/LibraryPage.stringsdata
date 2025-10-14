@@ -7,7 +7,7 @@
         "key": "Phần thư viện",
         "location": {
           "startingColumn": 16,
-          "startingLine": 75
+          "startingLine": 76
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Tiến độ đọc",
         "location": {
           "startingColumn": 22,
-          "startingLine": 47
+          "startingLine": 48
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Chương (Tiếng Việt)",
         "location": {
           "startingColumn": 18,
-          "startingLine": 76
+          "startingLine": 77
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Yêu thích",
         "location": {
           "startingColumn": 18,
-          "startingLine": 77
+          "startingLine": 78
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Ghi chú",
         "location": {
           "startingColumn": 18,
-          "startingLine": 78
+          "startingLine": 79
         }
       }
     ]
