@@ -6,8 +6,10 @@ struct SurahsPage: View {
 
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject private var readingProgressStore: ReadingProgressStore
-    private var surahList: [SurahPlaceholder] {
-        SurahPlaceholder.examples.sorted { $0.index < $1.index }
+    @EnvironmentObject private var quranStore: QuranDataStore
+
+    private var surahList: [Surah] {
+        quranStore.surahs.sorted { $0.index < $1.index }
     }
 
     var body: some View {
@@ -18,10 +20,10 @@ struct SurahsPage: View {
         }
     }
 
-    private func surahButton(for surah: SurahPlaceholder) -> some View {
+    private func surahButton(for surah: Surah) -> some View {
         Button {
             let targetAyah = readingProgressStore.nextAyah(for: surah)
-            onSelect(ReaderDestination(surah: surah, ayah: targetAyah))
+            onSelect(ReaderDestination(surahNumber: surah.number, ayah: targetAyah))
         } label: {
             ZStack(alignment: .leading) {
                 progressFill(for: surah)
@@ -31,7 +33,7 @@ struct SurahsPage: View {
                         .font(.headline)
                         .foregroundStyle(primaryText)
 
-                    Text("Chương \(surah.index) • \(surah.name)")
+                    Text("Chương \(surah.number) • \(surah.transliteration)")
                         .font(.subheadline)
                         .foregroundStyle(secondaryText)
                 }
@@ -44,7 +46,7 @@ struct SurahsPage: View {
         .buttonStyle(.plain)
     }
 
-    private func progressFill(for surah: SurahPlaceholder) -> some View {
+    private func progressFill(for surah: Surah) -> some View {
         GeometryReader { geometry in
             let progress = readingProgressStore.progress(for: surah)
             let clamped = min(max(progress, 0), 1)
@@ -85,4 +87,5 @@ struct SurahsPage: View {
 #Preview {
     SurahsPage(theme: .dawn) { _ in }
         .environmentObject(ReadingProgressStore())
+        .environmentObject(QuranDataStore())
 }

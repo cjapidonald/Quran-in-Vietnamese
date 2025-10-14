@@ -20,10 +20,10 @@ final class ReadingProgressStore: ObservableObject {
         load()
     }
 
-    func markAyah(_ ayah: Int, asReadIn surah: SurahPlaceholder, totalAyahs: Int) {
+    func markAyah(_ ayah: Int, asReadIn surah: Surah, totalAyahs: Int) {
         guard ayah > 0 else { return }
 
-        let baseTotal = max(totalAyahs, surah.placeholderAyahCount)
+        let baseTotal = max(totalAyahs, surah.ayahCount)
         let normalizedTotal = max(baseTotal, 1)
         let previous = progressBySurah[surah.index]
         var entry = previous ?? SurahProgress(lastReadAyah: 0, totalAyahs: normalizedTotal)
@@ -38,24 +38,23 @@ final class ReadingProgressStore: ObservableObject {
         progressBySurah[surah.index] = entry
     }
 
-    func progress(for surah: SurahPlaceholder) -> Double {
+    func progress(for surah: Surah) -> Double {
         let info = progressInfo(for: surah)
         guard info.total > 0 else { return 0 }
         return Double(info.last) / Double(info.total)
     }
 
-    func lastReadAyah(for surah: SurahPlaceholder) -> Int {
+    func lastReadAyah(for surah: Surah) -> Int {
         progressInfo(for: surah).last
     }
 
-    func nextAyah(for surah: SurahPlaceholder) -> Int {
+    func nextAyah(for surah: Surah) -> Int {
         let info = progressInfo(for: surah)
         let next = min(info.last + 1, max(info.total, 1))
         return max(next, 1)
     }
 
-    var overallProgress: Double {
-        let surahs = SurahPlaceholder.examples
+    func overallProgress(for surahs: [Surah]) -> Double {
         let totals = surahs.map { progressInfo(for: $0).total }
         let totalAyahs = totals.reduce(0, +)
         guard totalAyahs > 0 else { return 0 }
@@ -85,15 +84,15 @@ final class ReadingProgressStore: ObservableObject {
         progressBySurah = decoded
     }
 
-    private func progressInfo(for surah: SurahPlaceholder) -> (last: Int, total: Int) {
+    private func progressInfo(for surah: Surah) -> (last: Int, total: Int) {
         if let stored = progressBySurah[surah.index] {
-            let baseTotal = max(stored.totalAyahs, surah.placeholderAyahCount)
+            let baseTotal = max(stored.totalAyahs, surah.ayahCount)
             let total = max(baseTotal, 1)
             let last = min(max(stored.lastReadAyah, 0), total)
             return (last, total)
         }
 
-        let total = max(surah.placeholderAyahCount, 1)
+        let total = max(surah.ayahCount, 1)
         return (0, total)
     }
 }

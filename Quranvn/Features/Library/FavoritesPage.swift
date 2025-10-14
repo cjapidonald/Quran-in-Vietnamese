@@ -5,6 +5,7 @@ struct FavoritesPage: View {
     let onSelect: (FavoriteItem) -> Void
 
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.colorScheme) private var colorScheme
     @State private var expandedFavorites: Set<UUID> = []
 
@@ -28,7 +29,7 @@ struct FavoritesPage: View {
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             HStack(spacing: DesignTokens.Spacing.md) {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                    Text(item.surah.name)
+                    Text(item.surah.transliteration)
                         .font(.headline)
                         .foregroundStyle(primaryText)
                     Text("Câu số \(item.ayah)")
@@ -87,50 +88,31 @@ struct FavoritesPage: View {
             return override
         }
 #endif
-        return FavoriteItem.samples
+        return FavoriteItem.samples(using: quranStore.surahs)
     }
 }
 
 struct FavoriteItem: Identifiable {
     let id = UUID()
-    let surah: SurahPlaceholder
+    let surah: Surah
     let ayah: Int
     let ayahText: String
 
-    static let samples: [FavoriteItem] = [
-        FavoriteItem(
-            surah: SurahPlaceholder.examples[0],
-            ayah: 1,
-            ayahText: "Nhân danh Allah, Đấng Rộng Lượng, Đấng Khoan Dung."
-        ),
-        FavoriteItem(
-            surah: SurahPlaceholder.examples[1],
-            ayah: 7,
-            ayahText: "Xin Ngài hướng dẫn chúng con đi trên con đường chính trực."
-        ),
-        FavoriteItem(
-            surah: SurahPlaceholder.examples[2],
-            ayah: 5,
-            ayahText: "Allah biết rõ điều gì ẩn giấu trong lòng ngực của muôn loài."
-        ),
-        FavoriteItem(
-            surah: SurahPlaceholder.examples[3],
-            ayah: 12,
-            ayahText: "Allah đã đặt giữa các ngươi tình thương và lòng nhân ái."
-        ),
-        FavoriteItem(
-            surah: SurahPlaceholder.examples[4],
-            ayah: 3,
-            ayahText: "Hãy giữ lời giao ước, bởi vì lời giao ước sẽ được tra hỏi."
-        )
-    ]
+    static func samples(using surahs: [Surah]) -> [FavoriteItem] {
+        let entries = surahs.prefix(5)
+        return entries.enumerated().map { index, surah in
+            let ayah = surah.ayahs[min(index, surah.ayahs.count - 1)]
+            return FavoriteItem(surah: surah, ayah: ayah.number, ayahText: ayah.vietnamese)
+        }
+    }
 
     var destination: ReaderDestination {
-        ReaderDestination(surah: surah, ayah: ayah)
+        ReaderDestination(surahNumber: surah.number, ayah: ayah)
     }
 }
 
 #Preview {
     FavoritesPage(theme: .dawn) { _ in }
         .environmentObject(AppState())
+        .environmentObject(QuranDataStore())
 }

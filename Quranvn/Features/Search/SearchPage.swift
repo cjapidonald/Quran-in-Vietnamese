@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SearchPage: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.colorScheme) private var colorScheme
     @State private var searchQuery: String = ""
 
@@ -47,7 +48,7 @@ struct SearchPage: View {
             Text("Tìm kiếm")
                 .font(.largeTitle.bold())
                 .foregroundStyle(primaryText)
-            Text("Hình dung trải nghiệm tìm kiếm với dữ liệu mô phỏng")
+            Text("Tìm kiếm chương và câu kinh trong dữ liệu đã tải")
                 .font(.subheadline)
                 .foregroundStyle(secondaryText)
         }
@@ -87,7 +88,7 @@ struct SearchPage: View {
                                 Text(surah.vietnameseName)
                                     .font(.headline)
                                     .foregroundStyle(primaryText)
-                                Text("Chương \(surah.index) • \(surah.name)")
+                                Text("Chương \(surah.number) • \(surah.transliteration)")
                                     .font(.subheadline)
                                     .foregroundStyle(secondaryText)
                             }
@@ -107,20 +108,20 @@ struct SearchPage: View {
         searchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private var filteredSurahResults: [SurahPlaceholder] {
+    private var filteredSurahResults: [Surah] {
         guard !trimmedSearchQuery.isEmpty else { return [] }
 
-        return SurahPlaceholder.examples.filter { surah in
+        return quranStore.surahs.filter { surah in
             surah.vietnameseName.localizedCaseInsensitiveContains(trimmedSearchQuery) ||
-                surah.name.localizedCaseInsensitiveContains(trimmedSearchQuery) ||
-                String(surah.index).contains(trimmedSearchQuery)
+                surah.transliteration.localizedCaseInsensitiveContains(trimmedSearchQuery) ||
+                String(surah.number).contains(trimmedSearchQuery)
         }
     }
 
-    private func open(_ surah: SurahPlaceholder) {
+    private func open(_ surah: Surah) {
         searchQuery = ""
         appState.isSearchFocused = false
-        appState.pendingReaderDestination = ReaderDestination(surah: surah, ayah: 1)
+        appState.pendingReaderDestination = ReaderDestination(surahNumber: surah.number, ayah: 1)
         appState.selectedTab = .library
         appState.showSurahDashboard = true
         close()
@@ -148,4 +149,5 @@ struct SearchPage: View {
 #Preview {
     SearchPage()
         .environmentObject(AppState())
+        .environmentObject(QuranDataStore())
 }
