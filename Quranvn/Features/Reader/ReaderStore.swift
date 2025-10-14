@@ -6,6 +6,8 @@ import UIKit
 
 @MainActor
 final class ReaderStore: ObservableObject {
+    private static let defaultGradient: ThemeManager.ThemeGradient = .oasis
+
     enum TextColorStyle: Int, CaseIterable {
         case soft
         case strong
@@ -57,7 +59,7 @@ final class ReaderStore: ObservableObject {
     @Published var isFlowMode: Bool = true
     @Published var fontSize: CGFloat = 18
 
-    @Published var gradientIndex: Int = 0
+    @Published var gradientIndex: Int = ThemeManager.ThemeGradient.allCases.firstIndex(of: ReaderStore.defaultGradient) ?? 0
     @Published var textColorIndex: Int = 0
 
     @Published var arabicFontSelection: ArabicFontOption = .uthmani
@@ -160,7 +162,7 @@ final class ReaderStore: ObservableObject {
 
     var selectedGradient: ThemeManager.ThemeGradient {
         guard gradientIndex >= 0, gradientIndex < gradientOptions.count else {
-            return gradientOptions.first ?? .emerald
+            return ReaderStore.defaultGradient
         }
         return gradientOptions[gradientIndex]
     }
