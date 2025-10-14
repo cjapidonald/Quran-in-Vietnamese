@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct SurahDock: View {
-    let surahs: [SurahPlaceholder]
-    @Binding var selectedSurah: SurahPlaceholder
-    var onSelection: (SurahPlaceholder) -> Void
+    let surahs: [Surah]
+    @Binding var selectedSurahNumber: Int
+    var onSelection: (Surah) -> Void
 
     @EnvironmentObject private var readerStore: ReaderStore
     @Environment(\.colorScheme) private var colorScheme
@@ -13,12 +13,12 @@ struct SurahDock: View {
             HStack(spacing: DesignTokens.Spacing.sm) {
                 ForEach(surahs) { surah in
                     SegmentPill(
-                        title: surah.name,
-                        isSelected: surah == selectedSurah,
+                        title: surah.transliteration,
+                        isSelected: surah.number == selectedSurahNumber,
                         theme: readerStore.selectedGradient
                     ) {
-                        guard selectedSurah != surah else { return }
-                        selectedSurah = surah
+                        guard selectedSurahNumber != surah.number else { return }
+                        selectedSurahNumber = surah.number
                         onSelection(surah)
                     }
                     .lineLimit(1)

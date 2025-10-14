@@ -7,48 +7,47 @@ struct ReaderDashboardView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
     @EnvironmentObject private var readingProgressStore: ReadingProgressStore
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
 
-    @State private var selectedSurah: SurahPlaceholder
-    @State private var ayahs: [AyahPlaceholder]
-    @State private var scrollTarget: UUID?
-    @State private var favoriteAyahs: Set<UUID> = []
-    @State private var ayahNotes: [UUID: [String]] = [:]
+    @State private var selectedSurahID: Int
+    @State private var ayahs: [Ayah] = []
+    @State private var scrollTarget: String?
+    @State private var favoriteAyahs: Set<String> = []
+    @State private var ayahNotes: [String: [String]] = [:]
     @State private var toastMessage: String?
     @State private var showToast = false
     @State private var safariURL: URL?
     @State private var isShowingSafari = false
     @State private var isPresentingNoteSheet = false
     @State private var noteDraft = ""
-    @State private var noteAyahID: UUID?
+    @State private var noteAyahID: String?
     @State private var isShowingFullPlayer = false
-    @State private var highlightedAyahID: UUID?
+    @State private var highlightedAyahID: String?
     @State private var highlightIsActive = false
     @State private var hasActivatedHighlight = false
     @State private var lastHandledLanguageEnforcementID: UUID?
-    init(initialSurah: SurahPlaceholder? = nil, initialAyah: Int? = nil, highlightAyah: Int? = nil) {
-        let defaultSurah = SurahPlaceholder.examples.first ?? SurahPlaceholder(name: "Tạm thời", index: 1)
-        let resolvedSurah = initialSurah ?? defaultSurah
-        let highlightTarget = highlightAyah ?? initialAyah
-        var generatedAyahs = ReaderDashboardView.generateAyahs(for: resolvedSurah)
+    @State private var pendingInitialAyah: Int?
+    init(initialSurah: Surah? = nil, initialAyah: Int? = nil, highlightAyah: Int? = nil) {
+        let resolvedSurahID = initialSurah?.number ?? 1
+        _selectedSurahID = State(initialValue: resolvedSurahID)
+        let targetAyah = highlightAyah ?? initialAyah
+        _pendingInitialAyah = State(initialValue: targetAyah)
+        _scrollTarget = State(initialValue: nil)
+        _highlightedAyahID = State(initialValue: nil)
+    }
 
-        if let highlightTarget,
-           !generatedAyahs.contains(where: { $0.number == highlightTarget }) {
-            generatedAyahs.append(AyahPlaceholder(number: highlightTarget))
-            generatedAyahs.sort { $0.number < $1.number }
+    private var selectedSurah: Surah {
+        if let match = quranStore.surah(number: selectedSurahID) {
+            return match
         }
 
-        _selectedSurah = State(initialValue: resolvedSurah)
-        _ayahs = State(initialValue: generatedAyahs)
-        if let ayahNumber = highlightTarget ?? initialAyah,
-           let targetID = ReaderDashboardView.scrollIdentifier(for: ayahNumber, in: generatedAyahs) {
-            _scrollTarget = State(initialValue: targetID)
-            _highlightedAyahID = State(initialValue: targetID)
-        } else {
-            _scrollTarget = State(initialValue: nil)
-            _highlightedAyahID = State(initialValue: nil)
+        guard let fallback = quranStore.surahs.first else {
+            fatalError("Không tìm thấy dữ liệu chương Kinh Qur'an")
         }
+
+        return fallback
     }
 
     private var readerHorizontalPadding: CGFloat {
@@ -135,13 +134,17 @@ struct ReaderDashboardView: View {
             showToast(message: "Luôn bật ít nhất một ngôn ngữ")
         }
         .onAppear {
-            applyDebugAyahOverrideIfNeeded()
+            refreshAyahs(forceReset: true)
         }
 #if DEBUG
-        .onChange(of: appState.debugAyahCountOverride) {
-            applyDebugAyahOverrideIfNeeded()
+        .onChange(of: appState.debugAyahCountOverride) { _, _ in
+            refreshAyahs(forceReset: true)
         }
 #endif
+        .onChange(of: selectedSurahID) { _, _ in
+            pendingInitialAyah = 1
+            refreshAyahs(forceReset: true)
+        }
     }
 
     private var background: some View {
@@ -154,19 +157,19 @@ struct ReaderDashboardView: View {
             .ignoresSafeArea()
     }
 
-    private func ayahCard(for ayah: AyahPlaceholder) -> some View {
+    private func ayahCard(for ayah: Ayah) -> some View {
         let isHighlighted = highlightIsActive && highlightedAyahID == ayah.id
 
         return VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                 if readerStore.showArabic {
-                    Text("آية minh họa #\(ayah.number)")
+                    Text(ayah.arabic)
                         .font(arabicFont)
                         .foregroundStyle(primaryText)
                 }
 
                 if readerStore.showVietnamese {
-                    Text("Đây là đoạn văn mô phỏng cho câu số \(ayah.number).")
+                    Text(ayah.vietnamese)
                         .font(translationFont)
                         .foregroundStyle(translationText)
                         .lineSpacing(4)
@@ -242,8 +245,8 @@ struct ReaderDashboardView: View {
         }
     }
 
-    private func recordProgress(for ayah: AyahPlaceholder) {
-        let totalAyahs = max(ayahs.count, selectedSurah.placeholderAyahCount)
+    private func recordProgress(for ayah: Ayah) {
+        let totalAyahs = max(ayahs.count, selectedSurah.ayahCount)
         readingProgressStore.markAyah(ayah.number, asReadIn: selectedSurah, totalAyahs: totalAyahs)
     }
 
@@ -258,7 +261,7 @@ struct ReaderDashboardView: View {
             .accessibilityHidden(!isActive)
     }
 
-    private func toggleFavorite(for id: UUID) {
+    private func toggleFavorite(for id: String) {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
             if favoriteAyahs.contains(id) {
                 favoriteAyahs.remove(id)
@@ -268,13 +271,13 @@ struct ReaderDashboardView: View {
         }
     }
 
-    private func prepareNote(for id: UUID) {
+    private func prepareNote(for id: String) {
         noteAyahID = id
         noteDraft = ""
         isPresentingNoteSheet = true
     }
 
-    private func askChantGPT(for ayah: AyahPlaceholder) {
+    private func askChantGPT(for ayah: Ayah) {
         guard let url = chantGPTURL(for: ayah) else {
             showToast(message: "Không thể mở ChantGPT ngay bây giờ")
             return
@@ -284,7 +287,7 @@ struct ReaderDashboardView: View {
         isShowingSafari = true
     }
 
-    private func chantGPTURL(for ayah: AyahPlaceholder) -> URL? {
+    private func chantGPTURL(for ayah: Ayah) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "chantgpt.com"
@@ -300,7 +303,7 @@ struct ReaderDashboardView: View {
         return components.url
     }
 
-    private func chantGPTPrompt(for ayah: AyahPlaceholder) -> String {
+    private func chantGPTPrompt(for ayah: Ayah) -> String {
         "Hãy giải thích ý nghĩa và bối cảnh câu kinh số \(ayah.number) trong chương \(selectedSurah.vietnameseName) của Kinh Qur'an."
     }
 
@@ -378,13 +381,26 @@ struct ReaderDashboardView: View {
     }
 
     private var surahHeader: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-            Text(selectedSurah.name)
-                .font(.title2.weight(.semibold))
-                .foregroundStyle(primaryText)
-            Text("Chế độ hiển thị: \(readerStore.isFlowMode ? "Dạng dòng" : "Theo câu")")
-                .font(.footnote.weight(.medium))
-                .foregroundStyle(secondaryText.opacity(0.8))
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
+            VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
+                Text(selectedSurah.arabicName)
+                    .font(.title2.weight(.semibold))
+                    .foregroundStyle(primaryText)
+                Text(selectedSurah.vietnameseName)
+                    .font(.callout.weight(.medium))
+                    .foregroundStyle(secondaryText)
+                Text("Chế độ hiển thị: \(readerStore.isFlowMode ? \"Dạng dòng\" : \"Theo câu\")")
+                    .font(.footnote.weight(.medium))
+                    .foregroundStyle(secondaryText.opacity(0.8))
+            }
+
+            SurahDock(
+                surahs: quranStore.surahs,
+                selectedSurahNumber: $selectedSurahID
+            ) { surah in
+                pendingInitialAyah = 1
+                showToast(message: "Đang chuyển đến \(surah.vietnameseName)")
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -413,46 +429,55 @@ struct ReaderDashboardView: View {
         ThemeManager.accentColor(for: readerStore.selectedGradient, colorScheme: colorScheme)
     }
 
-    private func resolvedAyahs(for surah: SurahPlaceholder) -> [AyahPlaceholder] {
+    private func resolvedAyahs(for surah: Surah) -> [Ayah] {
 #if DEBUG
         if let override = appState.debugAyahCountOverride, override > 0 {
-            return (1...override).map { AyahPlaceholder(number: $0) }
+            return (1...override).map { number in
+                Ayah(
+                    id: "\(surah.number):\(number)",
+                    number: number,
+                    arabic: "آية giả lập #\(number)",
+                    vietnamese: "Đây là câu giả lập số \(number)."
+                )
+            }
         }
 #endif
-        return ReaderDashboardView.generateAyahs(for: surah)
+        return surah.ayahs
     }
 
-    private func applyDebugAyahOverrideIfNeeded() {
-#if DEBUG
+    private func refreshAyahs(forceReset: Bool = false) {
         let updated = resolvedAyahs(for: selectedSurah)
-        let currentNumbers = ayahs.map(\.number)
-        let updatedNumbers = updated.map(\.number)
+        let currentIDs = ayahs.map(\.id)
+        let updatedIDs = updated.map(\.id)
 
-        guard currentNumbers != updatedNumbers else { return }
+        guard forceReset || currentIDs != updatedIDs else { return }
 
         ayahs = updated
         favoriteAyahs.removeAll()
         ayahNotes.removeAll()
-        scrollTarget = nil
-        highlightedAyahID = nil
+
+        if let target = pendingInitialAyah,
+           let targetID = ReaderDashboardView.scrollIdentifier(for: target, in: updated) {
+            scrollTarget = targetID
+            highlightedAyahID = targetID
+            pendingInitialAyah = nil
+        } else {
+            scrollTarget = nil
+            highlightedAyahID = nil
+        }
+
         highlightIsActive = false
         hasActivatedHighlight = false
-#endif
     }
 
-    private static func generateAyahs(for surah: SurahPlaceholder) -> [AyahPlaceholder] {
-        let baseCount = max(surah.placeholderAyahCount, 1)
-        return (1...baseCount).map { AyahPlaceholder(number: $0) }
-    }
-
-    private static func scrollIdentifier(for ayahNumber: Int, in ayahs: [AyahPlaceholder]) -> UUID? {
+    private static func scrollIdentifier(for ayahNumber: Int, in ayahs: [Ayah]) -> String? {
         if let match = ayahs.first(where: { $0.number == ayahNumber }) {
             return match.id
         }
         return ayahs.last?.id
     }
 
-    private func scrollTo(_ id: UUID, using proxy: ScrollViewProxy) {
+    private func scrollTo(_ id: String, using proxy: ScrollViewProxy) {
         DispatchQueue.main.async {
             withAnimation(.easeInOut) {
                 proxy.scrollTo(id, anchor: .top)
@@ -585,55 +610,7 @@ private struct SafariView: View {
 }
 #endif
 
-struct AyahPlaceholder: Identifiable, Hashable {
-    let id = UUID()
-    let number: Int
-}
-
-struct SurahPlaceholder: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let index: Int
-
-    static let examples: [SurahPlaceholder] = [
-        SurahPlaceholder(name: "Al-Fātiḥah", index: 1),
-        SurahPlaceholder(name: "Al-Baqarah", index: 2),
-        SurahPlaceholder(name: "Āl ʿImrān", index: 3),
-        SurahPlaceholder(name: "An-Nisāʾ", index: 4),
-        SurahPlaceholder(name: "Al-Mā'idah", index: 5),
-        SurahPlaceholder(name: "Al-An'ām", index: 6),
-        SurahPlaceholder(name: "Al-A'rāf", index: 7),
-        SurahPlaceholder(name: "Al-Anfāl", index: 8),
-        SurahPlaceholder(name: "Al-Kahf", index: 18)
-    ]
-}
-
 struct ReaderDestination {
-    let surah: SurahPlaceholder
+    let surahNumber: Int
     let ayah: Int
-}
-
-extension SurahPlaceholder {
-    var vietnameseName: String {
-        if let mapped = Self.vietnameseTitles[index] {
-            return mapped
-        }
-        return name
-    }
-
-    var placeholderAyahCount: Int {
-        max(6 + (index % 5) * 2, 1)
-    }
-
-    private static let vietnameseTitles: [Int: String] = [
-        1: "Al-Fātiḥah — Lời Mở Đầu",
-        2: "Al-Baqarah — Con Bò Cái",
-        3: "Āl ʿImrān — Gia Đình Imran",
-        4: "An-Nisāʾ — Phụ Nữ",
-        5: "Al-Mā'idah — Bàn Tiệc",
-        6: "Al-An'ām — Đàn Gia Súc",
-        7: "Al-A'rāf — Thành Trì Cao",
-        8: "Al-Anfāl — Chiến Lợi Phẩm",
-        18: "Al-Kahf — Hang Động"
-    ]
 }

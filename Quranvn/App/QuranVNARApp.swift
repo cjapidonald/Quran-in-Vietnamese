@@ -4,12 +4,14 @@ import SwiftUI
 struct QuranVNARApp: App {
     @StateObject private var appState = AppState()
     @StateObject private var readingProgressStore = ReadingProgressStore()
+    @StateObject private var quranStore = QuranDataStore()
 
     var body: some Scene {
         WindowGroup {
             RootTabView()
                 .environmentObject(appState)
                 .environmentObject(readingProgressStore)
+                .environmentObject(quranStore)
         }
     }
 }
@@ -18,6 +20,7 @@ private struct RootTabView: View {
     @StateObject private var readerStore = ReaderStore()
     @StateObject private var cloudAuthManager = CloudAuthManager()
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
@@ -41,7 +44,7 @@ private struct RootTabView: View {
         .background(ThemeManager.backgroundGradient(style: appState.selectedThemeGradient, for: effectiveColorScheme))
         .preferredColorScheme(appState.themeStyle.preferredColorScheme)
         .onOpenURL { url in
-            Router.handle(url: url, appState: appState)
+            Router.handle(url: url, appState: appState, quranStore: quranStore)
         }
         .alert(item: $appState.routingAlert) { alert in
             Alert(title: Text(alert.message))

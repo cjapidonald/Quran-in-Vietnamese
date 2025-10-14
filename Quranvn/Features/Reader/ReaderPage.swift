@@ -4,6 +4,7 @@ struct ReaderPage: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var readerStore: ReaderStore
     @EnvironmentObject private var readingProgressStore: ReadingProgressStore
+    @EnvironmentObject private var quranStore: QuranDataStore
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var isShowingFullPlayer = false
@@ -36,7 +37,7 @@ struct ReaderPage: View {
             }
             .navigationDestination(isPresented: $appState.showSurahDashboard) {
                 ReaderDashboardView(
-                    initialSurah: appState.pendingReaderDestination?.surah,
+                    initialSurah: destinationSurah,
                     initialAyah: appState.pendingReaderDestination?.ayah
                 )
                 .environmentObject(readingProgressStore)
@@ -171,6 +172,11 @@ struct ReaderPage: View {
         ThemeManager.accentColor(for: readerStore.selectedGradient, colorScheme: colorScheme)
     }
 
+    private var destinationSurah: Surah? {
+        guard let destination = appState.pendingReaderDestination else { return nil }
+        return quranStore.surah(number: destination.surahNumber)
+    }
+
     private var activeLanguageSummary: String {
         let active = ReaderLanguage.allCases.filter { readerStore.isLanguageEnabled($0) }
         if active.isEmpty {
@@ -185,4 +191,5 @@ struct ReaderPage: View {
         .environmentObject(AppState())
         .environmentObject(ReaderStore())
         .environmentObject(ReadingProgressStore())
+        .environmentObject(QuranDataStore())
 }
