@@ -50,12 +50,16 @@ struct SurahsPage: View {
         GeometryReader { geometry in
             let progress = readingProgressStore.progress(for: surah)
             let clamped = min(max(progress, 0), 1)
-            let width = geometry.size.width * CGFloat(clamped)
+            let fillWidth = geometry.size.width * CGFloat(clamped)
 
             RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.extraLarge, style: .continuous)
                 .fill(progressGradient)
-                .frame(width: width, height: geometry.size.height)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .mask {
+                    RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.extraLarge, style: .continuous)
+                        .frame(width: fillWidth, height: geometry.size.height)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
                 .opacity(clamped > 0 ? 1 : 0)
                 .animation(.easeInOut(duration: 0.35), value: clamped)
         }
