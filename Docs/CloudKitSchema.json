@@ -24,7 +24,7 @@
         { "name": "userRecord", "type": "REFERENCE", "attributes": [], "defaultValue": null },
         { "name": "appleUserID", "type": "STRING", "attributes": ["QUERYABLE"], "defaultValue": null },
         { "name": "requestedAt", "type": "DATE_TIME", "attributes": ["SORTABLE"], "defaultValue": null },
-        { "name": "status", "type": "STRING", "attributes": ["QUERYABLE"], "defaultValue": "pending" },
+        { "name": "status", "type": "STRING", "attributes": ["QUERYABLE"], "defaultValue": "pending", "defaultClause": "DEFAULT \"pending\"" },
         { "name": "notes", "type": "STRING", "attributes": ["OPTIONAL"], "defaultValue": null }
       ],
       "indexes": [
