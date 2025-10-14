@@ -123,8 +123,9 @@ struct ReaderDashboardView: View {
         }
         .overlay(toastView, alignment: .top)
         .overlay(fullScreenControls, alignment: .topTrailing)
+        .contentShape(Rectangle())
         .simultaneousGesture(exitFullScreenGesture)
-        .highPriorityGesture(navigationGesture)
+        .highPriorityGesture(navigationGesture, including: .all)
         .navigationDestination(isPresented: $isShowingFullPlayer) {
             FullPlayerView()
         }
@@ -594,22 +595,24 @@ struct ReaderDashboardView: View {
     }
 
     private var navigationGesture: some Gesture {
-        DragGesture(minimumDistance: 40, coordinateSpace: .local)
-            .onEnded { value in
-                guard !readerStore.isFullScreen else { return }
+        DragGesture(minimumDistance: 20, coordinateSpace: .local)
+            .onEnded(handleNavigationSwipe)
+    }
 
-                let horizontalTranslation = value.translation.width
-                let absoluteHorizontalTranslation = abs(horizontalTranslation)
-                let verticalTranslation = abs(value.translation.height)
+    private func handleNavigationSwipe(_ value: DragGesture.Value) {
+        guard !readerStore.isFullScreen else { return }
 
-                guard absoluteHorizontalTranslation > 80, absoluteHorizontalTranslation > verticalTranslation else { return }
+        let horizontalTranslation = value.translation.width
+        let absoluteHorizontalTranslation = abs(horizontalTranslation)
+        let verticalTranslation = abs(value.translation.height)
 
-                if horizontalTranslation > 0 {
-                    navigateBackToSurahs()
-                } else {
-                    navigateToSettings()
-                }
-            }
+        guard absoluteHorizontalTranslation > 60, absoluteHorizontalTranslation > verticalTranslation else { return }
+
+        if horizontalTranslation > 0 {
+            navigateBackToSurahs()
+        } else {
+            navigateToSettings()
+        }
     }
 }
 
