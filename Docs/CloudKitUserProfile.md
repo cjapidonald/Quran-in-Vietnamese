@@ -15,26 +15,26 @@ This document captures the CloudKit configuration required to provision the back
 
 ### `UserProfile`
 
-| Field name    | Type      | Attributes          | Notes                                                       |
-|---------------|-----------|---------------------|-------------------------------------------------------------|
-| `appleUserID` | String    | Queryable           | Required, stores the stable Sign in with Apple identifier   |
-| `email`       | String    | Queryable, optional | Optional email address                                      |
-| `givenName`   | String    | Optional            | Optional user given name                                    |
-| `familyName`  | String    | Optional            | Optional user family name                                   |
-| `lastSignIn`  | Date      | Sortable            | Tracks the most recent sign-in timestamp                    |
-| `userRecord`  | Reference | —                   | Reference to the owner’s `_defaultOwner` user record        |
+| Field name    | Type                   | Attributes          | Notes                                                       |
+|---------------|------------------------|---------------------|-------------------------------------------------------------|
+| `appleUserID` | String                 | Queryable           | Required, stores the stable Sign in with Apple identifier   |
+| `email`       | String                 | Queryable, optional | Optional email address                                      |
+| `givenName`   | String                 | Optional            | Optional user given name                                    |
+| `familyName`  | String                 | Optional            | Optional user family name                                   |
+| `lastSignIn`  | Date Time (`DATE_TIME`) | Sortable           | Tracks the most recent sign-in date-time value              |
+| `userRecord`  | Reference              | —                   | Reference to the owner’s `_defaultOwner` user record        |
 
 *Add query indexes on `appleUserID` and `email` to enable efficient lookups.*
 
 ### `AccountDeletionRequest`
 
-| Field name   | Type      | Attributes          | Notes                                                                 |
-|--------------|-----------|---------------------|-----------------------------------------------------------------------|
-| `userRecord` | Reference | —                   | Reference to the `_defaultOwner` record for the signed-in user         |
-| `appleUserID` | String    | Queryable           | Mirrors the Sign in with Apple identifier for auditing                 |
-| `requestedAt` | Date      | Sortable            | Timestamp for when the user requested account deletion                 |
-| `status`     | String    | Queryable           | Workflow state (e.g. `pending`, `processing`, `completed`, `error`)    |
-| `notes`      | String    | Optional            | Optional field for operational comments                               |
+| Field name   | Type                   | Attributes          | Notes                                                                 |
+|--------------|------------------------|---------------------|-----------------------------------------------------------------------|
+| `userRecord` | Reference              | —                   | Reference to the `_defaultOwner` record for the signed-in user         |
+| `appleUserID` | String                | Queryable           | Mirrors the Sign in with Apple identifier for auditing                 |
+| `requestedAt` | Date Time (`DATE_TIME`) | Sortable           | Date-time for when the user requested account deletion                 |
+| `status`     | String                 | Queryable           | Workflow state (e.g. `pending`, `processing`, `completed`, `error`)    |
+| `notes`      | String                 | Optional            | Optional field for operational comments                               |
 
 *Add a query index on `appleUserID` and a sort index on `requestedAt` for the `AccountDeletionRequest` record type. A composite query index on (`status`, `requestedAt`) is recommended if you plan to filter by status frequently.*
 
