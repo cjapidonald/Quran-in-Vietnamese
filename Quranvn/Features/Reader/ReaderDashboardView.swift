@@ -232,9 +232,9 @@ struct ReaderDashboardView: View {
             }
 
             Button {
-                askChantGPT(for: ayah)
+                askChatGPT(for: ayah)
             } label: {
-                Label("Hỏi ChantGPT", systemImage: "sparkles")
+                Label("Hỏi ChatGPT", systemImage: "sparkles")
             }
 
             Button {
@@ -277,9 +277,9 @@ struct ReaderDashboardView: View {
         isPresentingNoteSheet = true
     }
 
-    private func askChantGPT(for ayah: Ayah) {
-        guard let url = chantGPTURL(for: ayah) else {
-            showToast(message: "Không thể mở ChantGPT ngay bây giờ")
+    private func askChatGPT(for ayah: Ayah) {
+        guard let url = chatGPTURL(for: ayah) else {
+            showToast(message: "Không thể mở ChatGPT ngay bây giờ")
             return
         }
 
@@ -287,23 +287,23 @@ struct ReaderDashboardView: View {
         isShowingSafari = true
     }
 
-    private func chantGPTURL(for ayah: Ayah) -> URL? {
+    private func chatGPTURL(for ayah: Ayah) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "chantgpt.com"
+        components.host = "chat.openai.com"
         components.queryItems = [
-            URLQueryItem(name: "q", value: chantGPTPrompt(for: ayah))
+            URLQueryItem(name: "q", value: chatGPTPrompt(for: ayah))
         ]
 
         if let url = components.url {
             return url
         }
 
-        components.host = "www.chantgpt.com"
+        components.host = "www.chat.openai.com"
         return components.url
     }
 
-    private func chantGPTPrompt(for ayah: Ayah) -> String {
+    private func chatGPTPrompt(for ayah: Ayah) -> String {
         let surahName = selectedSurah.vietnameseName
         return "Hãy giải thích ý nghĩa và bối cảnh câu kinh số \(ayah.number) trong chương \(surahName) của Kinh Qur'an."
     }
