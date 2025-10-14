@@ -1,0 +1,63 @@
+{
+  "buildCommand" : {
+    "command" : "preview",
+    "style" : "xojit"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "41ef17fdc1ddc5d4176bda9e6dd5befd7e1ed3d82dd90d988bf84a61ab824475"
+    }
+  ],
+  "containerPath" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator26.0",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "arm64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Products",
+      "derivedDataPath" : "/Users/donaldcjapi/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/donaldcjapi/Library/Developer/Xcode/DerivedData/Quranvn-btqnqqsjuuhsbgclhdrvwunlujom/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/donaldcjapi/Library/Developer/Xcode/DerivedData/Quranvn-btqnqqsjuuhsbgclhdrvwunlujom/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPhone18,1",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "26.0",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPhone18,1",
+          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "ONLY_ACTIVE_ARCH" : "YES",
+          "TARGET_DEVICE_IDENTIFIER" : "82D91C67-F007-4793-8ADA-14A92A60F488",
+          "TARGET_DEVICE_MODEL" : "iPhone18,1",
+          "TARGET_DEVICE_OS_VERSION" : "26.0",
+          "TARGET_DEVICE_PLATFORM_NAME" : "iphonesimulator"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}
