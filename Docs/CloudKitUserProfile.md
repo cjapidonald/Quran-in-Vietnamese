@@ -15,28 +15,37 @@ This document captures the CloudKit configuration required to provision the back
 
 ### `UserProfile`
 
-| Field name    | Type                   | Attributes          | Notes                                                       |
-|---------------|------------------------|---------------------|-------------------------------------------------------------|
-| `appleUserID` | String                 | Queryable           | Required, stores the stable Sign in with Apple identifier   |
-| `email`       | String                 | Queryable, optional | Optional email address                                      |
-| `givenName`   | String                 | Optional            | Optional user given name                                    |
-| `familyName`  | String                 | Optional            | Optional user family name                                   |
-| `lastSignIn`  | Date Time (`DATE_TIME`) | Sortable           | Tracks the most recent sign-in date-time value              |
-| `userRecord`  | Reference              | —                   | Reference to the owner’s `_defaultOwner` user record        |
+| Field name    | Type                    | Attributes          | Notes                                                       |
+|---------------|-------------------------|---------------------|-------------------------------------------------------------|
+| `appleUserID` | String                  | Queryable           | Required, stores the stable Sign in with Apple identifier   |
+| `email`       | String                  | Queryable, optional | Optional email address                                      |
+| `givenName`   | String                  | Optional            | Optional user given name                                    |
+| `familyName`  | String                  | Optional            | Optional user family name                                   |
+| `lastSignIn`  | Date Time (`DATE_TIME`) | Sortable            | Tracks the most recent sign-in date-time value              |
+| `userRecord`  | Reference               | —                   | Reference to the owner’s `_defaultOwner` user record        |
 
-*Add query indexes on `appleUserID` and `email` to enable efficient lookups.*
+```text
+INDEXES
+QUERY appleUserID
+QUERY email
+```
 
 ### `AccountDeletionRequest`
 
-| Field name   | Type                   | Attributes          | Notes                                                                 |
-|--------------|------------------------|---------------------|-----------------------------------------------------------------------|
-| `userRecord` | Reference              | —                   | Reference to the `_defaultOwner` record for the signed-in user         |
-| `appleUserID` | String                | Queryable           | Mirrors the Sign in with Apple identifier for auditing                 |
-| `requestedAt` | Date Time (`DATE_TIME`) | Sortable           | Date-time for when the user requested account deletion                 |
-| `status`     | String                 | Queryable           | Workflow state (e.g. `pending`, `processing`, `completed`, `error`)    |
-| `notes`      | String                 | Optional            | Optional field for operational comments                               |
+| Field name    | Type                    | Attributes          | Notes                                                                 |
+|---------------|-------------------------|---------------------|-----------------------------------------------------------------------|
+| `userRecord`  | Reference               | —                   | Reference to the `_defaultOwner` record for the signed-in user        |
+| `appleUserID` | String                  | Queryable           | Mirrors the Sign in with Apple identifier for auditing                |
+| `requestedAt` | Date Time (`DATE_TIME`) | Sortable            | Date-time for when the user requested account deletion                |
+| `status`      | String                  | Queryable           | Workflow state (e.g. `pending`, `processing`, `completed`, `error`)   |
+| `notes`       | String                  | Optional            | Optional field for operational comments                               |
 
-*Add a query index on `appleUserID` and a sort index on `requestedAt` for the `AccountDeletionRequest` record type. A composite query index on (`status`, `requestedAt`) is recommended if you plan to filter by status frequently.*
+```text
+INDEXES
+QUERY appleUserID
+QUERY status, requestedAt
+SORT requestedAt
+```
 
 4. In **Schema → Indexes**, confirm the indexes above exist. For query indexes, select the appropriate fields and press **Save**.
 5. Use **Deploy → Production** to promote the schema so it is available outside the development environment.
