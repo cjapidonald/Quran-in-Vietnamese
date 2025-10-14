@@ -304,7 +304,12 @@ struct ReaderDashboardView: View {
     }
 
     private func chantGPTPrompt(for ayah: Ayah) -> String {
+ codex/create-json-file-for-surahs-data-yg7akm
         "Hãy giải thích ý nghĩa và bối cảnh câu kinh số \(ayah.number) trong chương \(selectedSurah.vietnameseName) của Kinh Qur'an."
+
+        let surahName = selectedSurah.vietnameseName
+        return "Hãy giải thích ý nghĩa và bối cảnh câu kinh số \(ayah.number) trong chương \(surahName) của Kinh Qur'an."
+ main
     }
 
     private func showToast(message: String) {
@@ -614,3 +619,7 @@ struct ReaderDestination {
     let surahNumber: Int
     let ayah: Int
 }
+codex/create-json-file-for-surahs-data-yg7akm
+
+
+ main

@@ -1,0 +1,96 @@
+{
+  "source": "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderPage.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Đọc",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 56
+        }
+      },
+      {
+        "comment": "",
+        "key": "Các thao tác nhanh cho trải nghiệm đọc",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chuyển ngôn ngữ",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 87
+        }
+      },
+      {
+        "comment": "",
+        "key": "Xem trước",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 124
+        }
+      },
+      {
+        "comment": "",
+        "key": "Trình đọc toàn màn hình",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 130
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chế độ chìm đắm ẩn thanh điều hướng và tập trung vào từng câu kinh.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 133
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bố cục trình đọc tiêu chuẩn",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 136
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hiển thị tiêu đề, điều khiển và khung dịch bên cạnh.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 139
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chế độ hiển thị: %@",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 144
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ngôn ngữ: %@",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 148
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cỡ chữ: %lld pt",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 152
+        }
+      }
+    ]
+  },
+  "version": 1
+}

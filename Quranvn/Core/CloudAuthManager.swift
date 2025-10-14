@@ -67,19 +67,20 @@ final class CloudAuthManager: NSObject, ObservableObject {
             status = .authorizing
             cachedAppleUserID = credential.user
 
-            Task { [weak self] in
-                guard let self = self else { return }
-
+            Task {
+                let summary: UserSummary
                 do {
-                    let summary = try await self.completeSignIn(with: credential)
-                    await MainActor.run {
-                        self.status = .signedIn(summary)
-                    }
+                    summary = try await self.completeSignIn(with: credential)
                 } catch {
-                    await MainActor.run {
-                        self.clearCachedState()
-                        self.status = .error(error.localizedDescription)
+                    await MainActor.run { [weak self] in
+                        self?.clearCachedState()
+                        self?.status = .error(error.localizedDescription)
                     }
+                    return
+                }
+
+                await MainActor.run { [weak self] in
+                    self?.status = .signedIn(summary)
                 }
             }
 
@@ -99,12 +100,12 @@ final class CloudAuthManager: NSObject, ObservableObject {
             return
         }
 
-        ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID) { [weak self] state, error in
-            Task { @MainActor in
-                guard let self = self else { return }
-
+        ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID) { state, error in
+            Task {
                 if let error {
-                    self.status = .error(error.localizedDescription)
+                    await MainActor.run { [weak self] in
+                        self?.status = .error(error.localizedDescription)
+                    }
                     return
                 }
 
@@ -112,10 +113,14 @@ final class CloudAuthManager: NSObject, ObservableObject {
                 case .authorized:
                     break
                 case .revoked, .notFound, .transferred:
-                    self.clearCachedState()
-                    self.status = .signedOut
+                    await MainActor.run { [weak self] in
+                        self?.clearCachedState()
+                        self?.status = .signedOut
+                    }
                 @unknown default:
-                    self.status = .error("Trạng thái xác thực không xác định.")
+                    await MainActor.run { [weak self] in
+                        self?.status = .error("Trạng thái xác thực không xác định.")
+                    }
                 }
             }
         }
