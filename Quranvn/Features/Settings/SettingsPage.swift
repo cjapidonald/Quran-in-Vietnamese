@@ -9,6 +9,9 @@ struct SettingsPage: View {
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var reminderTime = Self.defaultReminderTime
+    @State private var isDeletingAccount = false
+    @State private var isShowingDeleteConfirmation = false
+    @State private var deleteErrorMessage: String?
 #if DEBUG
     @State private var isShowingDebugMenu = false
 #endif
@@ -38,6 +41,33 @@ struct SettingsPage: View {
         .task {
             cloudAuthManager.refreshCredentialState()
         }
+        .confirmationDialog(
+            "Bạn có chắc chắn muốn xóa tài khoản?",
+            isPresented: $isShowingDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Xóa tài khoản", role: .destructive) {
+                performAccountDeletion()
+            }
+            Button("Hủy", role: .cancel) {}
+        }
+        .alert(
+            "Không thể xóa tài khoản",
+            isPresented: Binding(
+                get: { deleteErrorMessage != nil },
+                set: { newValue in
+                    if !newValue {
+                        deleteErrorMessage = nil
+                    }
+                }
+            ),
+            actions: {
+                Button("Đóng", role: .cancel) {}
+            },
+            message: {
+                Text(deleteErrorMessage ?? "Đã xảy ra lỗi không xác định.")
+            }
+        )
 #if DEBUG
         .sheet(isPresented: $isShowingDebugMenu) {
             DebugMenu()
@@ -87,7 +117,7 @@ struct SettingsPage: View {
                     }
                     cloudAuthManager.handleAuthorization(result: result)
                 }
-                .disabled(!cloudAuthManager.isSignInAvailable)
+                .disabled(!cloudAuthManager.isSignInAvailable || isDeletingAccount)
                 .frame(maxWidth: .infinity, minHeight: 44)
                 .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
 
@@ -102,6 +132,26 @@ struct SettingsPage: View {
                         cloudAuthManager.signOut()
                     }
                     .buttonStyle(.borderedProminent)
+                    .frame(maxWidth: .infinity)
+                    .disabled(isDeletingAccount)
+
+                    Button(role: .destructive) {
+                        isShowingDeleteConfirmation = true
+                    } label: {
+                        if isDeletingAccount {
+                            HStack(spacing: DesignTokens.Spacing.sm) {
+                                ProgressView()
+                                Text("Đang xóa…")
+                                    .fontWeight(.semibold)
+                            }
+                            .frame(maxWidth: .infinity)
+                        } else {
+                            Text("Xóa tài khoản")
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                    .disabled(isDeletingAccount)
                 }
             }
         }
@@ -396,6 +446,21 @@ struct SettingsPage: View {
 
     private var accentColor: Color {
         ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: activeColorScheme)
+    }
+
+    private func performAccountDeletion() {
+        isDeletingAccount = true
+        deleteErrorMessage = nil
+
+        Task { @MainActor in
+            do {
+                try await cloudAuthManager.deleteAccount()
+            } catch {
+                deleteErrorMessage = cloudAuthManager.userFriendlyMessage(for: error)
+            }
+
+            isDeletingAccount = false
+        }
     }
 
     private var accountStatusColor: Color {
