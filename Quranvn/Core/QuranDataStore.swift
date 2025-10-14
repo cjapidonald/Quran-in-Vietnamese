@@ -1,8 +1,5 @@
 import Foundation
- codex/create-json-file-for-surahs-data-yg7akm
-
- Combine
- main
+import Combine
 
 struct QuranLibrary: Decodable {
     let metadata: QuranMetadata
