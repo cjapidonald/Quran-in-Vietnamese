@@ -164,7 +164,43 @@ final class CloudAuthManager: NSObject, ObservableObject {
         cachedUserRecordID = nil
     }
 
-    private func userFriendlyMessage(for error: Error) -> String {
+    private enum AccountActionError: LocalizedError {
+        case notSignedIn
+
+        var errorDescription: String? {
+            switch self {
+            case .notSignedIn:
+                return "Bạn cần đăng nhập để thực hiện thao tác này."
+            }
+        }
+    }
+
+    func deleteAccount() async throws {
+        guard case let .signedIn(summary) = status else {
+            throw AccountActionError.notSignedIn
+        }
+
+        status = .authorizing
+
+        do {
+            let container = CKContainer(identifier: containerIdentifier)
+            let database = container.privateCloudDatabase
+
+            do {
+                _ = try await database.deleteRecord(withID: summary.recordID)
+            } catch let error as CKError where error.code == .unknownItem {
+                // If the record is already gone, we can safely continue.
+            }
+
+            clearCachedState()
+            status = .signedOut
+        } catch {
+            status = .signedIn(summary)
+            throw error
+        }
+    }
+
+    func userFriendlyMessage(for error: Error) -> String {
         if let authorizationError = error as? ASAuthorizationError {
             switch authorizationError.code {
             case .unknown:
