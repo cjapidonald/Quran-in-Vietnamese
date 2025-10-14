@@ -72,9 +72,10 @@ final class CloudAuthManager: NSObject, ObservableObject {
                 do {
                     summary = try await self.completeSignIn(with: credential)
                 } catch {
+                    let message = self.userFriendlyMessage(for: error)
                     await MainActor.run { [weak self] in
                         self?.clearCachedState()
-                        self?.status = .error(error.localizedDescription)
+                        self?.status = .error(message)
                     }
                     return
                 }
@@ -89,7 +90,7 @@ final class CloudAuthManager: NSObject, ObservableObject {
                 status = .signedOut
             } else {
                 clearCachedState()
-                status = .error(error.localizedDescription)
+                status = .error(userFriendlyMessage(for: error))
             }
         }
     }
@@ -134,6 +135,47 @@ final class CloudAuthManager: NSObject, ObservableObject {
     private func clearCachedState() {
         cachedAppleUserID = nil
         cachedUserRecordID = nil
+    }
+
+    private func userFriendlyMessage(for error: Error) -> String {
+        if let authorizationError = error as? ASAuthorizationError {
+            switch authorizationError.code {
+            case .unknown:
+                return "Đăng nhập với Apple hiện không khả dụng trên thiết bị này. Vui lòng thử lại trên thiết bị khác đã đăng nhập iCloud."
+            case .invalidResponse, .notHandled, .failed:
+                return "Không thể hoàn tất đăng nhập với Apple. Vui lòng kiểm tra kết nối mạng và thử lại."
+            case .notInteractive:
+                return "Yêu cầu đăng nhập với Apple phải được kích hoạt từ giao diện đang hiển thị."
+            case .canceled:
+                return "Yêu cầu đăng nhập đã được hủy."
+            @unknown default:
+                break
+            }
+        }
+
+        if let cloudKitError = error as? CKError {
+            switch cloudKitError.code {
+            case .notAuthenticated:
+                return "Bạn cần đăng nhập iCloud để đồng bộ dữ liệu với Apple."
+            case .networkUnavailable, .networkFailure:
+                return "Kết nối mạng không ổn định nên không thể đăng nhập. Vui lòng thử lại."
+            default:
+                break
+            }
+        }
+
+        let nsError = error as NSError
+        if nsError.domain == "AKAuthenticationError" {
+            switch nsError.code {
+            case -7022:
+                return "Thiết bị cần bật mật mã và đăng nhập iCloud để sử dụng Đăng nhập với Apple."
+            default:
+                break
+            }
+        }
+
+        let description = error.localizedDescription
+        return description.isEmpty ? "Đã xảy ra lỗi không xác định khi đăng nhập với Apple." : description
     }
 
     private func completeSignIn(with credential: ASAuthorizationAppleIDCredential) async throws -> UserSummary {
