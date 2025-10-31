@@ -127,7 +127,7 @@ struct ReaderDashboardView: View {
         .overlay(fullScreenControls, alignment: .topTrailing)
         .contentShape(Rectangle())
         .simultaneousGesture(exitFullScreenGesture)
-        .simultaneousGesture(navigationGesture, including: .all)
+        .simultaneousGesture(navigationGesture)
         .navigationDestination(isPresented: $isShowingFullPlayer) {
             FullPlayerView()
         }

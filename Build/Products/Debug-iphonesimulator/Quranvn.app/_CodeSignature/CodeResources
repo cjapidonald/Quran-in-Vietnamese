@@ -4,6 +4,10 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>001.mp3</key>
+		<data>
+		xdr+O75Jq8cZ3cC4PXb92WkaaAE=
+		</data>
 		<key>AppIcon60x60@2x.png</key>
 		<data>
 		Ig7jSzVMVdOE3wi4zHAQb9VjeP0=
@@ -14,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		FGbmWfrrcEPw1t4VO97XlD7nlOE=
+		6bXTLKzrW4Fl0VGHR6n+vCUtZv4=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -26,7 +30,7 @@
 		</data>
 		<key>Quranvn.debug.dylib</key>
 		<data>
-		7ACBLr7P+ApjWNFifCEnapXYrAU=
+		/2xI9bYXaz7EVaO/mi6XMFSxXr0=
 		</data>
 		<key>__preview.dylib</key>
 		<data>
@@ -39,6 +43,13 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>001.mp3</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Nzh/lKYN2rCyn81QdFx3Xt2H2VNrDGupfJHhZqFknTc=
+			</data>
+		</dict>
 		<key>AppIcon60x60@2x.png</key>
 		<dict>
 			<key>hash2</key>
@@ -57,14 +68,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z6tWYzZ4jwDEo+3R5ioDtzlGn1DRKbLzc0ZKCqEBXi4=
+			PJERHMmsQTwkimvin9oYSLm3NbOHiu67s8CrdfKWdmk=
 			</data>
 		</dict>
 		<key>Quranvn.debug.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cbXXWPNxK0WQisTcAVA7BTGMMWPm4JSpFuXbFxHY2AE=
+			1vBzH86Pf09gRs3Gq0IQYMtYH5TUCyaRNGXWfoxw2+E=
 			</data>
 		</dict>
 		<key>__preview.dylib</key>

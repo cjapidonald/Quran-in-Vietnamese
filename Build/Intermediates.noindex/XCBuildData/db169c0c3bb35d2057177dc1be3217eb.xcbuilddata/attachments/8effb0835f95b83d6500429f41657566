@@ -1,0 +1,319 @@
+{
+  "" : {
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Quranvn-primary.dia",
+    "emit-module-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Quranvn-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Quranvn-primary-emit-module.dia",
+    "pch" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Quranvn-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Quranvn-primary.swiftdeps"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GeneratedAssetSymbols~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/App/QuranVNARApp.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranVNARApp.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranVNARApp.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranVNARApp.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranVNARApp.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranVNARApp.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranVNARApp.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranVNARApp.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranVNARApp~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/ContentView.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ContentView.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ContentView.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ContentView.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ContentView.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ContentView.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ContentView~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/AppState.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AppState.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AppState.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AppState.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AppState.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AppState.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AppState.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AppState.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AppState~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudAuthManager.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/CloudAuthManager.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/CloudAuthManager.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/CloudAuthManager.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/CloudAuthManager.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/CloudAuthManager.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/CloudAuthManager.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/CloudAuthManager.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/CloudAuthManager~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/DebugMenu.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DebugMenu.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DebugMenu.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DebugMenu.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DebugMenu.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DebugMenu.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DebugMenu.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DebugMenu.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DebugMenu~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/QuranDataStore.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranDataStore.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranDataStore.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranDataStore.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranDataStore.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranDataStore.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranDataStore.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranDataStore.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/QuranDataStore~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/ReadingProgressStore.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReadingProgressStore.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReadingProgressStore.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReadingProgressStore.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReadingProgressStore.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReadingProgressStore.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReadingProgressStore.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReadingProgressStore.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReadingProgressStore~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/Router.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Router.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Router.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Router.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Router.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Router.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Router.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Router.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Router~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Audio/FullPlayerView.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FullPlayerView.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FullPlayerView.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FullPlayerView.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FullPlayerView.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FullPlayerView.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FullPlayerView.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FullPlayerView.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FullPlayerView~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Audio/MiniPlayerBar.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/MiniPlayerBar.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/MiniPlayerBar.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/MiniPlayerBar.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/MiniPlayerBar.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/MiniPlayerBar.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/MiniPlayerBar.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/MiniPlayerBar.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/MiniPlayerBar~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Library/FavoritesPage.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FavoritesPage.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FavoritesPage.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FavoritesPage.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FavoritesPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FavoritesPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FavoritesPage.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FavoritesPage.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/FavoritesPage~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Library/LibraryPage.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/LibraryPage.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/LibraryPage.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/LibraryPage.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/LibraryPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/LibraryPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/LibraryPage.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/LibraryPage.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/LibraryPage~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Library/NotesPage.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/NotesPage.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/NotesPage.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/NotesPage.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/NotesPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/NotesPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/NotesPage.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/NotesPage.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/NotesPage~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Library/SurahsPage.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahsPage.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahsPage.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahsPage.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahsPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahsPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahsPage.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahsPage.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahsPage~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderDashboardView.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderDashboardView.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderDashboardView.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderDashboardView.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderDashboardView.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderDashboardView.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderDashboardView.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderDashboardView.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderDashboardView~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderPage.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderPage.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderPage.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderPage.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderPage.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderPage.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderPage~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderStore.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderStore.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderStore.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderStore.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderStore.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderStore.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderStore.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderStore.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderStore~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderToolbar.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderToolbar.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderToolbar.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderToolbar.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderToolbar.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderToolbar.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderToolbar.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderToolbar.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ReaderToolbar~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Reader/SurahDock.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahDock.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahDock.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahDock.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahDock.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahDock.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahDock.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahDock.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SurahDock~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Search/SearchPage.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SearchPage.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SearchPage.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SearchPage.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SearchPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SearchPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SearchPage.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SearchPage.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SearchPage~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Settings/AttributionPage.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AttributionPage.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AttributionPage.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AttributionPage.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AttributionPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AttributionPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AttributionPage.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AttributionPage.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/AttributionPage~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Settings/SettingsPage.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SettingsPage.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SettingsPage.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SettingsPage.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SettingsPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SettingsPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SettingsPage.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SettingsPage.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SettingsPage~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Item.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Item.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Item.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Item.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Item.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Item.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Item.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Item.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/Item~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/DesignTokens.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DesignTokens.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DesignTokens.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DesignTokens.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DesignTokens.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DesignTokens.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DesignTokens.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DesignTokens.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/DesignTokens~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/GlassCard.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GlassCard.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GlassCard.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GlassCard.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GlassCard.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GlassCard.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GlassCard.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GlassCard.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GlassCard~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/GradientSwatch.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GradientSwatch.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GradientSwatch.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GradientSwatch.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GradientSwatch.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GradientSwatch.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GradientSwatch.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GradientSwatch.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/GradientSwatch~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/PrimaryButton.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/PrimaryButton.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/PrimaryButton.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/PrimaryButton.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/PrimaryButton.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/PrimaryButton.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/PrimaryButton.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/PrimaryButton.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/PrimaryButton~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/SegmentPill.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SegmentPill.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SegmentPill.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SegmentPill.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SegmentPill.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SegmentPill.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SegmentPill.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SegmentPill.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/SegmentPill~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/StubButtonLabel.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/StubButtonLabel.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/StubButtonLabel.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/StubButtonLabel.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/StubButtonLabel.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/StubButtonLabel.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/StubButtonLabel.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/StubButtonLabel.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/StubButtonLabel~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/ThemeManager.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ThemeManager.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ThemeManager.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ThemeManager.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ThemeManager.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ThemeManager.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ThemeManager.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ThemeManager.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/x86_64/ThemeManager~partial.swiftmodule"
+  }
+}
