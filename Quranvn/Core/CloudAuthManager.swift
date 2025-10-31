@@ -107,6 +107,12 @@ final class CloudAuthManager: NSObject, ObservableObject {
         status = .error(Self.simulatorUnsupportedMessage)
         return
 #else
+        guard iCloudAccountStatus == .available else {
+            if let message = iCloudStatusMessage {
+                status = .error(message)
+            }
+            return
+        }
         request.requestedScopes = [.fullName, .email]
 #endif
     }
