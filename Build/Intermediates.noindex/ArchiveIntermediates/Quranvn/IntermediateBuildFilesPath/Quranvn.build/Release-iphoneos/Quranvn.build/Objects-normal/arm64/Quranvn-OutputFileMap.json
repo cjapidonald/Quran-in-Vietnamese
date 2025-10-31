@@ -1,0 +1,166 @@
+{
+  "" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Quranvn-primary.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Quranvn-primary.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Quranvn-primary.dia",
+    "emit-module-dependencies" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Quranvn-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Quranvn-primary-emit-module.dia",
+    "pch" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Quranvn-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Quranvn-primary.swiftdeps"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/App/QuranVNARApp.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/QuranVNARApp.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/QuranVNARApp.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/QuranVNARApp.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/ContentView.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ContentView.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Core/AppState.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/AppState.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/AppState.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/AppState.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Core/CloudAuthManager.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/CloudAuthManager.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/CloudAuthManager.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/CloudAuthManager.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Core/DebugMenu.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/DebugMenu.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/DebugMenu.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/DebugMenu.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Core/QuranDataStore.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/QuranDataStore.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/QuranDataStore.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/QuranDataStore.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Core/ReadingProgressStore.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReadingProgressStore.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReadingProgressStore.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReadingProgressStore.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Core/Router.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Router.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Router.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Router.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Audio/FullPlayerView.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/FullPlayerView.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/FullPlayerView.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/FullPlayerView.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Audio/MiniPlayerBar.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/MiniPlayerBar.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/MiniPlayerBar.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/MiniPlayerBar.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Library/FavoritesPage.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/FavoritesPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/FavoritesPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/FavoritesPage.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Library/LibraryPage.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/LibraryPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/LibraryPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/LibraryPage.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Library/NotesPage.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/NotesPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/NotesPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/NotesPage.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Library/SurahsPage.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SurahsPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SurahsPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SurahsPage.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderDashboardView.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderDashboardView.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderDashboardView.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderDashboardView.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderPage.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderPage.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderStore.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderStore.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderStore.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderStore.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderToolbar.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderToolbar.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderToolbar.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ReaderToolbar.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Reader/SurahDock.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SurahDock.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SurahDock.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SurahDock.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Search/SearchPage.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SearchPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SearchPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SearchPage.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Settings/AttributionPage.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/AttributionPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/AttributionPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/AttributionPage.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Settings/SettingsPage.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SettingsPage.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SettingsPage.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SettingsPage.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Item.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Item.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Item.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/Item.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/UI/DesignTokens.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/DesignTokens.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/DesignTokens.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/DesignTokens.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/UI/GlassCard.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GlassCard.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GlassCard.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GlassCard.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/UI/GradientSwatch.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GradientSwatch.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GradientSwatch.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/GradientSwatch.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/UI/PrimaryButton.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/PrimaryButton.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/PrimaryButton.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/PrimaryButton.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/UI/SegmentPill.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SegmentPill.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SegmentPill.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/SegmentPill.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/UI/StubButtonLabel.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/StubButtonLabel.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/StubButtonLabel.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/StubButtonLabel.o"
+  },
+  "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/UI/ThemeManager.swift" : {
+    "index-unit-output-path" : "/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ThemeManager.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ThemeManager.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Build/Intermediates.noindex/ArchiveIntermediates/Quranvn/IntermediateBuildFilesPath/Quranvn.build/Release-iphoneos/Quranvn.build/Objects-normal/arm64/ThemeManager.o"
+  }
+}

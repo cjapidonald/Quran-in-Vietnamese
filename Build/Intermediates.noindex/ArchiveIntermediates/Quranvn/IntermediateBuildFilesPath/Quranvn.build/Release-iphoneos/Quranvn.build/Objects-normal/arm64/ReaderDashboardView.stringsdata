@@ -1,0 +1,80 @@
+{
+  "source": "/Users/donaldcjapi/Desktop/Quranvn/Quran-in-Vietnamese/Quranvn/Features/Reader/ReaderDashboardView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Ghi chú %lld: %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 189
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sao chép câu kinh",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 233
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hỏi ChatGPT",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 240
+        }
+      },
+      {
+        "comment": "",
+        "key": "Thêm ghi chú",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 246
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ghi chú",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 351
+        }
+      },
+      {
+        "comment": "",
+        "key": "Thêm ghi chú",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 339
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hủy",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 354
+        }
+      },
+      {
+        "comment": "",
+        "key": "Lưu",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 359
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chế độ hiển thị: %@",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 401
+        }
+      }
+    ]
+  },
+  "version": 1
+}

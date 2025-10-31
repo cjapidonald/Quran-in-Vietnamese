@@ -20,6 +20,7 @@ final class CloudAuthManager: NSObject, ObservableObject {
     }
 
     @Published private(set) var status: SignInStatus = .signedOut
+    @Published private(set) var iCloudAccountStatus: CKAccountStatus = .couldNotDetermine
 
     private static let simulatorUnsupportedMessage = "Trình mô phỏng iOS không hỗ trợ Đăng nhập với Apple. Vui lòng thử trên thiết bị thật đã đăng nhập iCloud."
 
@@ -34,13 +35,16 @@ final class CloudAuthManager: NSObject, ObservableObject {
 #if targetEnvironment(simulator)
         return false
 #else
-        return true
+        return iCloudAccountStatus == .available
 #endif
     }
 
     var statusDescription: String {
         switch status {
         case .signedOut:
+            if iCloudAccountStatus != .available {
+                return "iCloud không khả dụng"
+            }
             return "Chưa đăng nhập"
         case .authorizing:
             return "Đang xác thực…"
@@ -48,6 +52,23 @@ final class CloudAuthManager: NSObject, ObservableObject {
             return "Đã đăng nhập"
         case let .error(message):
             return "Lỗi: \(message)"
+        }
+    }
+
+    var iCloudStatusMessage: String? {
+        switch iCloudAccountStatus {
+        case .couldNotDetermine:
+            return "Không thể xác định trạng thái iCloud. Vui lòng thử lại."
+        case .restricted:
+            return "iCloud bị hạn chế trên thiết bị này do Hạn chế hoặc Kiểm soát trẻ em."
+        case .noAccount:
+            return "Không có tài khoản iCloud. Vui lòng đăng nhập iCloud trong Cài đặt để sử dụng tính năng này."
+        case .temporarilyUnavailable:
+            return "iCloud tạm thời không khả dụng. Vui lòng thử lại sau."
+        case .available:
+            return nil
+        @unknown default:
+            return "Trạng thái iCloud không xác định."
         }
     }
 
@@ -66,7 +87,19 @@ final class CloudAuthManager: NSObject, ObservableObject {
         super.init()
 #if targetEnvironment(simulator)
         status = .error(Self.simulatorUnsupportedMessage)
+#else
+        Task {
+            await checkiCloudAccountStatus()
+        }
 #endif
+    }
+
+    func checkiCloudAccountStatus() async {
+        let container = CKContainer(identifier: containerIdentifier)
+        let status = try? await container.accountStatus()
+        await MainActor.run { [weak self] in
+            self?.iCloudAccountStatus = status ?? .couldNotDetermine
+        }
     }
 
     func prepareAuthorizationRequest(_ request: ASAuthorizationAppleIDRequest) {
