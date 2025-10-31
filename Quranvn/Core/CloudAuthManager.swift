@@ -122,6 +122,13 @@ final class CloudAuthManager: NSObject, ObservableObject {
         status = .error(Self.simulatorUnsupportedMessage)
         return
 #else
+        guard iCloudAccountStatus == .available else {
+            if let message = iCloudStatusMessage {
+                status = .error(message)
+            }
+            return
+        }
+
         switch result {
         case let .success(authorization):
             guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
@@ -265,6 +272,10 @@ final class CloudAuthManager: NSObject, ObservableObject {
                 return "Bạn cần đăng nhập iCloud để đồng bộ dữ liệu với Apple."
             case .networkUnavailable, .networkFailure:
                 return "Kết nối mạng không ổn định nên không thể đăng nhập. Vui lòng thử lại."
+            case .accountTemporarilyUnavailable:
+                return "Tài khoản iCloud tạm thời không khả dụng. Vui lòng thử lại sau."
+            case .permissionFailure:
+                return "Không có quyền truy cập iCloud. Vui lòng kiểm tra cài đặt quyền trong Cài đặt."
             default:
                 break
             }

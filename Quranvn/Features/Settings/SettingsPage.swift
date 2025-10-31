@@ -39,6 +39,7 @@ struct SettingsPage: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .task {
+            await cloudAuthManager.checkiCloudAccountStatus()
             cloudAuthManager.refreshCredentialState()
         }
         .confirmationDialog(
@@ -106,25 +107,36 @@ struct SettingsPage: View {
                     Spacer()
                 }
 
-                SignInWithAppleButton(.signIn) { request in
-                    guard cloudAuthManager.isSignInAvailable else {
-                        return
+                if let iCloudMessage = cloudAuthManager.iCloudStatusMessage {
+                    HStack(spacing: DesignTokens.Spacing.sm) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundStyle(.orange)
+                        Text(iCloudMessage)
+                            .font(.footnote)
+                            .foregroundStyle(secondaryText)
                     }
-                    cloudAuthManager.prepareAuthorizationRequest(request)
-                } onCompletion: { result in
-                    guard cloudAuthManager.isSignInAvailable else {
-                        return
-                    }
-                    cloudAuthManager.handleAuthorization(result: result)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.medium)
+                            .fill(Color.orange.opacity(0.15))
+                    )
                 }
-                .disabled(!cloudAuthManager.isSignInAvailable || isDeletingAccount)
-                .frame(maxWidth: .infinity, minHeight: 44)
-                .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
 
-                if !cloudAuthManager.isSignInAvailable {
-                    Text("Chạy ứng dụng trên thiết bị thật đã đăng nhập iCloud để sử dụng Đăng nhập với Apple.")
-                        .font(.footnote)
-                        .foregroundStyle(secondaryText)
+                if !cloudAuthManager.isSignedIn {
+                    SignInWithAppleButton(.signIn) { request in
+                        guard cloudAuthManager.isSignInAvailable else {
+                            return
+                        }
+                        cloudAuthManager.prepareAuthorizationRequest(request)
+                    } onCompletion: { result in
+                        guard cloudAuthManager.isSignInAvailable else {
+                            return
+                        }
+                        cloudAuthManager.handleAuthorization(result: result)
+                    }
+                    .disabled(!cloudAuthManager.isSignInAvailable || isDeletingAccount)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
                 }
 
                 if cloudAuthManager.isSignedIn {

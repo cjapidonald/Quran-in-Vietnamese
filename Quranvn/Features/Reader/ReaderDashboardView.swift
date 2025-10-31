@@ -29,6 +29,8 @@ struct ReaderDashboardView: View {
     @State private var hasActivatedHighlight = false
     @State private var lastHandledLanguageEnforcementID: UUID?
     @State private var pendingInitialAyah: Int?
+    @State private var progressUpdateTask: Task<Void, Never>?
+    @State private var lastRecordedAyah: Int?
     init(initialSurah: Surah? = nil, initialAyah: Int? = nil, highlightAyah: Int? = nil) {
         let resolvedSurahID = initialSurah?.number ?? 1
         _selectedSurahID = State(initialValue: resolvedSurahID)
@@ -125,7 +127,7 @@ struct ReaderDashboardView: View {
         .overlay(fullScreenControls, alignment: .topTrailing)
         .contentShape(Rectangle())
         .simultaneousGesture(exitFullScreenGesture)
-        .highPriorityGesture(navigationGesture, including: .all)
+        .gesture(navigationGesture)
         .navigationDestination(isPresented: $isShowingFullPlayer) {
             FullPlayerView()
         }
@@ -200,7 +202,6 @@ struct ReaderDashboardView: View {
             if isHighlighted {
                 Rectangle()
                     .fill(highlightColor.opacity(colorScheme == .dark ? 0.28 : 0.18))
-                    .transition(.opacity.combined(with: .scale))
             }
         }
         .overlay(alignment: .leading) {
@@ -209,7 +210,6 @@ struct ReaderDashboardView: View {
                     .fill(highlightColor)
                     .frame(width: 4)
                     .cornerRadius(2)
-                    .transition(.move(edge: .leading).combined(with: .opacity))
             }
         }
         .overlay(alignment: .bottomLeading) {
@@ -218,8 +218,6 @@ struct ReaderDashboardView: View {
                 .opacity(0.4)
         }
         .contentShape(Rectangle())
-        .scaleEffect(isHighlighted ? 1.01 : 1)
-        .animation(.spring(response: 0.55, dampingFraction: 0.75), value: isHighlighted)
         .onTapGesture(count: 2) {
             toggleFavorite(for: ayah.id)
         }
@@ -249,8 +247,24 @@ struct ReaderDashboardView: View {
     }
 
     private func recordProgress(for ayah: Ayah) {
-        let totalAyahs = max(ayahs.count, selectedSurah.ayahCount)
-        readingProgressStore.markAyah(ayah.number, asReadIn: selectedSurah, totalAyahs: totalAyahs)
+        // Cancel previous pending update
+        progressUpdateTask?.cancel()
+
+        // Only update if this is a new ayah
+        guard lastRecordedAyah != ayah.number else { return }
+
+        // Debounce: wait 0.5s before actually recording to avoid writing during scroll
+        progressUpdateTask = Task {
+            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+
+            guard !Task.isCancelled else { return }
+
+            await MainActor.run {
+                lastRecordedAyah = ayah.number
+                let totalAyahs = max(ayahs.count, selectedSurah.ayahCount)
+                readingProgressStore.markAyah(ayah.number, asReadIn: selectedSurah, totalAyahs: totalAyahs)
+            }
+        }
     }
 
     private func formattedAyahText(_ text: String, number: Int, includeNumber: Bool) -> String {
@@ -595,7 +609,7 @@ struct ReaderDashboardView: View {
     }
 
     private var navigationGesture: some Gesture {
-        DragGesture(minimumDistance: 20, coordinateSpace: .local)
+        DragGesture(minimumDistance: 80, coordinateSpace: .local)
             .onEnded(handleNavigationSwipe)
     }
 

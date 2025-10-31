@@ -10,7 +10,7 @@ struct SurahDock: View {
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: DesignTokens.Spacing.sm) {
+            LazyHStack(spacing: DesignTokens.Spacing.sm) {
                 ForEach(surahs) { surah in
                     SegmentPill(
                         title: surah.transliteration,
