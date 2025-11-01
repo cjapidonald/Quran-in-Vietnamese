@@ -7,7 +7,7 @@
         "key": "Ghi chú %lld: %@",
         "location": {
           "startingColumn": 30,
-          "startingLine": 191
+          "startingLine": 210
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Sao chép câu kinh",
         "location": {
           "startingColumn": 23,
-          "startingLine": 231
+          "startingLine": 250
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Hỏi ChatGPT",
         "location": {
           "startingColumn": 23,
-          "startingLine": 238
+          "startingLine": 257
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Thêm ghi chú",
         "location": {
           "startingColumn": 23,
-          "startingLine": 244
+          "startingLine": 263
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Ghi chú",
         "location": {
           "startingColumn": 30,
-          "startingLine": 365
+          "startingLine": 380
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "Thêm ghi chú",
         "location": {
           "startingColumn": 22,
-          "startingLine": 353
+          "startingLine": 368
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Hủy",
         "location": {
           "startingColumn": 28,
-          "startingLine": 368
+          "startingLine": 383
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "Lưu",
         "location": {
           "startingColumn": 28,
-          "startingLine": 373
+          "startingLine": 388
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "Chế độ hiển thị: %@",
         "location": {
           "startingColumn": 22,
-          "startingLine": 415
+          "startingLine": 428
         }
       }
     ]

@@ -2,6 +2,7 @@
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/AppState.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudAuthManager.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/DebugMenu.swift
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/FavoritesStore.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/QuranDataStore.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/ReadingProgressStore.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/Router.swift
