@@ -8,14 +8,13 @@ struct ReaderDashboardView: View {
     @EnvironmentObject private var readerStore: ReaderStore
     @EnvironmentObject private var readingProgressStore: ReadingProgressStore
     @EnvironmentObject private var quranStore: QuranDataStore
+    @EnvironmentObject private var favoritesStore: FavoritesStore
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
 
     @State private var selectedSurahID: Int
     @State private var ayahs: [Ayah] = []
     @State private var scrollTarget: String?
-    @State private var favoriteAyahs: Set<String> = []
-    @State private var ayahNotes: [String: [String]] = [:]
     @State private var toastMessage: String?
     @State private var showToast = false
     @State private var safariURL: URL?
@@ -45,8 +44,24 @@ struct ReaderDashboardView: View {
             return match
         }
 
+        // Fallback to first surah if selected one not found
+        // If no surahs available, return to library view
         guard let fallback = quranStore.surahs.first else {
-            fatalError("Không tìm thấy dữ liệu chương Kinh Qur'an")
+            print("⚠️ ReaderDashboardView - No surahs available, dismissing")
+            DispatchQueue.main.async {
+                dismiss()
+            }
+            // Return a placeholder to avoid crashes
+            return Surah(
+                number: 1,
+                arabicName: "",
+                transliteration: "Al-Fatiha",
+                revelationPlace: nil,
+                revelationOrder: nil,
+                page: nil,
+                vietnameseName: "Khai Mạc",
+                ayahs: []
+            )
         }
 
         return fallback
@@ -148,6 +163,10 @@ struct ReaderDashboardView: View {
             pendingInitialAyah = 1
             refreshAyahs(forceReset: true)
         }
+        .onDisappear {
+            // Cancel any pending progress update tasks to prevent memory leaks
+            progressUpdateTask?.cancel()
+        }
     }
 
     private var background: some View {
@@ -180,14 +199,14 @@ struct ReaderDashboardView: View {
                 }
             }
             .overlay(alignment: .topTrailing) {
-                favoriteBadge(isActive: favoriteAyahs.contains(ayah.id))
+                favoriteBadge(isActive: favoritesStore.isFavorite(ayah.id))
             }
 
-            if let notes = ayahNotes[ayah.id], !notes.isEmpty {
+            if !favoritesStore.getNotes(for: ayah.id).isEmpty {
                 Divider()
                     .blendMode(.overlay)
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                    ForEach(Array(notes.enumerated()), id: \.offset) { entry in
+                    ForEach(Array(favoritesStore.getNotes(for: ayah.id).enumerated()), id: \.offset) { entry in
                         Text("Ghi chú \(entry.offset + 1): \(entry.element)")
                             .font(.footnote)
                             .foregroundStyle(secondaryText.opacity(0.85))
@@ -285,11 +304,7 @@ struct ReaderDashboardView: View {
 
     private func toggleFavorite(for id: String) {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
-            if favoriteAyahs.contains(id) {
-                favoriteAyahs.remove(id)
-            } else {
-                favoriteAyahs.insert(id)
-            }
+            favoritesStore.toggleFavorite(id)
         }
     }
 
@@ -384,9 +399,7 @@ struct ReaderDashboardView: View {
         guard let id = noteAyahID else { return }
         let trimmed = noteDraft.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
-        var notes = ayahNotes[id] ?? []
-        notes.append(trimmed)
-        ayahNotes[id] = notes
+        favoritesStore.addNote(trimmed, to: id)
     }
 
     private var toastView: some View {
@@ -476,8 +489,6 @@ struct ReaderDashboardView: View {
         guard forceReset || currentIDs != updatedIDs else { return }
 
         ayahs = updated
-        favoriteAyahs.removeAll()
-        ayahNotes.removeAll()
 
         if let target = pendingInitialAyah,
            let targetID = ReaderDashboardView.scrollIdentifier(for: target, in: updated) {

@@ -1,6 +1,23 @@
 import Foundation
 import Combine
 
+enum QuranDataError: LocalizedError {
+    case fileNotFound
+    case invalidData
+    case decodingFailed(Error)
+
+    var errorDescription: String? {
+        switch self {
+        case .fileNotFound:
+            return "Không tìm thấy dữ liệu Kinh Qur'an. Vui lòng cài đặt lại ứng dụng."
+        case .invalidData:
+            return "Dữ liệu Kinh Qur'an không hợp lệ. Vui lòng cài đặt lại ứng dụng."
+        case .decodingFailed(let error):
+            return "Không thể đọc dữ liệu Kinh Qur'an: \(error.localizedDescription)"
+        }
+    }
+}
+
 struct QuranLibrary: Decodable {
     let metadata: QuranMetadata
     let surahs: [Surah]
@@ -26,6 +43,15 @@ struct QuranMetadata: Decodable {
     struct StructureSource: Decodable {
         let name: String
         let url: String
+    }
+
+    static var empty: QuranMetadata {
+        QuranMetadata(
+            generatedAt: "",
+            arabicSource: nil,
+            vietnameseSource: nil,
+            structureSource: StructureSource(name: "", url: "")
+        )
     }
 }
 
@@ -54,23 +80,73 @@ struct Ayah: Identifiable, Hashable, Decodable {
 
 @MainActor
 final class QuranDataStore: ObservableObject {
-    @Published private(set) var metadata: QuranMetadata
-    @Published private(set) var surahs: [Surah]
+    @Published private(set) var metadata: QuranMetadata = .empty
+    @Published private(set) var surahs: [Surah] = []
+    @Published private(set) var isLoading = true
+    @Published var loadError: QuranDataError?
+
+    var hasData: Bool {
+        !surahs.isEmpty
+    }
 
     init(bundle: Bundle = .main) {
+        Task {
+            await loadQuranData(from: bundle)
+        }
+    }
+
+    private func loadQuranData(from bundle: Bundle) async {
+        print("📖 QuranDataStore - Starting to load quran.json...")
+
         guard let url = bundle.url(forResource: "quran", withExtension: "json") else {
-            fatalError("Unable to locate quran.json in bundle")
+            print("❌ QuranDataStore - quran.json not found in bundle")
+            await MainActor.run {
+                self.loadError = .fileNotFound
+                self.isLoading = false
+            }
+            return
         }
 
         do {
-            let data = try Data(contentsOf: url)
+            // Load data on background thread to avoid blocking UI
+            let data = try await Task.detached(priority: .userInitiated) {
+                try Data(contentsOf: url)
+            }.value
+
+            print("📖 QuranDataStore - Loaded \(data.count) bytes, decoding...")
+
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let library = try decoder.decode(QuranLibrary.self, from: data)
-            metadata = library.metadata
-            surahs = library.surahs
+
+            print("✅ QuranDataStore - Successfully loaded \(library.surahs.count) surahs")
+
+            await MainActor.run {
+                self.metadata = library.metadata
+                self.surahs = library.surahs
+                self.isLoading = false
+                self.loadError = nil
+            }
+        } catch let error as DecodingError {
+            print("❌ QuranDataStore - Decoding error: \(error)")
+            await MainActor.run {
+                self.loadError = .decodingFailed(error)
+                self.isLoading = false
+            }
         } catch {
-            fatalError("Failed to load Quran data: \(error)")
+            print("❌ QuranDataStore - Loading error: \(error)")
+            await MainActor.run {
+                self.loadError = .invalidData
+                self.isLoading = false
+            }
+        }
+    }
+
+    func retry() {
+        isLoading = true
+        loadError = nil
+        Task {
+            await loadQuranData(from: .main)
         }
     }
 

@@ -5,6 +5,7 @@ struct QuranVNARApp: App {
     @StateObject private var appState = AppState()
     @StateObject private var readingProgressStore = ReadingProgressStore()
     @StateObject private var quranStore = QuranDataStore()
+    @StateObject private var favoritesStore = FavoritesStore()
 
     var body: some Scene {
         WindowGroup {
@@ -12,6 +13,7 @@ struct QuranVNARApp: App {
                 .environmentObject(appState)
                 .environmentObject(readingProgressStore)
                 .environmentObject(quranStore)
+                .environmentObject(favoritesStore)
         }
     }
 }
@@ -24,6 +26,65 @@ private struct RootTabView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
+        Group {
+            if quranStore.isLoading {
+                loadingView
+            } else if let error = quranStore.loadError {
+                errorView(error: error)
+            } else {
+                mainTabView
+            }
+        }
+        .preferredColorScheme(appState.themeStyle.preferredColorScheme)
+    }
+
+    private var loadingView: some View {
+        VStack(spacing: 20) {
+            ProgressView()
+                .scaleEffect(1.5)
+                .tint(ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: effectiveColorScheme))
+
+            Text("Đang tải Kinh Qur'an...")
+                .font(.headline)
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(ThemeManager.backgroundGradient(style: appState.selectedThemeGradient, for: effectiveColorScheme))
+    }
+
+    private func errorView(error: QuranDataError) -> some View {
+        VStack(spacing: 20) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 60))
+                .foregroundColor(.orange)
+
+            Text("Lỗi tải dữ liệu")
+                .font(.title2)
+                .fontWeight(.bold)
+
+            Text(error.localizedDescription)
+                .font(.body)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+
+            Button {
+                quranStore.retry()
+            } label: {
+                Label("Thử lại", systemImage: "arrow.clockwise")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 12)
+                    .background(ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: effectiveColorScheme))
+                    .cornerRadius(10)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(ThemeManager.backgroundGradient(style: appState.selectedThemeGradient, for: effectiveColorScheme))
+    }
+
+    private var mainTabView: some View {
         TabView(selection: $appState.selectedTab) {
             LibraryPage()
                 .environmentObject(readerStore)
@@ -42,7 +103,6 @@ private struct RootTabView: View {
         }
         .tint(ThemeManager.accentColor(for: appState.selectedThemeGradient, colorScheme: effectiveColorScheme))
         .background(ThemeManager.backgroundGradient(style: appState.selectedThemeGradient, for: effectiveColorScheme))
-        .preferredColorScheme(appState.themeStyle.preferredColorScheme)
         .onOpenURL { url in
             Router.handle(url: url, appState: appState, quranStore: quranStore)
         }
