@@ -262,7 +262,8 @@ final class CloudAuthManager: NSObject, ObservableObject {
             case .canceled:
                 return "Yêu cầu đăng nhập đã được hủy."
             @unknown default:
-                break
+                let description = error.localizedDescription
+                return description.isEmpty ? "Đã xảy ra lỗi không xác định khi đăng nhập với Apple." : description
             }
         }
 
@@ -277,7 +278,8 @@ final class CloudAuthManager: NSObject, ObservableObject {
             case .permissionFailure:
                 return "Không có quyền truy cập iCloud. Vui lòng kiểm tra cài đặt quyền trong Cài đặt."
             default:
-                break
+                let description = error.localizedDescription
+                return description.isEmpty ? "Đã xảy ra lỗi không xác định khi đăng nhập với Apple." : description
             }
         }
 
@@ -287,7 +289,8 @@ final class CloudAuthManager: NSObject, ObservableObject {
             case -7022:
                 return "Thiết bị cần bật mật mã và đăng nhập iCloud để sử dụng Đăng nhập với Apple."
             default:
-                break
+                let description = error.localizedDescription
+                return description.isEmpty ? "Đã xảy ra lỗi không xác định khi đăng nhập với Apple." : description
             }
         }
 
