@@ -4,10 +4,34 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "Chương %lld • %@",
+        "key": "%lld",
         "location": {
-          "startingColumn": 26,
-          "startingLine": 36
+          "startingColumn": 30,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld câu",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 47
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 51
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 125
         }
       }
     ]

@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		1xBWTUpkV6VD4J1VbV2wUgkf34U=
+		FGbmWfrrcEPw1t4VO97XlD7nlOE=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -30,13 +30,17 @@
 		</data>
 		<key>Quranvn.debug.dylib</key>
 		<data>
-		Suk6vIoj6vJ3t1lnivrX+UAZ+/Y=
+		3H6cJjZGzuxiVj77LkW1rJ3BxJM=
 		</data>
 		<key>__preview.dylib</key>
 		<data>
-		tcLEpySlXyCDv5H3cPTjFKSnt3s=
+		f3pptX0EJ01cJO+furRfcJavVjA=
 		</data>
 		<key>quran.json</key>
+		<data>
+		AN6R1pOs00zdQap2kcaH/SLXtMA=
+		</data>
+		<key>quran_hassan_backup.json</key>
 		<data>
 		Jm0CkPf+/MlB8tjsgsqRn+c2DRk=
 		</data>
@@ -68,24 +72,31 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1KFz1uIF7wGCgHzXYojS8ocyTzOKvMEcZ0adsM8D4Iw=
+			Z6tWYzZ4jwDEo+3R5ioDtzlGn1DRKbLzc0ZKCqEBXi4=
 			</data>
 		</dict>
 		<key>Quranvn.debug.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			se4DIrC5q2QiGwzjoaRuChJlcr07du4d6KRCPWPCfO8=
+			0iBTthwOIfc4T8MNIAxveU4V/CGfo2W9wIKmghkyfQE=
 			</data>
 		</dict>
 		<key>__preview.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			gG46gTD0B/9M52Fy7KTrA90brxr9lmnay/KvpNp5he8=
+			WNgHFQbyP4OWIqIlcQaZVzbt+nHNz9/7jKg5P+VxM84=
 			</data>
 		</dict>
 		<key>quran.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ECD8IlHpFx07lzTvo/ekduCw8EIz+ZZd2oi66txnYOM=
+			</data>
+		</dict>
+		<key>quran_hassan_backup.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
