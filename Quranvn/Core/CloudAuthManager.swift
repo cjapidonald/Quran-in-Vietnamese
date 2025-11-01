@@ -96,9 +96,17 @@ final class CloudAuthManager: NSObject, ObservableObject {
 
     func checkiCloudAccountStatus() async {
         let container = CKContainer(identifier: containerIdentifier)
-        let status = try? await container.accountStatus()
-        await MainActor.run { [weak self] in
-            self?.iCloudAccountStatus = status ?? .couldNotDetermine
+        do {
+            let status = try await container.accountStatus()
+            print("✅ iCloud Status Check - Status: \(status.rawValue)")
+            await MainActor.run { [weak self] in
+                self?.iCloudAccountStatus = status
+            }
+        } catch {
+            print("❌ iCloud Status Check Failed: \(error)")
+            await MainActor.run { [weak self] in
+                self?.iCloudAccountStatus = .couldNotDetermine
+            }
         }
     }
 
@@ -277,6 +285,16 @@ final class CloudAuthManager: NSObject, ObservableObject {
                 return "Tài khoản iCloud tạm thời không khả dụng. Vui lòng thử lại sau."
             case .permissionFailure:
                 return "Không có quyền truy cập iCloud. Vui lòng kiểm tra cài đặt quyền trong Cài đặt."
+            case .serverRejectedRequest, .invalidArguments:
+                return "Lỗi cấu hình máy chủ. Vui lòng cập nhật phiên bản mới nhất của ứng dụng."
+            case .internalError, .serverResponseLost:
+                return "Lỗi máy chủ iCloud. Vui lòng thử lại sau."
+            case .serviceUnavailable:
+                return "Dịch vụ iCloud tạm thời không khả dụng. Vui lòng thử lại sau."
+            case .quotaExceeded:
+                return "Dung lượng iCloud đã đầy. Vui lòng giải phóng dung lượng."
+            case .unknownItem:
+                return "Không tìm thấy dữ liệu. Vui lòng thử đăng nhập lại."
             default:
                 let description = error.localizedDescription
                 return description.isEmpty ? "Đã xảy ra lỗi không xác định khi đăng nhập với Apple." : description
@@ -300,14 +318,46 @@ final class CloudAuthManager: NSObject, ObservableObject {
 
     private func completeSignIn(with credential: ASAuthorizationAppleIDCredential) async throws -> UserSummary {
         let container = CKContainer(identifier: containerIdentifier)
-        let userRecordID = try await container.userRecordID()
-        cachedUserRecordID = userRecordID
+
+        // Get user record ID
+        let userRecordID: CKRecord.ID
+        do {
+            userRecordID = try await container.userRecordID()
+            cachedUserRecordID = userRecordID
+        } catch {
+            print("❌ CloudKit Error - Failed to get userRecordID: \(error)")
+            throw error
+        }
 
         let database = container.privateCloudDatabase
-        let profileRecord = try await fetchOrCreateProfileRecord(for: userRecordID, in: database)
+
+        // Fetch or create profile record
+        let profileRecord: CKRecord
+        do {
+            profileRecord = try await fetchOrCreateProfileRecord(for: userRecordID, in: database)
+        } catch {
+            print("❌ CloudKit Error - Failed to fetch/create profile: \(error)")
+            throw error
+        }
+
         updateProfileRecord(profileRecord, with: credential, userRecordID: userRecordID)
 
-        _ = try await database.modifyRecords(saving: [profileRecord], deleting: [])
+        // Save profile record
+        do {
+            _ = try await database.modifyRecords(saving: [profileRecord], deleting: [])
+            print("✅ CloudKit - Profile saved successfully")
+        } catch let error as CKError {
+            print("❌ CloudKit Error - Failed to save profile:")
+            print("   Error code: \(error.code.rawValue)")
+            print("   Error: \(error.localizedDescription)")
+            if let underlying = error.userInfo[NSUnderlyingErrorKey] {
+                print("   Underlying: \(underlying)")
+            }
+            throw error
+        } catch {
+            print("❌ Unknown error saving profile: \(error)")
+            throw error
+        }
 
         let summary = UserSummary(
             appleUserID: credential.user,
