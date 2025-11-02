@@ -23,7 +23,12 @@ private struct RootTabView: View {
     @StateObject private var cloudAuthManager = CloudAuthManager()
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var quranStore: QuranDataStore
+    @EnvironmentObject private var favoritesStore: FavoritesStore
+    @EnvironmentObject private var readingProgressStore: ReadingProgressStore
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.scenePhase) private var scenePhase
+
+    @State private var cloudKitCoordinator: CloudKitCoordinator?
 
     var body: some View {
         Group {
@@ -108,6 +113,52 @@ private struct RootTabView: View {
         }
         .alert(item: $appState.routingAlert) { alert in
             Alert(title: Text(alert.message))
+        }
+        .onAppear {
+            initializeCloudKitIfNeeded()
+        }
+        .onChange(of: cloudAuthManager.isSignedIn) { _, isSignedIn in
+            handleSignInStatusChange(isSignedIn)
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            handleScenePhaseChange(newPhase)
+        }
+    }
+
+    private func initializeCloudKitIfNeeded() {
+        guard cloudKitCoordinator == nil else { return }
+
+        cloudKitCoordinator = CloudKitCoordinator(
+            favoritesStore: favoritesStore,
+            progressStore: readingProgressStore,
+            quranStore: quranStore,
+            cloudAuthManager: cloudAuthManager
+        )
+
+        print("✅ CloudKitCoordinator initialized")
+
+        // Initial sync if user is already signed in
+        if cloudAuthManager.isSignedIn {
+            cloudKitCoordinator?.syncAll()
+        }
+    }
+
+    private func handleSignInStatusChange(_ isSignedIn: Bool) {
+        if isSignedIn {
+            cloudKitCoordinator?.handleSignIn()
+        } else {
+            cloudKitCoordinator?.handleSignOut()
+        }
+    }
+
+    private func handleScenePhaseChange(_ phase: ScenePhase) {
+        switch phase {
+        case .active:
+            cloudKitCoordinator?.handleAppDidBecomeActive()
+        case .inactive, .background:
+            cloudKitCoordinator?.handleAppWillResignActive()
+        @unknown default:
+            break
         }
     }
 
