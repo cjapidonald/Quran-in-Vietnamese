@@ -56,6 +56,46 @@
     "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudAuthManager.swiftdeps",
     "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudAuthManager~partial.swiftmodule"
   },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudKitCoordinator.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudKitFavoritesSync.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudKitProgressSync.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync~partial.swiftmodule"
+  },
+  "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudKitSyncManager.swift" : {
+    "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager.swiftconstvalues",
+    "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager.d",
+    "diagnostics" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager.dia",
+    "index-unit-output-path" : "/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager.o",
+    "llvm-bc" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager.bc",
+    "object" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager.o",
+    "swift-dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager.swiftdeps",
+    "swiftmodule" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager~partial.swiftmodule"
+  },
   "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/DebugMenu.swift" : {
     "const-values" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/DebugMenu.swiftconstvalues",
     "dependencies" : "/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/DebugMenu.d",

@@ -7,7 +7,7 @@
         "key": "Đang tải Kinh Qur'an...",
         "location": {
           "startingColumn": 18,
-          "startingLine": 47
+          "startingLine": 52
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Lỗi tải dữ liệu",
         "location": {
           "startingColumn": 18,
-          "startingLine": 61
+          "startingLine": 66
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Thử lại",
         "location": {
           "startingColumn": 23,
-          "startingLine": 74
+          "startingLine": 79
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Thư viện",
         "location": {
           "startingColumn": 27,
-          "startingLine": 92
+          "startingLine": 97
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Cài đặt",
         "location": {
           "startingColumn": 27,
-          "startingLine": 100
+          "startingLine": 105
         }
       }
     ]

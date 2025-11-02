@@ -1,14 +1,16 @@
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitProgressSync.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/QuranVNARApp.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/AppState.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudAuthManager.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/DebugMenu.o
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/FavoritesStore.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/QuranDataStore.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/ReadingProgressStore.o
-/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/FavoritesStore.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/Router.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/FullPlayerView.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/MiniPlayerBar.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/FavoritesPage.o
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitSyncManager.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/LibraryPage.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/NotesPage.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/SurahsPage.o
@@ -25,7 +27,9 @@
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/GradientSwatch.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/PrimaryButton.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/SegmentPill.o
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitCoordinator.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/StubButtonLabel.o
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/CloudKitFavoritesSync.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/ThemeManager.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/ContentView.o
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Build/Intermediates.noindex/Quranvn.build/Debug-iphonesimulator/Quranvn.build/Objects-normal/arm64/Item.o

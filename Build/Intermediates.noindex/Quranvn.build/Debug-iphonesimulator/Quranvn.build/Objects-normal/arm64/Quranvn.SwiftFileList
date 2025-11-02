@@ -1,14 +1,16 @@
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudKitProgressSync.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/App/QuranVNARApp.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/AppState.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudAuthManager.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/DebugMenu.swift
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/FavoritesStore.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/QuranDataStore.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/ReadingProgressStore.swift
-/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/FavoritesStore.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/Router.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Audio/FullPlayerView.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Audio/MiniPlayerBar.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Library/FavoritesPage.swift
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudKitSyncManager.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Library/LibraryPage.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Library/NotesPage.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Features/Library/SurahsPage.swift
@@ -25,7 +27,9 @@
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/GradientSwatch.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/PrimaryButton.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/SegmentPill.swift
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudKitCoordinator.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/StubButtonLabel.swift
+/Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Core/CloudKitFavoritesSync.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/UI/ThemeManager.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/ContentView.swift
 /Users/donaldcjapi/Desktop/Quran-in-Vietnamese/Quranvn/Item.swift
