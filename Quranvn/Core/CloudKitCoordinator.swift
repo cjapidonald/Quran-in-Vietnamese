@@ -56,22 +56,16 @@ final class CloudKitCoordinator: ObservableObject {
             isSyncing = true
             lastSyncError = nil
 
-            do {
-                // Run all syncs in parallel
-                async let favSync = favoritesSync.syncAll()
-                async let progSync = progressSync.syncAll()
+            // Run all syncs in parallel
+            async let favSync = favoritesSync.syncAll()
+            async let progSync = progressSync.syncAll()
 
-                await favSync
-                await progSync
+            await favSync
+            await progSync
 
-                lastSyncDate = Date()
-                print("✅ CloudKit sync completed successfully")
-            } catch {
-                lastSyncError = error
-                print("❌ CloudKit sync failed: \(error.localizedDescription)")
-            }
-
+            lastSyncDate = Date()
             isSyncing = false
+            print("✅ CloudKit sync completed successfully")
         }
     }
 
