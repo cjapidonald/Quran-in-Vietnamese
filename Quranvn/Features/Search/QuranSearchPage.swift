@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SearchResult: Identifiable {
+struct SearchResultItem: Identifiable {
     let id = UUID()
     let surah: Surah
     let ayah: Ayah
@@ -16,7 +16,7 @@ struct QuranSearchPage: View {
 
     @State private var searchText = ""
     @State private var isSearching = false
-    @State private var searchResults: [SearchResult] = []
+    @State private var searchResults: [SearchResultItem] = []
 
     var body: some View {
         VStack(spacing: DesignTokens.Spacing.sm) {
@@ -92,7 +92,7 @@ struct QuranSearchPage: View {
         }
     }
 
-    private func searchResultCard(_ result: SearchResult) -> some View {
+    private func searchResultCard(_ result: SearchResultItem) -> some View {
         Button {
             // Navigate to this specific ayah
             onSelect(ReaderDestination(
@@ -197,7 +197,7 @@ struct QuranSearchPage: View {
         isSearching = true
 
         let lowercased = query.lowercased()
-        var results: [SearchResult] = []
+        var results: [SearchResultItem] = []
 
         // Search through all surahs and ayahs
         for surah in quranStore.surahs {
@@ -212,7 +212,7 @@ struct QuranSearchPage: View {
                         query: query
                     )
 
-                    results.append(SearchResult(
+                    results.append(SearchResultItem(
                         surah: surah,
                         ayah: ayah,
                         matchText: matchText

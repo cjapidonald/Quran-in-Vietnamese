@@ -1,5 +1,12 @@
 import SwiftUI
 
+struct SearchResult: Identifiable {
+    let id = UUID()
+    let surah: Surah
+    let ayah: Ayah
+    let matchText: String
+}
+
 struct SurahsPage: View {
     let theme: ThemeManager.ThemeGradient
     let onSelect: (ReaderDestination) -> Void
@@ -10,36 +17,14 @@ struct SurahsPage: View {
 
     @State private var searchText = ""
     @State private var isSearching = false
+    @State private var searchResults: [SearchResult] = []
 
     private var surahList: [Surah] {
-        let sorted = quranStore.surahs.sorted { $0.index < $1.index }
+        quranStore.surahs.sorted { $0.index < $1.index }
+    }
 
-        // Filter based on search
-        if searchText.isEmpty {
-            return sorted
-        }
-
-        let lowercased = searchText.lowercased()
-        return sorted.filter { surah in
-            // Search by surah name (Vietnamese or Arabic)
-            let matchesSurahName = surah.vietnameseName.lowercased().contains(lowercased) ||
-                surah.arabicName.lowercased().contains(lowercased) ||
-                surah.transliteration.lowercased().contains(lowercased) ||
-                "\(surah.number)".contains(lowercased)
-
-            // If surah name matches, return true immediately
-            if matchesSurahName {
-                return true
-            }
-
-            // Otherwise, search through all ayahs in this surah
-            let matchesAyah = surah.ayahs.contains { ayah in
-                ayah.vietnamese.lowercased().contains(lowercased) ||
-                ayah.arabic.lowercased().contains(lowercased)
-            }
-
-            return matchesAyah
-        }
+    private var showingAyahResults: Bool {
+        !searchText.isEmpty && searchText.count >= 2
     }
 
     var body: some View {
@@ -47,26 +32,20 @@ struct SurahsPage: View {
             // Search bar
             searchBar
 
-            // Surah list or loading state
-            if quranStore.surahs.isEmpty {
-                // Loading state
-                VStack(spacing: DesignTokens.Spacing.md) {
-                    ProgressView()
-                        .scaleEffect(1.5)
-                        .tint(accentColor)
-                    Text("Đang tải...")
-                        .font(.subheadline)
-                        .foregroundStyle(secondaryText)
+            // Show ayah results when searching, surah list otherwise
+            if showingAyahResults {
+                // Ayah search results
+                if searchResults.isEmpty {
+                    emptySearchState
+                } else {
+                    ayahResultsList
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, DesignTokens.Spacing.xl * 2)
-            } else if surahList.isEmpty && !searchText.isEmpty {
-                // Empty search results
-                emptySearchState
             } else {
-                // Surah list
-                ForEach(surahList) { surah in
-                    surahButton(for: surah)
+                // Surah list or loading state
+                if quranStore.surahs.isEmpty {
+                    loadingState
+                } else {
+                    surahsList
                 }
             }
         }
@@ -90,8 +69,9 @@ struct SurahsPage: View {
                         isSearching = true
                     }
                 }
-                .onChange(of: searchText) { _, _ in
-                    if searchText.isEmpty {
+                .onChange(of: searchText) { _, newValue in
+                    performSearch(query: newValue)
+                    if newValue.isEmpty {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             isSearching = false
                         }
@@ -103,6 +83,7 @@ struct SurahsPage: View {
                 Button {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         searchText = ""
+                        searchResults = []
                         isSearching = false
                     }
                 } label: {
@@ -117,6 +98,87 @@ struct SurahsPage: View {
         .padding(.horizontal, DesignTokens.Spacing.lg)
         .padding(.vertical, DesignTokens.Spacing.md)
         .glassCard(cornerRadius: DesignTokens.CornerRadius.large)
+    }
+
+    private var loadingState: some View {
+        VStack(spacing: DesignTokens.Spacing.md) {
+            ProgressView()
+                .scaleEffect(1.5)
+                .tint(accentColor)
+            Text("Đang tải...")
+                .font(.subheadline)
+                .foregroundStyle(secondaryText)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, DesignTokens.Spacing.xl * 2)
+    }
+
+    private var surahsList: some View {
+        ForEach(surahList) { surah in
+            surahButton(for: surah)
+        }
+    }
+
+    private var ayahResultsList: some View {
+        VStack(spacing: DesignTokens.Spacing.sm) {
+            // Results header
+            HStack {
+                Text("\(searchResults.count) kết quả")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(secondaryText)
+                Spacer()
+            }
+            .padding(.horizontal, DesignTokens.Spacing.sm)
+
+            // Search results
+            ForEach(searchResults) { result in
+                searchResultCard(result)
+            }
+        }
+    }
+
+    private func searchResultCard(_ result: SearchResult) -> some View {
+        Button {
+            // Navigate to this specific ayah
+            onSelect(ReaderDestination(
+                surahNumber: result.surah.number,
+                ayah: result.ayah.number
+            ))
+        } label: {
+            VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
+                // Surah info
+                HStack {
+                    Text(result.surah.vietnameseName)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(accentColor)
+
+                    Text("•")
+                        .font(.caption)
+                        .foregroundStyle(secondaryText.opacity(0.5))
+
+                    Text("Câu \(result.ayah.number)")
+                        .font(.caption)
+                        .foregroundStyle(secondaryText)
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.caption2)
+                        .foregroundStyle(secondaryText.opacity(0.5))
+                }
+
+                // Matched text preview
+                Text(highlightedText(result.matchText, query: searchText))
+                    .font(.subheadline)
+                    .foregroundStyle(primaryText)
+                    .lineLimit(3)
+                    .multilineTextAlignment(.leading)
+            }
+            .padding(DesignTokens.Spacing.md)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .glassCard(cornerRadius: DesignTokens.CornerRadius.large, padding: 0)
+        }
+        .buttonStyle(.plain)
     }
 
     private var emptySearchState: some View {
@@ -135,6 +197,83 @@ struct SurahsPage: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, DesignTokens.Spacing.xl * 2)
+    }
+
+    private func performSearch(query: String) {
+        guard !query.isEmpty, query.count >= 2 else {
+            searchResults = []
+            isSearching = false
+            return
+        }
+
+        isSearching = true
+
+        let lowercased = query.lowercased()
+        var results: [SearchResult] = []
+
+        // Search through all surahs and ayahs
+        for surah in quranStore.surahs {
+            for ayah in surah.ayahs {
+                // Check if ayah matches
+                if ayah.vietnamese.lowercased().contains(lowercased) ||
+                   ayah.arabic.lowercased().contains(lowercased) {
+
+                    // Get context around match for preview
+                    let matchText = getMatchPreview(
+                        text: ayah.vietnamese,
+                        query: query
+                    )
+
+                    results.append(SearchResult(
+                        surah: surah,
+                        ayah: ayah,
+                        matchText: matchText
+                    ))
+                }
+            }
+        }
+
+        // Limit results to prevent performance issues
+        searchResults = Array(results.prefix(100))
+    }
+
+    private func getMatchPreview(text: String, query: String) -> String {
+        guard let range = text.range(of: query, options: .caseInsensitive) else {
+            // If no match, return beginning of text
+            return String(text.prefix(150))
+        }
+
+        let matchStart = text.distance(from: text.startIndex, to: range.lowerBound)
+        let contextStart = max(0, matchStart - 50)
+        let contextEnd = min(text.count, matchStart + query.count + 100)
+
+        let startIndex = text.index(text.startIndex, offsetBy: contextStart)
+        let endIndex = text.index(text.startIndex, offsetBy: contextEnd)
+
+        var preview = String(text[startIndex..<endIndex])
+
+        // Add ellipsis if truncated
+        if contextStart > 0 {
+            preview = "..." + preview
+        }
+        if contextEnd < text.count {
+            preview = preview + "..."
+        }
+
+        return preview
+    }
+
+    private func highlightedText(_ text: String, query: String) -> AttributedString {
+        var attributedString = AttributedString(text)
+
+        if let range = text.range(of: query, options: .caseInsensitive) {
+            let start = attributedString.index(attributedString.startIndex, offsetByCharacters: text.distance(from: text.startIndex, to: range.lowerBound))
+            let end = attributedString.index(start, offsetByCharacters: query.count)
+            attributedString[start..<end].foregroundColor = accentColor
+            attributedString[start..<end].font = .subheadline.weight(.semibold)
+        }
+
+        return attributedString
     }
 
     private func surahButton(for surah: Surah) -> some View {
