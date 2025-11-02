@@ -57,11 +57,8 @@ final class CloudKitCoordinator: ObservableObject {
             lastSyncError = nil
 
             // Run all syncs in parallel
-            async let favSync = favoritesSync.syncAll()
-            async let progSync = progressSync.syncAll()
-
-            await favSync
-            await progSync
+            await favoritesSync.syncAll()
+            await progressSync.syncAll()
 
             lastSyncDate = Date()
             isSyncing = false
@@ -159,7 +156,9 @@ final class CloudKitCoordinator: ObservableObject {
     private func setupAutoSync() {
         // Sync every 5 minutes when app is active
         autoSyncTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
-            self?.syncAll()
+            Task { @MainActor in
+                self?.syncAll()
+            }
         }
     }
 

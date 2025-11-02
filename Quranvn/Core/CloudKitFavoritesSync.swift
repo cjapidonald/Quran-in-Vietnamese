@@ -22,13 +22,10 @@ final class CloudKitFavoritesSync: CloudKitSyncManager {
 
         startSync()
 
-        // Sync favorites and notes in parallel
-        async let favoriteSync = syncFavorites()
-        async let notesSync = syncNotes()
-
         do {
-            try await favoriteSync
-            try await notesSync
+            // Sync favorites and notes in parallel
+            try await syncFavorites()
+            try await syncNotes()
             endSync()
         } catch {
             endSync(error: error)

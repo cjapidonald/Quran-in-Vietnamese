@@ -74,7 +74,8 @@ struct LibraryPage: View {
 
     private var segmentedControl: some View {
         Picker("Phần thư viện", selection: $selectedSegment) {
-            Text("Chương (Tiếng Việt)").tag(LibrarySegment.surahs)
+            Text("Chương").tag(LibrarySegment.surahs)
+            Text("Tìm kiếm").tag(LibrarySegment.search)
             Text("Yêu thích").tag(LibrarySegment.favorites)
             Text("Ghi chú").tag(LibrarySegment.notes)
         }
@@ -85,13 +86,17 @@ struct LibraryPage: View {
     @ViewBuilder
     private var segmentContent: some View {
         switch selectedSegment {
-        case .favorites:
-            FavoritesPage(theme: appState.selectedThemeGradient) { item in
-                openReader(for: item.destination)
-            }
         case .surahs:
             SurahsPage(theme: appState.selectedThemeGradient) { destination in
                 openReader(for: destination)
+            }
+        case .search:
+            QuranSearchPage(theme: appState.selectedThemeGradient) { destination in
+                openReader(for: destination)
+            }
+        case .favorites:
+            FavoritesPage(theme: appState.selectedThemeGradient) { item in
+                openReader(for: item.destination)
             }
         case .notes:
             NotesPage(theme: appState.selectedThemeGradient) { note in
@@ -132,8 +137,9 @@ struct LibraryPage: View {
 }
 
 enum LibrarySegment: Hashable {
-    case favorites
     case surahs
+    case search
+    case favorites
     case notes
 }
 
