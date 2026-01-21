@@ -32,17 +32,23 @@ final class FavoritesStore: ObservableObject {
     }
 
     private func loadFavorites() {
-        if let data = userDefaults.data(forKey: favoritesKey),
-           let decoded = try? JSONDecoder().decode(Set<String>.self, from: data) {
-            favoriteAyahs = decoded
+        guard let data = userDefaults.data(forKey: favoritesKey) else { return }
+
+        do {
+            favoriteAyahs = try JSONDecoder().decode(Set<String>.self, from: data)
             print("📖 FavoritesStore - Loaded \(favoriteAyahs.count) favorites")
+        } catch {
+            print("❌ FavoritesStore - Failed to decode favorites: \(error.localizedDescription)")
         }
     }
 
     private func saveFavorites() {
-        if let data = try? JSONEncoder().encode(favoriteAyahs) {
+        do {
+            let data = try JSONEncoder().encode(favoriteAyahs)
             userDefaults.set(data, forKey: favoritesKey)
             print("✅ FavoritesStore - Saved \(favoriteAyahs.count) favorites")
+        } catch {
+            print("❌ FavoritesStore - Failed to encode favorites: \(error.localizedDescription)")
         }
     }
 
@@ -72,19 +78,25 @@ final class FavoritesStore: ObservableObject {
     }
 
     private func loadNotes() {
-        if let data = userDefaults.data(forKey: notesKey),
-           let decoded = try? JSONDecoder().decode([String: [String]].self, from: data) {
-            ayahNotes = decoded
+        guard let data = userDefaults.data(forKey: notesKey) else { return }
+
+        do {
+            ayahNotes = try JSONDecoder().decode([String: [String]].self, from: data)
             let totalNotes = ayahNotes.values.reduce(0) { $0 + $1.count }
             print("📖 FavoritesStore - Loaded \(totalNotes) notes across \(ayahNotes.count) ayahs")
+        } catch {
+            print("❌ FavoritesStore - Failed to decode notes: \(error.localizedDescription)")
         }
     }
 
     private func saveNotes() {
-        if let data = try? JSONEncoder().encode(ayahNotes) {
+        do {
+            let data = try JSONEncoder().encode(ayahNotes)
             userDefaults.set(data, forKey: notesKey)
             let totalNotes = ayahNotes.values.reduce(0) { $0 + $1.count }
             print("✅ FavoritesStore - Saved \(totalNotes) notes")
+        } catch {
+            print("❌ FavoritesStore - Failed to encode notes: \(error.localizedDescription)")
         }
     }
 

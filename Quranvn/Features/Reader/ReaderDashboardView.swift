@@ -1,7 +1,6 @@
 import SwiftUI
-#if canImport(SafariServices)
-import SafariServices
-#endif
+
+// MARK: - Reader Dashboard View
 
 struct ReaderDashboardView: View {
     @EnvironmentObject private var appState: AppState
@@ -641,27 +640,4 @@ struct ReaderDashboardView: View {
     }
 }
 
-#if canImport(SafariServices)
-private struct SafariView: UIViewControllerRepresentable {
-    let url: URL
-
-    func makeUIViewController(context: Context) -> SFSafariViewController {
-        SFSafariViewController(url: url)
-    }
-
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
-}
-#else
-private struct SafariView: View {
-    let url: URL
-
-    var body: some View {
-        EmptyView()
-    }
-}
-#endif
-
-struct ReaderDestination {
-    let surahNumber: Int
-    let ayah: Int
-}
+// Note: SafariView and ReaderDestination moved to ReaderHelpers.swift

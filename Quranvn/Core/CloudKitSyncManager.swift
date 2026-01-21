@@ -128,15 +128,46 @@ class CloudKitSyncManager: ObservableObject {
         }
 
         for batch in batches {
-            let result = try await privateDatabase.modifyRecords(
-                saving: batch,
-                deleting: []
-            )
+            try await withRetry {
+                let result = try await self.privateDatabase.modifyRecords(
+                    saving: batch,
+                    deleting: []
+                )
 
-            // Check for partial failures
-            for (recordID, saveResult) in result.saveResults {
-                if case .failure(let error) = saveResult {
-                    print("❌ CloudKit - Failed to save record \(recordID): \(error)")
+                // Check for partial failures
+                for (recordID, saveResult) in result.saveResults {
+                    if case .failure(let error) = saveResult {
+                        print("❌ CloudKit - Failed to save record \(recordID): \(error)")
+                    }
+                }
+            }
+        }
+    }
+
+    /// Update existing records using changedKeys policy to merge with server state
+    /// Use this for records that already exist in CloudKit to avoid conflicts
+    func updateRecords(_ records: [CKRecord]) async throws {
+        guard !records.isEmpty else { return }
+
+        // Split into batches of 400 (CloudKit limit)
+        let batchSize = 400
+        let batches = stride(from: 0, to: records.count, by: batchSize).map {
+            Array(records[$0..<min($0 + batchSize, records.count)])
+        }
+
+        for batch in batches {
+            try await withRetry {
+                let result = try await self.privateDatabase.modifyRecords(
+                    saving: batch,
+                    deleting: [],
+                    savePolicy: .changedKeys
+                )
+
+                // Check for partial failures
+                for (recordID, saveResult) in result.saveResults {
+                    if case .failure(let error) = saveResult {
+                        print("❌ CloudKit - Failed to update record \(recordID): \(error)")
+                    }
                 }
             }
         }
@@ -152,19 +183,21 @@ class CloudKitSyncManager: ObservableObject {
         }
 
         for batch in batches {
-            let result = try await privateDatabase.modifyRecords(
-                saving: [],
-                deleting: batch
-            )
+            try await withRetry {
+                let result = try await self.privateDatabase.modifyRecords(
+                    saving: [],
+                    deleting: batch
+                )
 
-            // Check for partial failures
-            for (recordID, deleteResult) in result.deleteResults {
-                if case .failure(let error) = deleteResult {
-                    // Ignore "unknownItem" errors (record already deleted)
-                    if let ckError = error as? CKError, ckError.code == .unknownItem {
-                        continue
+                // Check for partial failures
+                for (recordID, deleteResult) in result.deleteResults {
+                    if case .failure(let error) = deleteResult {
+                        // Ignore "unknownItem" errors (record already deleted)
+                        if let ckError = error as? CKError, ckError.code == .unknownItem {
+                            continue
+                        }
+                        print("❌ CloudKit - Failed to delete record \(recordID): \(error)")
                     }
-                    print("❌ CloudKit - Failed to delete record \(recordID): \(error)")
                 }
             }
         }
@@ -180,6 +213,35 @@ class CloudKitSyncManager: ObservableObject {
 
         // Return the most recently modified record
         return clientModTime > serverModTime ? clientRecord : serverRecord
+    }
+
+    // MARK: - Retry Logic
+
+    /// Execute an operation with automatic retry for transient CloudKit errors
+    /// Uses exponential backoff based on CloudKit's suggested retry delay
+    func withRetry<T>(
+        maxAttempts: Int = 3,
+        operation: () async throws -> T
+    ) async throws -> T {
+        var lastError: Error?
+
+        for attempt in 1...maxAttempts {
+            do {
+                return try await operation()
+            } catch {
+                lastError = error
+
+                if attempt < maxAttempts && shouldRetry(error: error) {
+                    let delay = retryDelay(for: error)
+                    print("⏳ CloudKit retry attempt \(attempt + 1)/\(maxAttempts) after \(delay)s delay")
+                    try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                } else {
+                    throw error
+                }
+            }
+        }
+
+        throw lastError ?? CKError(.internalError)
     }
 
     // MARK: - Error Handling

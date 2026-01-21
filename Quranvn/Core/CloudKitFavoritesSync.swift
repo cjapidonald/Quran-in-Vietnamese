@@ -55,10 +55,14 @@ final class CloudKitFavoritesSync: CloudKitSyncManager {
         // Favorites to download (in cloud but not in local)
         let toDownload = cloudAyahIDs.subtracting(localAyahIDs)
 
-        // Favorites to delete from cloud (removed locally)
-        let toDeleteFromCloud = cloudAyahIDs.subtracting(localAyahIDs)
+        // NOTE: Deletion sync is disabled because without tracking when favorites were
+        // locally deleted, we cannot distinguish between:
+        // - A favorite added on another device (should download)
+        // - A favorite deleted locally (should delete from cloud)
+        // This results in merge-only sync where favorites are never auto-deleted from cloud.
+        // Users can manually delete favorites through the deleteFavorite() method.
 
-        print("📊 Favorites - Upload: \(toUpload.count), Download: \(toDownload.count), Delete: \(toDeleteFromCloud.count)")
+        print("📊 Favorites - Upload: \(toUpload.count), Download: \(toDownload.count)")
 
         // 4. Upload new favorites
         if !toUpload.isEmpty {
@@ -75,15 +79,6 @@ final class CloudKitFavoritesSync: CloudKitSyncManager {
                 favoritesStore.favoriteAyahs.insert(ayahID)
             }
             print("✅ Downloaded \(toDownload.count) favorites")
-        }
-
-        // 6. Delete removed favorites from cloud
-        if !toDeleteFromCloud.isEmpty {
-            let recordIDsToDelete = cloudFavorites
-                .filter { toDeleteFromCloud.contains($0.ayahID) }
-                .map { $0.recordID }
-            try await deleteRecords(withIDs: recordIDsToDelete)
-            print("✅ Deleted \(recordIDsToDelete.count) favorites from cloud")
         }
     }
 

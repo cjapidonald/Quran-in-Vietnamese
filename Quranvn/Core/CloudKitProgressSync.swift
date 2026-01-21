@@ -112,11 +112,15 @@ final class CloudKitProgressSync: CloudKitSyncManager {
 
         print("📊 Progress - Create: \(recordsToSave.count), Update: \(recordsToUpdate.count)")
 
-        // 6. Save and update
-        let allRecordsToSave = recordsToSave + recordsToUpdate
-        if !allRecordsToSave.isEmpty {
-            try await saveRecords(allRecordsToSave)
-            print("✅ Synced \(allRecordsToSave.count) progress records")
+        // 6. Save new records and update existing records separately
+        if !recordsToSave.isEmpty {
+            try await saveRecords(recordsToSave)
+            print("✅ Created \(recordsToSave.count) progress records")
+        }
+
+        if !recordsToUpdate.isEmpty {
+            try await updateRecords(recordsToUpdate)
+            print("✅ Updated \(recordsToUpdate.count) progress records")
         }
     }
 

@@ -1,7 +1,7 @@
 # CloudKit Schema for Quran in Vietnamese App
 
 ## Container Information
-- **Container Identifier**: `iCloud.com.donald.quranvn`
+- **Container Identifier**: `iCloud.donald.kvietnamisht`
 - **Database**: Private Database (user-specific data)
 - **Default Zone**: Use the default zone for all records
 
@@ -199,7 +199,7 @@ Do NOT use public database for this app - all data is user-private.
 ### Step 1: Create New CloudKit Container
 1. Go to https://icloud.developer.apple.com/
 2. Click "CloudKit Database"
-3. Select your existing container or create a new one: `iCloud.com.donald.quranvn`
+3. Select your existing container or create a new one: `iCloud.donald.kvietnamisht`
 4. Select "Production" environment (you can test in Development first)
 
 ### Step 2: Create Record Types
@@ -228,7 +228,7 @@ For each record type:
 ### Step 5: Update App Entitlements
 Ensure your Xcode project has:
 1. CloudKit capability enabled
-2. Container `iCloud.com.donald.quranvn` selected
+2. Container `iCloud.donald.kvietnamisht` selected
 3. Sign in with Apple capability enabled
 4. Background Modes → Remote notifications enabled (for subscriptions)
 

@@ -70,18 +70,26 @@ final class ReadingProgressStore: ObservableObject {
     // MARK: - Persistence
 
     private func persist() {
-        guard let data = try? JSONEncoder().encode(progressBySurah) else { return }
-        userDefaults.set(data, forKey: storageKey)
+        do {
+            let data = try JSONEncoder().encode(progressBySurah)
+            userDefaults.set(data, forKey: storageKey)
+        } catch {
+            print("❌ ReadingProgressStore - Failed to encode progress: \(error.localizedDescription)")
+        }
     }
 
     private func load() {
-        guard let data = userDefaults.data(forKey: storageKey),
-              let decoded = try? JSONDecoder().decode([Int: SurahProgress].self, from: data) else {
+        guard let data = userDefaults.data(forKey: storageKey) else {
             progressBySurah = [:]
             return
         }
 
-        progressBySurah = decoded
+        do {
+            progressBySurah = try JSONDecoder().decode([Int: SurahProgress].self, from: data)
+        } catch {
+            print("❌ ReadingProgressStore - Failed to decode progress: \(error.localizedDescription)")
+            progressBySurah = [:]
+        }
     }
 
     private func progressInfo(for surah: Surah) -> (last: Int, total: Int) {
